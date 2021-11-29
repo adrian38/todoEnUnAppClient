@@ -1,0 +1,25 @@
+<ion-tabs (ionTabsWillChange)="setCurrentTab($event)" #tabs>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="tab1">
+            <img
+                class="icon-image"
+                [src]="'../../../assets/icon/solicitudes_icon' + tab1_active + '.svg'"
+            />
+            <ion-label style="margin-top: 6px">Solicitudes</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="tab2">
+            <img
+                class="icon-image"
+                [src]="'../../../assets/icon/contratados_icon' + tab2_active + '.svg'"
+            />
+            <ion-label style="margin-top: 5px">Servicios</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="tab3">
+            <img
+                class="icon-image"
+                [src]="'../../../assets/icon/perfil_icon' + tab3_active + '.svg'"
+            />
+            <ion-label style="margin-top: 5px">Perfil</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>
