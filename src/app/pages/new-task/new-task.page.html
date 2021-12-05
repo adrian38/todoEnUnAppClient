@@ -1,0 +1,84 @@
+<ion-content [fullscreen]="true" class="animated fadeIn">
+    <app-header headerText="Solicitudes" [fillBackground]="false"></app-header>
+
+    <ion-row style="margin-top: 50px; margin-left: 55px">
+        <ion-label id="encabezado">¿Que tipo de servicio necesita?</ion-label>
+    </ion-row>
+
+    <ion-row style="margin-top: 20px">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img"
+                    class="service-type-image"
+                    src="/assets/images/fontaneria.png"
+                    (click)="taskSelected(0)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.taskTypes[0]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    class="service-type-image invalid"
+                    src="/assets/images/carpinteria.png"
+                    (click)="taskSelected(1)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.taskTypes[1]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 20px">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    class="service-type-image invalid"
+                    src="/assets/images/electricidad.jpg"
+                    (click)="taskSelected(2)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.taskTypes[2]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    class="service-type-image invalid"
+                    src="/assets/images/masaje.jpg"
+                    (click)="taskSelected(3)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.taskTypes[3]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <!-- <div class="new_task_buttons">
+        <div class="one_button">
+            <p-button label="VER SOLICITUDES">
+                <img alt="logo" src="/assets/icon/solicitudes_icon.svg" style="width: 1.5rem" />
+            </p-button>
+        </div>
+    </div> -->
+</ion-content>

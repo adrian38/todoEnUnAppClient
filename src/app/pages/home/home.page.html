@@ -1,11 +1,21 @@
+<!-- <ion-content [fullscreen]="true" class="animated fadeIn"></ion-content> -->
 <ion-content [fullscreen]="true">
     <div class="home">
-        <div class="image"></div>
+        <div class="home_image">
+            <div class="home_icon"></div>
+        </div>
 
-        <div class="container_buttons">
-            <!--   <div class="buttons"> -->
-            <p-button label="Click"></p-button>
-            <!--   </div> -->
+        <div class="home_buttons">
+            <div class="two_up_buttons">
+                <p-button label="INICIAR SESIÓN" (onClick)="browseLogin()"></p-button>
+                <p-button label="CREAR CUENTA"></p-button>
+            </div>
+            <button
+                pButton
+                type="button"
+                label="Entar para ver cómo funciona"
+                class="p-button-outlined"
+            ></button>
         </div>
     </div>
 </ion-content>

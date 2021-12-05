@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true">
+    <div class="login">
+        <div class="login_icon"></div>
+
+        <div class="login_buttons">
+            <div style="display: flex; justify-content: flex-start">
+                <ion-label class="welcome">Bienvenido</ion-label>
+            </div>
+
+            <div class="one_button">
+                <form #invalid_form="ngForm" (ngSubmit)="onSubmit()">
+                    <ion-input
+                        class="custom_input"
+                        type="email"
+                        name="user"
+                        [(ngModel)]="user.username"
+                        placeholder="USUARIO"
+                        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                        required
+                    >
+                    </ion-input>
+
+                    <ion-input
+                        class="custom_input"
+                        type="password"
+                        name="password"
+                        [(ngModel)]="user.password"
+                        minlength="5"
+                        placeholder="CONTRASEÑA"
+                        required
+                    >
+                    </ion-input>
+
+                    <p-button
+                        [disabled]="invalid_form.invalid || btn_disabled"
+                        type="submit"
+                        label="INICIAR SESIÓN"
+                    ></p-button>
+                </form>
+            </div>
+
+            <div class="forgotten_pass_div">
+                <a class="forgotten_pass">¿Has olvidado tu contraseña?</a>
+            </div>
+        </div>
+    </div>
+</ion-content>

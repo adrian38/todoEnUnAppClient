@@ -1,0 +1,101 @@
+#barraInferior {
+    width: 100%;
+    height: 70px;
+    border-radius: 0px 0px 20px 0px;
+    background-color: rgb(49, 49, 57);
+}
+
+#logo {
+    width: 40px;
+    height: 40px;
+    margin-top: 13px;
+    margin-left: 6px;
+}
+img {
+    border-radius: 11px 11px 11px 11px;
+    box-shadow: 0px 10px 10px -6px black;
+}
+
+.classname {
+    -webkit-animation: jello-horizontal 0.5s both;
+    animation: jello-horizontal 0.5s both;
+    width: 120px;
+    height: 120px;
+}
+@-webkit-keyframes jello-horizontal {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.invalid {
+    -webkit-filter: grayscale(60%);
+    -moz-filter: grayscale(60%);
+    -o-filter: grayscale(60%);
+    -ms-filter: grayscale(60%);
+    filter: grayscale(90%);
+}
+
+#encabezado {
+    font-family: 'Helvetica-Bd';
+}
+
+// :host ::ng-deep .new_task_buttons {
+//     width: 80%;
+//     margin-left: 10%;
+//     //bottom: 0;
+//     // padding-bottom: 10%;
+//     position: absolute;
+//     bottom: 5%;
+
+//     .one_button {
+//         width: 100%;
+//         //padding-top: 15%;
+
+//         .p-button {
+//             margin-top: 10%;
+//             span {
+//                 padding-top: 5px;
+//                 font: normal 15px 'Helvetica-Md', sans-serif !important;
+//             }
+
+//             img {
+//                 box-shadow: none;
+//             }
+
+//             color: rgb(49, 49, 57);
+//             border: solid var(--ion-color-primary);
+//             background: var(--ion-color-primary);
+//             width: 100%;
+//         }
+
+//         .p-button:focus {
+//             box-shadow: none !important;
+//         }
+//     }
+// }

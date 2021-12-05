@@ -10,6 +10,22 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./pages/home/home.module').then((m) => m.HomePageModule),
     },
+    {
+        path: 'login',
+        loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    },
+    {
+        path: 'new-task',
+        loadChildren: () =>
+            import('./pages/new-task/new-task.module').then((m) => m.NewTaskPageModule),
+    },
+    {
+        path: 'task-subcategory',
+        loadChildren: () =>
+            import('./pages/task-subcategory/task-subcategory.module').then(
+                (m) => m.TaskSubcategoryPageModule
+            ),
+    },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
