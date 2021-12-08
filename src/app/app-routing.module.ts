@@ -75,6 +75,11 @@ const routes: Routes = [
                 (m) => m.TaskAbstractPageModule
             ),
     },
+    {
+        path: 'map-detail',
+        loadChildren: () =>
+            import('./pages/map-detail/map-detail.module').then((m) => m.MapDetailPageModule),
+    },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

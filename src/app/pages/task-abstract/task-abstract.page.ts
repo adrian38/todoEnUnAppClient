@@ -16,6 +16,7 @@ import { Observable, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImagenmodalPage } from '../imagenmodal/imagenmodal.page';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-abstract',
@@ -48,15 +49,13 @@ export class TaskAbstractPage implements OnInit {
         private _taskOdoo: TaskOdooService,
         private ngZone: NgZone,
         public navCtrl: NavController,
-        public photoService: PhotoService,
-        public actionSheetController: ActionSheetController,
         private platform: Platform,
         private messageService: MessageService,
-        public sanitizer: DomSanitizer,
         public alertCtrl: AlertController,
         public loadingController: LoadingController,
         private _authOdoo: AuthOdooService,
-        private modalCtrl: ModalController //private screenOrientation: ScreenOrientation
+        private modalCtrl: ModalController,
+        private router: Router //private screenOrientation: ScreenOrientation
     ) {
         this.task.address = new Address('', '', '', '', '', '', '', '', '', 0);
         this.user = this._authOdoo.getUser();
@@ -85,17 +84,17 @@ export class TaskAbstractPage implements OnInit {
         //this.task.time = this.datos.getCalendarioT().toString();
         this.task.client_id = this.user.partner_id;
 
-        if (this.datos.getfoto0()) {
-            this.task.photoSO.push(this.datos.getfoto0());
+        if (this.datos.getfoto00() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto00());
         }
-        if (this.datos.getfoto1()) {
-            this.task.photoSO.push(this.datos.getfoto1());
+        if (this.datos.getfoto11() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto11());
         }
-        if (this.datos.getfoto2()) {
-            this.task.photoSO.push(this.datos.getfoto2());
+        if (this.datos.getfoto22() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto22());
         }
 
-        console.log(this.task.photoSO);
+        //console.log(this.task.photoSO);
 
         this.disableImages();
         this.subscriptions();
@@ -195,66 +194,27 @@ export class TaskAbstractPage implements OnInit {
 
         this.taskToSend = { ...this.task };
         this.taskToSend.photoSO = [...this.task.photoSO];
-        // this.taskToSend.photoSO[0]="20"
-        // console.log('************* this.taskToSend  *************');
-        // console.log(this.taskToSend);
-        // console.log('************* this.task *************');
-        // console.log(this.task);
+        console.log('before', this.taskToSend);
 
-        if (this.datos.getfoto0()) {
-            if (
-                Buffer.from(this.datos.getfoto0().substring(this.datos.getfoto0().indexOf(',') + 1))
-                    .length /
-                    1e6 >
-                0.322216
-            ) {
-                this.resizedataURL(this.datos.getfoto0(), 1280, 960, 0);
+        for (let [index, element] of this.taskToSend.photoSO.entries()) {
+            if (Buffer.from(element.substring(element.indexOf(',') + 1)).length / 1e6 > 0.322216) {
+                this.resizedataURL(element, 1280, 960, index);
             } else {
-                this.taskToSend.photoSO[0] = this.datos
-                    .getfoto0()
-                    .substring(this.datos.getfoto0().indexOf(',') + 1);
+                element = element.substring(element.indexOf(',') + 1);
             }
         }
 
-        if (this.datos.getfoto1()) {
-            if (
-                Buffer.from(this.datos.getfoto1().substring(this.datos.getfoto1().indexOf(',') + 1))
-                    .length /
-                    1e6 >
-                0.322216
-            ) {
-                this.resizedataURL(this.datos.getfoto1(), 1280, 960, 1);
-            } else {
-                this.taskToSend.photoSO[1] = this.datos
-                    .getfoto1()
-                    .substring(this.datos.getfoto1().indexOf(',') + 1);
-            }
-        }
+        // this.taskToSend.time = this.date.transform(this.datos.getCalendarioT(), 'HH:mm:ss');
 
-        if (this.datos.getfoto2()) {
-            if (
-                Buffer.from(this.datos.getfoto2().substring(this.datos.getfoto2().indexOf(',') + 1))
-                    .length /
-                    1e6 >
-                0.322216
-            ) {
-                this.resizedataURL(this.datos.getfoto2(), 1280, 960, 2);
-            } else {
-                this.taskToSend.photoSO[2] = this.datos
-                    .getfoto2()
-                    .substring(this.datos.getfoto2().indexOf(',') + 1);
-            }
-        }
-
-        this.taskToSend.time = this.date.transform(this.datos.getCalendarioT(), 'HH:mm:ss');
-
-        console.log(this.taskToSend, 'tarea a crear');
+        //console.log(this.taskToSend, 'tarea a crear');
         this.btn_deshabilitar = true;
-        //this._taskOdoo.newTask(this.taskToSend);
+        this._taskOdoo.newTask(this.taskToSend);
     }
 
     onClickLocation() {
-        this.navCtrl.navigateRoot('/maparesumen', {
+        //this.datos.setMapType(false);
+        this.datos.setruta(this.router.url);
+        this.navCtrl.navigateRoot('/map-detail', {
             animated: true,
             animationDirection: 'back',
         });
@@ -301,7 +261,7 @@ export class TaskAbstractPage implements OnInit {
     }
 
     resizedataURL(datas, wantedWidth, wantedHeight, index) {
-        console.log(datas, 'como llega al resize');
+        //console.log(datas, 'como llega al resize');
 
         var img = document.createElement('img');
         img.src = datas;

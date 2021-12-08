@@ -186,6 +186,7 @@ export class TaskLocationPage implements OnInit {
     ubicacion() {
         this.mantener_campos_manual();
         this._serv.setruta(this.router.url);
+        //this._serv.setMapType(true);
         this.navCtrl.navigateRoot('/map', { animated: true, animationDirection: 'back' });
     }
 
@@ -210,7 +211,7 @@ export class TaskLocationPage implements OnInit {
             this._serv.setportal(this.portal);
             this._serv.setLatitud(parseFloat(this.latitud));
             this._serv.setLongitud(parseFloat(this.longitud));
-            this._serv.setradiobuton(true);
+            this._serv.setradiobuton(this.Autofill);
         } else {
             this.calle = this._serv.getcalle();
             this.puerta = this._serv.getpuerta();

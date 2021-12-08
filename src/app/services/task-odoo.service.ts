@@ -952,7 +952,7 @@ export class TaskOdooService {
                             temp.title = order['title'];
                             temp.date_created = order['date_order'];
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.time = String(order['commitment_date']);
                             temp.finish = order['finish'];
                             recordListTemp.push(temp);
@@ -1380,7 +1380,7 @@ export class TaskOdooService {
                             temp.require_materials = order['require_materials'];
                             temp.date_created = order['date_order'];
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.time = String(order['commitment_date']);
                             temp.notificationNewChat = order['new_chat'];
                             temp.notificationNewSo = order['new_created'];
@@ -1741,7 +1741,7 @@ export class TaskOdooService {
                             temp.require_materials = order['require_materials'];
                             temp.date_created = order['date_order'];
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.time = String(order['commitment_date']);
                             temp.notificationNewChat = order['new_chat'];
                             //temp.notificationNewOffert = order['po_agreement'];
@@ -2312,7 +2312,7 @@ export class TaskOdooService {
                             temp.title = order['title'];
                             temp.date_created = order['date_order'];
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.finish = order['finish'];
                             recordList.push(temp);
                         }
@@ -2411,7 +2411,7 @@ export class TaskOdooService {
                             temp.require_materials = order['require_materials'];
                             temp.date_created = order['date_order'];
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.time = String(order['commitment_date']);
                             temp.notificationNewChat = order['new_chat'];
                             temp.notificationNewSo = order['new_created'];
@@ -2495,7 +2495,7 @@ export class TaskOdooService {
                         notificationError$.next({ type: 1 });
                     } else {
                         offsetApplication += limit;
-                        ////console.log(value, "task");
+                        console.log(value, 'task');
 
                         for (let order of value) {
                             let temp = new TaskModel();
@@ -2513,10 +2513,13 @@ export class TaskOdooService {
                             temp.So_id = order['id'];
                             temp.title = order['title'];
                             temp.require_materials = order['require_materials'];
+
                             temp.date_created = order['date_order'];
+                            temp.time_created = String(order['date_order']);
+
                             temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
                             temp.time = String(order['commitment_date']);
+
                             temp.notificationNewChat = order['new_chat'];
                             //temp.notificationNewOffert = order['po_agreement'];
                             temp.notificationNewSo = order['new_created'];
@@ -5513,7 +5516,7 @@ export class TaskOdooService {
                             //temp.require_materials = order['require_materials'];
                             //temp.date_created = order['date_order'];
                             temp.date_planned = String(order['date_order']).slice(0, 10);
-                            temp.time_created = String(order['date_order']).slice(0, 10);
+                            temp.time_created = String(order['date_order']);
                             temp.time = String(order['date_order']);
                             temp.notificationNewChat = order['new_chat'];
                             //temp.notificationNewOffert = order['po_agreement'];

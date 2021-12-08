@@ -53,6 +53,7 @@ export class ObtSubSService {
 
     sub_servicio_activo: string = '';
     detalles: boolean = false;
+    mapType: boolean = false;
 
     //-----------------------------------------------------------
 
@@ -78,6 +79,14 @@ export class ObtSubSService {
         this.foto00 = '/assets/images/fotoadd.png';
         this.foto11 = '/assets/images/fotoadd.png';
         this.foto22 = '/assets/images/fotoadd.png';
+    }
+
+    setMapType(type: boolean) {
+        this.mapType = type;
+    }
+
+    getMapType() {
+        return this.mapType;
     }
 
     deleteFields() {
