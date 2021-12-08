@@ -51,6 +51,7 @@ export class TaskModel {
     photoSO?: Array<any>;
     date_planned?: string;
     date_created?: string;
+    time_created?: string;
     time?: string;
     title?: string;
     description?: string;
@@ -135,6 +136,7 @@ export class TaskModel {
         photoSO = [],
         date_planned = '',
         date_created = '',
+        time_created = '',
         time = '',
         title = '',
         description = '',
@@ -165,6 +167,7 @@ export class TaskModel {
         this.photoSO = photoSO;
         this.date_planned = date_planned;
         this.date_created = date_created;
+        this.time_created = time_created;
         this.time = time;
         this.title = title;
         this.description = description;

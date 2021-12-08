@@ -6,9 +6,17 @@ import { Tab1Page } from './tab1.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-    imports: [ComponentsModule, IonicModule, CommonModule, FormsModule, Tab1PageRoutingModule],
+    imports: [
+        ToastModule,
+        ComponentsModule,
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        Tab1PageRoutingModule,
+    ],
     declarations: [Tab1Page],
 })
 export class Tab1PageModule {}

@@ -75,12 +75,16 @@ export class ObtSubSService {
         this.ContaratadosList = [];
         this.HistorialList = [];
 
-        this.foto00 = '../../../assets/fotoadd.png';
-        this.foto11 = '../../../assets/fotoadd.png';
-        this.foto22 = '../../../assets/fotoadd.png';
+        this.foto00 = '/assets/images/fotoadd.png';
+        this.foto11 = '/assets/images/fotoadd.png';
+        this.foto22 = '/assets/images/fotoadd.png';
     }
 
     deleteFields() {
+        this.foto00 = '/assets/images/fotoadd.png';
+        this.foto11 = '/assets/images/fotoadd.png';
+        this.foto22 = '/assets/images/fotoadd.png';
+
         this.calle = '';
         this.numero = '';
         this.portal = '';

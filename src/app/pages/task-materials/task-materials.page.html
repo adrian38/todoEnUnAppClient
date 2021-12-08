@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+    <app-header
+        headerText="Solicitudes"
+        [fillBackground]="true"
+        [expandHeader]="true"
+        expandText="{{taskType}}"
+        [cerrar]="true"
+        [atras]="true"
+        [titulo]="true"
+        (clickedClose)="cerrarsolicitud()"
+    ></app-header>
+
+    <div id="barra" style="margin-top: 40px">
+        <ion-label>¿Dispone de los materiales?</ion-label>
+    </div>
+
+    <ion-list style="margin-top: 20px">
+        <ion-radio-group value="no">
+            <ion-item (click)="checkSiF()">
+                <ion-label>Si</ion-label>
+                <ion-radio slot="start" value="si"></ion-radio>
+            </ion-item>
+
+            <ion-item (click)="checkNoF()">
+                <ion-label>No</ion-label>
+                <ion-radio slot="start" value="no"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button (onClick)="materialSelected()" label="SIGUIENTE"> </p-button>
+        </div>
+    </div>
+</ion-content>

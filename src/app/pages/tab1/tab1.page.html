@@ -1,3 +1,90 @@
-<ion-content [fullscreen]="true">
-    <app-header headerText="Servicios" [fillBackground]="false"></app-header>
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<app-header headerText="Servicios" [fillBackground]="false"></app-header>
+
+<ion-content>
+    <div *ngIf=" solicitudesList.length > 0">
+        <ion-row>
+            <ion-col size="0.2" style="padding: 0px"> </ion-col>
+            <ion-col size="11.6" style="padding: 0px">
+                <ion-list>
+                    <ion-item-sliding
+                        *ngFor="let Solicitud of solicitudesList; let i = index"
+                        style="padding: 0px"
+                    >
+                        <ion-item lines="none" style="padding: 0px">
+                            <div>
+                                <app-application-card
+                                    (click)="in(i)"
+                                    [Solicitud]="Solicitud"
+                                    style="width: 100%"
+                                >
+                                </app-application-card>
+                            </div>
+                        </ion-item>
+                        <ion-item-options side="end" style="padding: 0px">
+                            <ion-item-option (click)="cancelar(i)" color="tertiary" expandable
+                                >cancelar
+                            </ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-list>
+            </ion-col>
+            <ion-col size="0.2" style="padding: 0px"> </ion-col>
+        </ion-row>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Cargando mas solicitudes..."
+            >
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+
+    <ion-fab *ngIf=" solicitudesList.length > 0" vertical="bottom" horizontal="end" slot="fixed">
+        <img src="assets/icon/buttonPlusNewApplication.svg" class="heaven" />
+        <ion-fab-button color="orange" style="margin-right: 20px">
+            <img
+                class="star_add"
+                src="assets/icon/buttonNewApplication.svg"
+                (click)="irSolicitud()"
+            />
+        </ion-fab-button>
+    </ion-fab>
+
+    <div *ngIf="solicitudesList.length === 0">
+        <ion-fab vertical="center" horizontal="center" slot="fixed">
+            <img src="assets/icon/buttonPlusNewApplication.svg" class="heaven" />
+            <ion-fab-button color="orange" style="margin-right: 20px">
+                <img src="assets/icon/buttonNewApplication.svg" (click)="irSolicitud()" />
+            </ion-fab-button>
+        </ion-fab>
+
+        <div class="container newApplication">
+            <ion-row>
+                <ion-col style="text-align: center; padding-bottom: 0px">
+                    <h6 style="color: lightgray; margin-top: 0px; margin-bottom: 0px">
+                        No tiene solicitudes
+                    </h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col style="text-align: center; padding: 0px 0px">
+                    <h6>
+                        <span style="color: rgb(246, 183, 118); margin-top: 0px"
+                            >Presione el botón</span
+                        >
+                        <span style="color: lightgray; margin-top: 0px; margin-left: 5px"
+                            >para añadir</span
+                        >
+                    </h6>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
 </ion-content>

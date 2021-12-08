@@ -1,0 +1,138 @@
+#barraSuperior {
+    width: 100%;
+    height: 99px;
+
+    background-color: rgb(246, 183, 118);
+}
+
+#barraInferior {
+    width: 100%;
+    height: 65px;
+    border-radius: 0px 0px 20px 0px;
+    background-color: rgb(49, 49, 57);
+}
+
+#logo {
+    width: 30px;
+    height: 30px;
+    margin-top: 13px;
+    margin-left: 6px;
+}
+
+#barra {
+    background-color: rgb(241, 241, 241);
+    width: 100%;
+    height: 50px;
+    margin-top: 43px;
+    font-family: 'Helvetica-Bd';
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* #formasFoto{
+    width: auto;
+    height: auto;
+    border: 2px solid  rgb(0, 0, 0, 0.22);
+    border-radius: 4px;
+} */
+
+ion-card {
+    border: 0.5px solid rgb(49, 49, 57);
+    width: 110px;
+    height: 110px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+#selecf {
+    /*  width: auto;
+    height: auto;  */
+    width: 109px;
+    height: 109px;
+    object-fit: cover;
+}
+
+//------------------------------------------------
+
+/* #cuadrado{
+  width: 0;
+  height: 0;
+  border-right: 50px solid transparent;
+  border-top: 50px solid transparent;
+  border-left: 50px solid  transparent;
+  border-bottom: 50px solid transparent;
+  border-radius: 4px;
+
+}  */
+
+.avatar-profile {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 4px;
+    flex: none !important;
+    background-color: transparent;
+    color: #bdbdbd;
+    border: 2px solid rgba(0, 0, 0, 0.22) !important;
+}
+ion-input {
+    border: 3px solid rgb(246, 183, 118);
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+}
+/* img{
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+}
+#ion-img{
+    width: 100%;
+    height: 50px;
+    max-width: 97px;
+    max-height: 97px;
+
+} */
+
+#boton {
+    background-color: rgb(246, 183, 118);
+    color: rgb(49, 49, 57);
+    width: 155px;
+    height: 39px;
+    border-radius: 5px 5px 5px 5px;
+    font-family: 'Helvetica-Bd';
+    margin-top: 75px;
+}
+
+:host ::ng-deep .task_materials_buttons {
+    width: 80%;
+    margin-left: 10%;
+    //bottom: 0;
+    // padding-bottom: 10%;
+    position: absolute;
+    bottom: 5%;
+
+    .one_button {
+        width: 100%;
+        //padding-top: 15%;
+
+        .p-button {
+            margin-top: 10%;
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: rgb(49, 49, 57);
+            border: solid var(--ion-color-primary);
+            background: var(--ion-color-primary);
+            width: 100%;
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
+}

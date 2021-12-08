@@ -27,11 +27,11 @@ export class NewTaskPage implements OnInit {
         });
     }
 
-    taskSelected(selecction: number) {
-        this._serv.setServ(this.taskTypes[selecction]);
+    taskSelected(selected: number) {
+        this._serv.setServ(this.taskTypes[selected]);
 
-        if (selecction === 0) {
-            document.getElementById('img').className = 'classname';
+        if (selected === 0) {
+            document.getElementById('img').className = 'jello-horizontal';
 
             setTimeout(() => {
                 this.navCtrl.navigateRoot('/task-subcategory', {
@@ -45,6 +45,14 @@ export class NewTaskPage implements OnInit {
 
         /* this.navCtrl.navigateRoot('/titulo', {animated: true, animationDirection: 'forward' }) ;
          */
+    }
+
+    goToTasks() {
+        this._serv.deleteFields();
+        this.navCtrl.navigateRoot('/tabs/tab1', {
+            animated: true,
+            animationDirection: 'back',
+        });
     }
 
     async showAlert() {

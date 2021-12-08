@@ -1,0 +1,41 @@
+<app-header
+    headerText="Solicitudes"
+    [fillBackground]="true"
+    [expandHeader]="true"
+    expandText="{{servicio}}"
+    [cerrar]="true"
+    [atras]="true"
+    [titulo]="true"
+    (clickedClose)="cerrarsolicitud()"
+></app-header>
+
+<div id="barra" slot="fixed">
+    <ion-label>Describa el servicio (Opcional)</ion-label>
+</div>
+
+<ion-content>
+    <ion-grid>
+        <ion-row style="margin-top: 25px">
+            <ion-col size="1"> </ion-col>
+
+            <ion-col size="10" style="margin-top: 60x">
+                <textarea
+                    name="Text1"
+                    cols="30"
+                    rows="5"
+                    [(ngModel)]="comentario"
+                    placeholder="Describa su problema"
+                    style="max-width: 100%; width: 100%; flex: 100%; padding: 10px"
+                ></textarea>
+            </ion-col>
+
+            <ion-col size="1"> </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button (onClick)="goto()" label="SIGUIENTE"> </p-button>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-content>
+    <input
+        class="search-input"
+        type="text"
+        placeholder="Buscar..."
+        matInput
+        [value]="directions"
+        ngx-google-places-autocomplete
+        [options]="options"
+        #placesRef="ngx-places"
+        (onAddressChange)="handleAddressChange($event)"
+    />
+
+    <agm-map
+        id="map-parent"
+        [zoom]="zoom"
+        (mapClick)="agregarMarcador($event)"
+        [latitude]="lat"
+        [longitude]="lng"
+        mapTypeId="hybrid"
+        [disableDefaultUI]="true"
+    >
+        <agm-marker
+            *ngFor="let marcador of marcadores; let i = index"
+            [latitude]="marcador.lat"
+            [longitude]="marcador.lng"
+        >
+        </agm-marker>
+    </agm-map>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="getMyLocation(true)">
+        <ion-fab-button>
+            <ion-icon name="location"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab id="enter" vertical="bottom" horizontal="end" slot="fixed" (click)="getBack()">
+        <ion-fab-button>
+            <ion-icon name="enter"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

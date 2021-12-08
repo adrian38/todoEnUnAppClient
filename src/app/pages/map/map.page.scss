@@ -1,0 +1,59 @@
+agm-map {
+    //height: 300px;
+    width: 99%;
+    height: 100%;
+    position: relative;
+}
+
+.search-input {
+    z-index: 90999;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    height: 50px;
+    width: 80%;
+    background-color: white;
+    border-radius: 50px;
+    transform: translateX(-50%);
+    display: flex;
+    padding-left: 5%;
+}
+
+#enter {
+    margin-bottom: 20%;
+}
+
+// :host ::ng-deep .task_materials_buttons {
+//     width: 80%;
+//     margin-left: 10%;
+
+//     padding-bottom: 10%;
+//     position: absolute;
+//     bottom: 5%;
+
+//     .one_button {
+//         width: 100%;
+//         //padding-top: 15%;
+
+//         .p-button {
+//             margin-top: 10%;
+//             span {
+//                 padding-top: 5px;
+//                 font: normal 15px 'Helvetica-Md', sans-serif !important;
+//             }
+
+//             color: rgb(49, 49, 57);
+//             border: solid var(--ion-color-primary);
+//             background: var(--ion-color-primary);
+//             width: 100%;
+//         }
+
+//         .p-button:focus {
+//             box-shadow: none !important;
+//         }
+//     }
+// }
+
+// .search-input:focus {
+//     height: 5%;
+// }

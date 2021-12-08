@@ -1,0 +1,216 @@
+<app-header
+    headerText="Solicitudes"
+    [fillBackground]="true"
+    [expandHeader]="true"
+    expandText="{{servicio}}"
+    [cerrar]="true"
+    [atras]="true"
+    [titulo]="true"
+    (clickedClose)="cerrarsolicitud()"
+></app-header>
+
+<div id="barra" slot="fixed">
+    <ion-label>Direccion donde se realiza el servicio</ion-label>
+</div>
+
+<ion-content>
+    <ion-grid>
+        <ion-item style="margin-top: 25px">
+            <ion-checkbox
+                mode="ios"
+                [(ngModel)]="Autofill"
+                [ngModelOptions]="{standalone: true}"
+                (ionChange)="autofillChange()"
+            ></ion-checkbox>
+            <ion-label style="margin-left: 20px">Direccion personal</ion-label>
+        </ion-item>
+
+        <form #formulario="ngForm">
+            <ion-row style="margin-top: 25px">
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+
+                <ion-col size="10">
+                    <div *ngIf="!this.oblidatoriocalle">
+                        <ion-input
+                            id="inc"
+                            name="calle"
+                            type="text"
+                            placeholder="Calle"
+                            [(ngModel)]="calle"
+                            required
+                            #call="ngModel"
+                            [disabled]="Autofill"
+                        >
+                        </ion-input>
+
+                        <div id="link">
+                            <small *ngIf="call.invalid && call.touched" class="text-danger"
+                                >Campo obligatorio</small
+                            >
+                        </div>
+                    </div>
+
+                    <div *ngIf="this.oblidatoriocalle">
+                        <ion-input
+                            style="border: 2px solid rgb(101, 173, 172) !important"
+                            name="calle"
+                            type="text"
+                            [(ngModel)]="calle"
+                            placeholder="Calle"
+                        ></ion-input>
+
+                        <div id="link">
+                            <small class="text-danger">Campo obligatorio</small>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+
+                <ion-col size="5">
+                    <div *ngIf="!this.oblidatorionumero">
+                        <ion-input
+                            id="in"
+                            name="numero"
+                            type="number"
+                            placeholder="Numero"
+                            [(ngModel)]="numero"
+                            required
+                            #num="ngModel"
+                            [disabled]="Autofill"
+                        ></ion-input>
+
+                        <div id="link">
+                            <small *ngIf="num.invalid && num.touched" class="text-danger"
+                                >Campo obligatorio</small
+                            >
+                        </div>
+                    </div>
+
+                    <div *ngIf="this.oblidatorionumero">
+                        <ion-input
+                            style="border: 2px solid rgb(101, 173, 172) !important"
+                            name="calle"
+                            type="text"
+                            [(ngModel)]="numero"
+                            placeholder="Numero"
+                        ></ion-input>
+
+                        <div id="link">
+                            <small class="text-danger">Campo obligatorio</small>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col size="5" style="margin-left: 15px">
+                    <ion-input
+                        id="in"
+                        name="puerta"
+                        type="number"
+                        placeholder="Puerta"
+                        [(ngModel)]="puerta"
+                        [disabled]="Autofill"
+                    ></ion-input>
+                </ion-col>
+
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+
+                <ion-col size="5">
+                    <ion-input
+                        id="in"
+                        name="portal"
+                        type="number"
+                        placeholder="Portal"
+                        [(ngModel)]="portal"
+                        [disabled]="Autofill"
+                    ></ion-input>
+                </ion-col>
+
+                <ion-col size="5" style="margin-left: 15px">
+                    <ion-input
+                        id="in"
+                        name="cod_postal"
+                        type="number"
+                        placeholder="Cod.Postal"
+                        [(ngModel)]="cod_postal"
+                        [disabled]="Autofill"
+                    ></ion-input>
+                </ion-col>
+
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+
+                <ion-col size="5">
+                    <ion-input
+                        id="in"
+                        name="escalera"
+                        type="text"
+                        placeholder="Escalera"
+                        [(ngModel)]="escalera"
+                        [disabled]="Autofill"
+                    ></ion-input>
+                </ion-col>
+
+                <ion-col size="5" style="margin-left: 15px">
+                    <ion-input
+                        id="in"
+                        name="piso"
+                        type="number"
+                        placeholder="Piso"
+                        [(ngModel)]="piso"
+                        [disabled]="Autofill"
+                    ></ion-input>
+                </ion-col>
+
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+                <ion-col
+                    size="3"
+                    style="text-align: end; margin-top: 5px; background: rgb(255, 255, 255)"
+                >
+                    <div *ngIf="!this.oblidatorioGPS">
+                        <ion-card id="logo1" [disabled]="Autofill" (click)="ubicacion()">
+                            <img
+                                style="width: 39px; height: 39px"
+                                src="/assets/icon/ubicacion.svg"
+                            />
+                        </ion-card>
+                    </div>
+
+                    <div *ngIf="this.oblidatorioGPS">
+                        <ion-card id="logo1" [disabled]="Autofill" (click)="ubicacion()">
+                            <img
+                                style="width: 39px; height: 39px"
+                                src="/assets/icon/gpsObligatorio.svg"
+                            />
+                        </ion-card>
+                    </div>
+                </ion-col>
+
+                <ion-col size="8" style="background: rgb(255, 255, 255)"></ion-col>
+            </ion-row>
+        </form>
+
+        <!-- [disabled]="(formulario.invalid || !coordenadas) && !Autofill  " -->
+    </ion-grid>
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button (onClick)="goto()" label="SIGUIENTE"> </p-button>
+        </div>
+    </div>
+</ion-content>
+<!-- [disabled]="formulario.invalid && !Autofill || !coordenadas" -->

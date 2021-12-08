@@ -1,0 +1,334 @@
+.div_btn {
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+    height: 56px;
+    width: 100%;
+    //margin-bottom: 15px;
+
+    .btn_init_section {
+        width: 100% !important;
+        min-width: 160px !important;
+        height: 32px;
+        font: normal 15px 'Helvetica-Roman', sans-serif !important;
+        --border-radius: 5px;
+        //font: normal 15px "Helvetica-Bd", sans-serif;
+    }
+}
+
+#barra {
+    background-color: rgb(241, 241, 241);
+    width: 100%;
+    height: 50px;
+    margin-top: 43px;
+    font-family: 'Helvetica-Bd';
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+:host ::ng-deep {
+    .p-toast-message-custom {
+        background-color: rgb(246, 183, 118);
+        border: solid rgb(246, 183, 118);
+        border-width: 0 0 0 6px;
+        width: 10px;
+        color: #2c1e30;
+        .p-toast-icon-close {
+            color: #2c1e30;
+        }
+    }
+}
+
+#ServHist {
+    background-color: rgb(246, 183, 118);
+}
+
+img {
+    width: 60%;
+    height: 90%;
+}
+
+#item {
+    border-bottom: 2px solid rgba(246, 183, 118, 0.7);
+}
+
+#fotopersonal {
+    width: 55px;
+    height: 55px;
+    border: 0.5px solid rgb(241, 241, 241);
+    border-radius: 7px 7px 7px 7px;
+    opacity: 0.9;
+}
+
+ion-button {
+    width: 18px;
+    height: 25px;
+}
+#botonpago {
+    width: 65px;
+    height: 25px;
+}
+
+#ico {
+    width: 25px;
+    height: 20px;
+}
+
+// #item {
+//   border-bottom: 2px solid rgb(246, 183, 118);
+// }
+
+#iconosdetalles {
+    width: 20px;
+    height: 20px;
+}
+
+#selecf {
+    width: 79px;
+    height: 79px;
+    object-fit: cover;
+}
+
+#imgGPS {
+    width: 34px;
+    height: 34px;
+}
+
+:host ::ng-deep .p-dialog {
+    .p-dialog-header {
+        display: none;
+    }
+    .p-dialog-content {
+        border-radius: 15px !important;
+
+        .p-rating-star {
+            color: rgb(246, 183, 118);
+        }
+        .p-rating-icon.pi-star {
+            color: rgb(246, 183, 118);
+        }
+
+        .p-rating-icon {
+            color: rgb(246, 183, 118);
+        }
+    }
+}
+
+ion-input {
+    //border: 1px solid rgb(49 ,49 ,57);
+    border: 1px solid rgb(255, 255, 255);
+
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    height: 50%;
+    width: 100%;
+}
+ion-input:focus-within {
+    border: 1px solid rgb(246, 183, 118);
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    height: 50%;
+    width: 100%;
+}
+#buton {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#botonguardar {
+    width: 145px;
+    height: 25px;
+    border-radius: 5px 5px 5px 5px;
+
+    font-size: small;
+    background-color: rgb(246, 183, 118);
+    color: rgb(49, 49, 57);
+}
+
+#botonpagar {
+    width: 80px;
+    height: 25px;
+    border-radius: 5px 5px 5px 5px;
+
+    font-size: small;
+    background-color: rgb(246, 183, 118);
+    color: rgb(49, 49, 57);
+}
+.container {
+    background: rgb(255, 255, 255);
+    color: rgb(49, 49, 57);
+    //margin: 0 0 1rem;
+    /*    height: 10rem; */
+
+    display: flex;
+    /* align-items por defecto tiene el valor `stretch` */
+    align-items: start;
+}
+.center-h {
+    justify-content: center;
+}
+.center-v {
+    align-items: center;
+}
+/*   :host ::ng-deep .p-galleria-mask{
+      width: 100%;
+
+
+  } */
+
+:host ::ng-deep .p-galleria .p-galleria-close {
+    margin-right: 9em;
+}
+
+/* item-native{
+    padding-left: 0px;
+} */
+
+ion-item {
+    --inner-padding-end: 0px;
+    --padding-start: 0px;
+}
+
+#notificacion {
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.btn_pagar {
+    width: 100%;
+    font: normal 15px 'Helvetica-Roman', sans-serif !important;
+    --border-radius: 5px;
+    color: black;
+}
+
+.segment {
+    --background: var(--ion-color-orange);
+    height: 44px !important;
+}
+
+.segment_btn {
+    font: normal 15px 'Helvetica-Roman', sans-serif;
+    color: var(--ion-color-black);
+    --color-checked: var(--ion-color-black);
+    --indicator-height: 4px;
+    min-height: 44px !important;
+    z-index: 5 !important;
+    //z-index: 500 !important;
+    width: 50%;
+}
+
+.font_bold {
+    font-weight: bold;
+}
+
+ion-segment .segment-button-checked {
+    font: normal 15px 'Helvetica-Bd', sans-serif;
+}
+
+.module {
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid var(--ion-color-orange) !important;
+    margin-top: 10px !important;
+}
+
+.last_module {
+    padding-bottom: 10% !important;
+    margin-top: 10px !important;
+}
+
+.h2_title {
+    font: normal 16px 'Helvetica-Bd', sans-serif !important;
+    padding: 8px 5px 8px 0 !important;
+    text-align: left;
+    width: 100%;
+}
+
+.h6_title {
+    font: normal 12px 'Helvetica-Roman', sans-serif !important;
+    text-align: left;
+    width: 100%;
+    padding: 5px 20px 5px 2px !important;
+    min-width: 100px !important;
+}
+
+.icon_calendar {
+    height: 17px !important;
+    width: 17px !important;
+}
+
+.h3_title {
+    font: normal 14px 'Helvetica-Md', sans-serif !important;
+    margin: 8px 5px 8px 10px !important;
+    text-align: left;
+    width: 100%;
+}
+
+.icon_schedule {
+    height: 19px !important;
+    width: 19px !important;
+}
+
+.img_location {
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+
+.icon_photo {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.selecf {
+    width: 79px;
+    height: 79px;
+    object-fit: cover;
+}
+
+.icon_direction {
+    height: 19px !important;
+    width: 19px !important;
+}
+
+:host ::ng-deep .home_buttons {
+    width: 80%;
+    margin-left: 10%;
+    // position: absolute;
+    // bottom: 5%;
+
+    .two_up_buttons {
+        width: 100%;
+        // margin: 0 auto;
+        // margin-bottom: 15%;
+
+        .p-button {
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: var(--ion-color-primary-background);
+            //margin-top: 15%;
+            background-color: var(--ion-color-primary);
+            border: solid var(--ion-color-primary);
+            width: 100%;
+        }
+        #down {
+            .p-button {
+                margin-top: 12%;
+            }
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
+}

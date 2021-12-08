@@ -1,0 +1,37 @@
+
+<ion-header [translucent]="true" class="ion-no-border" >
+  <ion-row id="contenido">
+    <ion-col size=10></ion-col>
+    <ion-col size=2 style="text-align: end;">
+      <ion-button  (click)="cerrar()" class="boton" fill="clear" style="margin-top: 0px;">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+
+<ion-content fullscreen id="contenido">
+ 
+<div id="contenido" class="center" >
+
+  <ion-slides pager="false" zoom="true" #slides id="contenido" >
+    <ion-slide >
+      <div class="swiper-zoom-container" >
+        <img   src="{{imagen}}"  alt="" >
+      </div>
+    </ion-slide>
+  </ion-slides>
+ 
+
+  
+
+
+</div>
+
+  
+
+
+
+
+</ion-content>

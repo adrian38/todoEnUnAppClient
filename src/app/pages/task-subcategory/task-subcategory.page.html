@@ -1,9 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>task-subcategory</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
+    <app-header headerText="Solicitudes" [fillBackground]="false"></app-header>
 
-<ion-content>
+    <ion-row style="margin-top: 50px; margin-left: 55px">
+        <ion-label id="encabezado">¿Que tipo de servicio necesita?</ion-label>
+    </ion-row>
 
+    <ion-row style="margin-top: 20px">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img0"
+                    class="service-type-image"
+                    src="/assets/images/llavepaso.jpg"
+                    (click)="subTaskSelected(0)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.subTaskTypes[0]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img1"
+                    class="service-type-image"
+                    src="/assets/images/griferia.jpg"
+                    (click)="subTaskSelected(1)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.subTaskTypes[1]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 20px">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img2"
+                    class="service-type-image"
+                    src="/assets/images/cambiosifon.jpg"
+                    (click)="subTaskSelected(2)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.subTaskTypes[2]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img3"
+                    class="service-type-image"
+                    src="/assets/images/radiadorescalafaccion.jpg"
+                    (click)="subTaskSelected(3)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.subTaskTypes[3]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
 </ion-content>

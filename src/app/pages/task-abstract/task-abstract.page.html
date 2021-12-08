@@ -1,0 +1,184 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<app-header
+    headerText="Solicitudes"
+    [fillBackground]="true"
+    [expandHeader]="true"
+    expandText="{{servicio}}"
+    [cerrar]="true"
+    [atras]="true"
+    [titulo]="true"
+    (clickedClose)="cerrarsolicitud()"
+></app-header>
+
+<div id="barra" slot="fixed">
+    <ion-label>Resumen</ion-label>
+</div>
+
+<ion-content>
+    <ion-list style="padding: 15px 25px 25px 25px !important">
+        <ion-item class="module ion-no-padding" lines="none">
+            <div class="flex_column">
+                <ion-label class="h2_title">{{ task.type }}</ion-label>
+                <ion-label class="h6_title ion-text-wrap">{{ task.title }}</ion-label>
+            </div>
+        </ion-item>
+
+        <ion-item class="module ion-no-padding" lines="none">
+            <div class="flex_column">
+                <div class="flex_row flex_centered">
+                    <ion-img class="icon_direction" src="/assets/icon/direccion.svg"></ion-img>
+                    <ion-label class="h3_title">Dirección</ion-label>
+                </div>
+
+                <div class="flex_row">
+                    <div class="flex_column">
+                        <ion-label class="h6_title ion-text-wrap"
+                            >{{ task.address.street}}, Numero: {{ task.address.number }},</ion-label
+                        >
+                        <div class="flex_row">
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.portal"
+                                >Portal: {{ task.address.portal }},
+                            </ion-label>
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.stair"
+                                >Escalera: {{ task.address.stair }},
+                            </ion-label>
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.floor"
+                                >Piso: {{ task.address.floor }},
+                            </ion-label>
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.door"
+                                >Puerta: {{ task.address.door }},
+                            </ion-label>
+                        </div>
+                        <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.cp"
+                            >Codigo_Postal: {{ task.address.cp }},
+                        </ion-label>
+                    </div>
+
+                    <div class="flex_centered">
+                        <img
+                            class="img_location"
+                            src="/assets/icon/ubicacion.svg"
+                            (click)="onClickLocation()"
+                        />
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-item class="module ion-no-padding" lines="none">
+            <div class="flex_column">
+                <div class="flex_row flex_centered">
+                    <ion-img class="icon_schedule" src="/assets/icon/materials.svg"></ion-img>
+                    <ion-label class="h3_title">Materiales</ion-label>
+                </div>
+                <ion-label class="h6_title ion-text-wrap"
+                    >{{ task.require_materials?'Dispone de materiales':'No dispone de
+                    materiales'}}</ion-label
+                >
+            </div>
+        </ion-item>
+
+        <ion-item class="module ion-no-padding" lines="none">
+            <div class="flex_column">
+                <div class="flex_row flex_centered">
+                    <ion-img class="icon_photo" src="/assets/icon/camara.svg"></ion-img>
+                    <ion-label class="h3_title">Fotos</ion-label>
+                </div>
+                <div class="flex_column">
+                    <!-- <ion-label class="h6_title">Antes</ion-label> -->
+                    <div class="flex_row">
+                        <div class="flex_column">
+                            <ion-card
+                                [disabled]="habilitar_0"
+                                style="
+                                    border: 0.5px solid rgb(49, 49, 57);
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: 5px 5px 5px 5px;
+                                    margin: 10px 0px;
+                                "
+                            >
+                                <img
+                                    class="selecf"
+                                    (click)="imageClick(task.photoSO[0])"
+                                    src="{{task.photoSO[0]}}"
+                                    onError="this.src='assets/images/noImage.svg'"
+                                />
+                            </ion-card>
+                        </div>
+                        <div class="flex_column">
+                            <ion-card
+                                [disabled]="habilitar_1"
+                                style="
+                                    border: 0.5px solid rgb(49, 49, 57);
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: 5px 5px 5px 5px;
+                                    margin: 10px 0px;
+                                "
+                            >
+                                <img
+                                    class="selecf"
+                                    (click)="imageClick(task.photoSO[1])"
+                                    src="{{task.photoSO[1]}}"
+                                    onError="this.src='assets/images/noImage.svg'"
+                                />
+                            </ion-card>
+                        </div>
+                        <div class="flex_column">
+                            <ion-card
+                                [disabled]="habilitar_2"
+                                style="
+                                    border: 0.5px solid rgb(49, 49, 57);
+                                    width: 80px;
+                                    height: 80px;
+                                    border-radius: 5px 5px 5px 5px;
+                                    margin: 10px 0px;
+                                "
+                            >
+                                <img
+                                    class="selecf"
+                                    (click)="imageClick(task.photoSO[2])"
+                                    src="{{task.photoSO[2]}}"
+                                    onError="this.src='assets/images/noImage.svg'"
+                                />
+                            </ion-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-item class="last_module ion-no-padding" lines="none">
+            <div class="flex_column">
+                <div class="flex_row flex_centered">
+                    <ion-img class="icon_schedule" src="/assets/icon/edit.svg"></ion-img>
+                    <ion-label class="h3_title">Descripción</ion-label>
+                </div>
+                <p class="h6_title ion-text-wrap">
+                    {{ task.description?task.description:'Sin descripción' }}
+                </p>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <div class="home_buttons">
+        <div class="two_up_buttons">
+            <p-button
+                [disabled]="btn_deshabilitar"
+                label="CREAR SOLICITUD"
+                (onClick)="crearSolicitudn()"
+            ></p-button>
+            <p-button
+                id="down"
+                [disabled]="btn_deshabilitar"
+                label="CANCELAR"
+                (click)="cerrarsolicitud()"
+            ></p-button>
+        </div>
+    </div>
+</ion-content>
