@@ -1,0 +1,123 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<app-header headerText="Solicitud" [fillBackground]="false"></app-header>
+
+<ion-content>
+    <div style="width: 100%; height: 100%; display: flex">
+        <div style="width: 80%; margin-left: auto; margin-right: auto">
+            <div style="font-weight: bold; margin-top: 50px">
+                <ion-label>{{task.title | uppercase}}</ion-label>
+            </div>
+            <div style="margin-top: 10px">
+                <ion-label style="color: rgb(150, 150, 150)">{{task.type}}</ion-label>
+            </div>
+
+            <div style="margin-top: 40px; font-weight: bold">
+                <ion-label>Dirección</ion-label>
+            </div>
+            <ion-row style="margin-top: 20px">
+                <div class="flex_centered" style="width: 30px" (click)="onClickLocation()">
+                    <img class="img_location" src="/assets/icon/ubicacion.svg" />
+                </div>
+                <ion-label style="margin-left: 20px; margin-top: auto; margin-bottom: auto"
+                    >Pulse para ver en el mapa</ion-label
+                >
+            </ion-row>
+
+            <div style="margin-top: 40px; font-weight: bold">
+                <ion-label>Ofertas</ion-label>
+            </div>
+
+            <div *ngIf="task.So_offers || task.So_offers.length > 0">
+                <app-offer-card
+                    style="width: 100%"
+                    *ngFor="let element of task.So_offers; let index = index;"
+                    [offer]="element"
+                    [index]="index"
+                    (outputShowDialog)="showDialog($event)"
+                    (outputOpenChat)="openChat($event)"
+                ></app-offer-card>
+            </div>
+
+            <div
+                *ngIf="!task.So_offers || task.So_offers.length === 0"
+                style="width: 100%; height: 50%; display: flex"
+            >
+                <ion-row style="margin: auto">
+                    <ion-col size="12" style="text-align: center">
+                        <ion-row>
+                            <div>
+                                <img style="width: 40%" src="../../../assets/icon/empty.svg" />
+                            </div>
+                        </ion-row>
+                        <ion-row>
+                            <div style="width: 100%; margin-top: 20px">
+                                <ion-label>No hay ofertas todavia</ion-label>
+                            </div>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<p-dialog
+    header=" "
+    [(visible)]="display"
+    [modal]="true"
+    [style]="{ width: '85vw' }"
+    [baseZIndex]="1000"
+    [draggable]="false"
+    [resizable]="false"
+    [dismissableMask]="true"
+>
+    <ion-row>
+        <ion-col size="4">
+            <img
+                style="
+                    width: 65px;
+                    height: 65px;
+                    border: 0.5px solid rgb(241, 241, 241);
+                    border-radius: 7px 7px 7px 7px;
+                    margin-top: 17px;
+                "
+                src="{{tempInfoProvider.photoProvider}}"
+                onError="this.src='assets/images/noImage.svg'"
+            />
+        </ion-col>
+        <ion-col size="8">
+            <h2>{{tempInfoProvider.provider_name}}</h2>
+            <p-rating
+                [ngModel]="tempInfoProvider.ranking_provider"
+                readonly="true"
+                stars="5"
+                [cancel]="false"
+            ></p-rating>
+        </ion-col>
+    </ion-row>
+
+    <ion-content style="max-height: 180px; height: 180px">
+        <ion-row>
+            <div *ngIf="tempInfoProvider.opinions_provider.length >= 0" style="margin-top: 5px">
+                <div *ngFor="let comments of tempInfoProvider.opinions_provider">
+                    <h2>{{comments.author }}</h2>
+                    {{comments.comment}}
+                </div>
+            </div>
+            <p *ngIf="tempInfoProvider.opinions_provider.length == 0 " style="margin-top: 5px">
+                No hay comentarios del trabajador
+            </p>
+            <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+                <ion-infinite-scroll-content
+                    loadingSpinner="bubbles"
+                    loadingText="Cargando mas opiniones..."
+                >
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+        </ion-row>
+    </ion-content>
+</p-dialog>

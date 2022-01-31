@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class TaskMaterialsPage implements OnInit {
     constructor(
         private _serv: ObtSubSService,
         public navCtrl: NavController,
-        private platform: Platform
+        private platform: Platform,
+        public alertCtrl: AlertController
     ) {
         this.taskType = this._serv.getServ();
     }
@@ -63,5 +64,40 @@ export class TaskMaterialsPage implements OnInit {
             animated: true,
             animationDirection: 'forward',
         });
+    }
+
+    cerrarsolicitud() {
+        this.presentAlert();
+    }
+
+    async presentAlert() {
+        const alert = await this.alertCtrl.create({
+            cssClass: 'my-custom-class',
+            header: 'Alerta',
+            message: 'Desea cancelar la solicitud',
+
+            buttons: [
+                {
+                    text: 'Cancelar',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    },
+                },
+                {
+                    text: 'Aceptar',
+                    handler: (datos) => {
+                        this._serv.deleteFields();
+                        this.navCtrl.navigateRoot('/tabs/tab1', {
+                            animated: true,
+                            animationDirection: 'forward',
+                        });
+                    },
+                },
+            ],
+        });
+
+        await alert.present();
     }
 }

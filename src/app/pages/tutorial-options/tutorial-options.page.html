@@ -1,0 +1,17 @@
+<app-header headerText="Seleccione" [fillBackground]="false"></app-header>
+
+<ion-content style="text-align: center">
+    <div style="margin-top: 60px; font-weight: bold">¿Qué desea hacer para continuar?</div>
+
+    <div class="init_div" style="margin-top: 50px">
+        <ion-button class="btn" color="orange" style="width: 80%" (click)="createNewRequest();">
+            <span style="padding-top: 5px; font-weight: bold"> Crear nueva solicitud </span>
+        </ion-button>
+    </div>
+
+    <div class="create_div" style="margin-top: 40px">
+        <ion-button class="btn" color="orange" style="width: 80%" (click)="seeAllRequest()">
+            <span style="padding-top: 5px; font-weight: bold">Ver solicitudes existentes</span>
+        </ion-button>
+    </div>
+</ion-content>

@@ -97,26 +97,6 @@ ion-button {
     height: 34px;
 }
 
-:host ::ng-deep .p-dialog {
-    .p-dialog-header {
-        display: none;
-    }
-    .p-dialog-content {
-        border-radius: 15px !important;
-
-        .p-rating-star {
-            color: rgb(246, 183, 118);
-        }
-        .p-rating-icon.pi-star {
-            color: rgb(246, 183, 118);
-        }
-
-        .p-rating-icon {
-            color: rgb(246, 183, 118);
-        }
-    }
-}
-
 ion-input {
     //border: 1px solid rgb(49 ,49 ,57);
     border: 1px solid rgb(255, 255, 255);
@@ -301,6 +281,8 @@ ion-segment .segment-button-checked {
 :host ::ng-deep .home_buttons {
     width: 80%;
     margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     // position: absolute;
     // bottom: 5%;
 

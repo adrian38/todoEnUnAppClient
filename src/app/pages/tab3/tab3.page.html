@@ -1,3 +1,92 @@
-<ion-content [fullscreen]="true">
-    <app-header headerText="Perfil" [fillBackground]="false"></app-header>
+<app-header headerText="Perfil" [fillBackground]="false"></app-header>
+
+<ion-content class="animated fadeIn">
+    <ion-row style="margin-top: 30px" (click)="datospersonales()">
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+            <ion-img
+                src="../../assets/icon/1.svg"
+                style="width: 30px; height: 30px; margin-top: 5px; color: rgb(246, 183, 118)"
+            >
+            </ion-img>
+        </ion-col>
+        <ion-col size="8" style="margin-top: 5px; margin-left: 15px">
+            <ion-list>
+                <ion-label style="color: rgb(49, 49, 57)"> Datos personales </ion-label>
+                <div id="item"></div>
+            </ion-list>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row (click)="cambiarcontrasea()">
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+            <ion-img
+                src="../../assets/icon/3.svg"
+                style="width: 30px; height: 30px; margin-top: 5px; color: rgb(246, 183, 118)"
+            >
+            </ion-img>
+        </ion-col>
+        <ion-col size="8" style="margin-top: 5px; margin-left: 15px">
+            <ion-list>
+                <ion-label style="color: rgb(49, 49, 57)"> Contraseña </ion-label>
+                <div id="item"></div>
+            </ion-list>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row (click)="notificaciones()">
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+            <ion-img
+                src="../../assets/icon/4.svg"
+                style="width: 30px; height: 30px; margin-top: 5px; color: rgb(246, 183, 118)"
+            >
+            </ion-img>
+        </ion-col>
+        <ion-col size="8" style="margin-top: 5px; margin-left: 15px">
+            <ion-list>
+                <ion-label style="color: rgb(49, 49, 57)"> Notificaciones </ion-label>
+                <div id="item"></div>
+            </ion-list>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row (click)="promociones()">
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+            <ion-img
+                src="../../assets/icon/bocina.svg"
+                style="width: 30px; height: 30px; margin-top: 5px; color: rgb(246, 183, 118)"
+            ></ion-img>
+        </ion-col>
+        <ion-col size="8" style="margin-top: 5px; margin-left: 15px">
+            <ion-list>
+                <ion-label style="color: rgb(49, 49, 57)"> Promociones </ion-label>
+                <div id="item"></div>
+            </ion-list>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row (click)="somos()">
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+            <ion-img
+                src="../../assets/icon/Quien_somos.svg"
+                style="width: 30px; height: 30px; margin-top: 5px; color: rgb(246, 183, 118)"
+            ></ion-img>
+        </ion-col>
+        <ion-col size="8" style="margin-top: 5px; margin-left: 15px">
+            <ion-list>
+                <ion-label style="color: rgb(49, 49, 57)"> ¿Quienes somos? </ion-label>
+                <div id="item"></div>
+            </ion-list>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+    </ion-row>
 </ion-content>

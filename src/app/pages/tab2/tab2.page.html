@@ -1,3 +1,121 @@
-<ion-content [fullscreen]="true">
-    <app-header headerText="Contratados" [fillBackground]="false"></app-header>
+<ion-header>
+    <app-header headerText="Solicitudes" [fillBackground]="true"></app-header>
+    <div id="ServHist">
+        <ion-segment
+            (ionChange)="segChange($event)"
+            mode="md"
+            style="color: rgb(49, 49, 57)"
+            color="dark"
+            #segmentHist
+        >
+            <ion-segment-button class="segment_btn" value="servicio">
+                <ion-label style="color: rgb(49, 49, 57); border-radius: 20px 20px 0px 0px"
+                    >Contratados</ion-label
+                >
+            </ion-segment-button>
+            <ion-segment-button class="segment_btn" value="historial">
+                <ion-label style="color: rgb(49, 49, 57); border-radius: 20px 20px 0px 0px"
+                    >Historial</ion-label
+                >
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="verservicios">
+        <div *ngIf="contratadoVacia == false">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="0.5" style="padding-left: 0px; padding-right: 0px"> </ion-col>
+                    <ion-col size="11" style="padding-left: 0px; padding-right: 0px">
+                        <ion-list>
+                            <div
+                                *ngFor="let contrato of contratadosList;let i = index"
+                                (click)="in(i)"
+                            >
+                                <app-hired-card
+                                    [contrato]="contrato"
+                                    style="width: 100%"
+                                ></app-hired-card>
+                            </div>
+                        </ion-list>
+                    </ion-col>
+                    <ion-col size="0.5" style="padding-left: 0px; padding-right: 0px"> </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div *ngIf="contratadoVacia">
+            <ion-row style="margin-top: 75px">
+                <ion-col size="4"></ion-col>
+                <ion-col size="4" style="text-align: center">
+                    <ion-row>
+                        <div>
+                            <img style="width: 85%; height: 85%" src="../../../assets/empty.svg" />
+                        </div>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="4"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="3"></ion-col>
+                <ion-col size="6" style="text-align: center">
+                    <h4 style="color: lightgray; margin-top: 0px">Ningún contratado</h4>
+                </ion-col>
+                <ion-col size="3"></ion-col>
+            </ion-row>
+        </div>
+    </div>
+
+    <div *ngIf="verhistorial">
+        <div *ngIf="contratadoVacia == false">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="0.5" style="padding-left: 0px; padding-right: 0px"> </ion-col>
+                    <ion-col size="11" style="padding-left: 0px; padding-right: 0px">
+                        <ion-list>
+                            <div *ngFor="let record of historialList;let i = index">
+                                <app-record-card
+                                    [record]="record"
+                                    style="width: 100%"
+                                ></app-record-card>
+                            </div>
+                        </ion-list>
+                    </ion-col>
+                    <ion-col size="0.5" style="padding-left: 0px; padding-right: 0px"> </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div *ngIf="contratadoVacia">
+            <ion-row style="margin-top: 75px">
+                <ion-col size="4"></ion-col>
+                <ion-col size="4" style="text-align: center">
+                    <ion-row>
+                        <div>
+                            <img style="width: 85%; height: 85%" src="../../../assets/empty.svg" />
+                        </div>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="4"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="3"></ion-col>
+                <ion-col size="6" style="text-align: center">
+                    <h4 style="color: lightgray; margin-top: 0px">Ningún historial</h4>
+                </ion-col>
+                <ion-col size="3"></ion-col>
+            </ion-row>
+        </div>
+    </div>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Cargando mas solicitudes..."
+        >
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

@@ -1,0 +1,219 @@
+<ion-header class="ion-no-border">
+    <div style="background: var(--ion-color-orange)">
+        <app-header headerText="Perfil" [fillBackground]="false"></app-header>
+    </div>
+    <div id="barraSuperior">
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8" style="text-align: center; padding-top: 0px">
+                <ion-label
+                    style="
+                        color: rgb(49, 49, 57);
+                        font-family: 'Helvetica-Bd';
+                        font-size: 15px;
+                        display: flex;
+                        justify-content: center;
+                        align-content: center;
+                        flex-direction: column;
+                        text-align: center;
+                        margin-top: 8px;
+                    "
+                    >DATOS PERSONALES</ion-label
+                >
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-header>
+
+<ion-content>
+    <ion-row style="margin-top: 25px">
+        <ion-col size="3.5"></ion-col>
+        <ion-col size="5" style="display: flex">
+            <ion-card *ngIf="avatarusuario" style="margin: auto">
+                <img id="selecf" [src]="avatarusuario  " (click)="presentAlertConfirm()" />
+            </ion-card>
+        </ion-col>
+        <ion-col size="3.5"></ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 30px">
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="10">
+            <ion-row>
+                <ion-col>
+                    <ion-item lines="none">
+                        <ion-input
+                            type="text"
+                            name="calle"
+                            [(ngModel)]="calle"
+                            placeholder="{{placeholderCalle}}"
+                            #call="ngModel"
+                            required
+                        >
+                        </ion-input>
+                    </ion-item>
+
+                    <div id="item"></div>
+
+                    <div id="link">
+                        <small *ngIf="call.invalid && call.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+
+                <ion-col>
+                    <ion-item lines="none">
+                        <ion-input
+                            type="text"
+                            name="puerta"
+                            [(ngModel)]="piso"
+                            placeholder="{{placeholderPiso}}"
+                            #pis="ngModel"
+                            required
+                        >
+                        </ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="pis.invalid && pis.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-item lines="none">
+                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
+                        <ion-input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="numero"
+                            placeholder="{{this.placeholderNumero}}"
+                            #num="ngModel"
+                            required
+                        ></ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="num.invalid && num.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <ion-item lines="none">
+                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
+                        <ion-input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="puerta"
+                            placeholder="{{this.placeholderPuerta}}"
+                            #pue="ngModel"
+                            required
+                        ></ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="pue.invalid && pue.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-item lines="none">
+                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
+                        <ion-input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="portal"
+                            placeholder="{{this.placeholderPortal}}"
+                            #port="ngModel"
+                            required
+                        ></ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="port.invalid && port.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <ion-item lines="none">
+                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
+                        <ion-input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="cpostal"
+                            placeholder="{{this.placeholderCp}}"
+                            #c_post="ngModel"
+                            required
+                        >
+                        </ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="c_post.invalid && c_post.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+
+                <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-item lines="none">
+                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
+                        <ion-input
+                            type="text"
+                            name="escalera"
+                            [(ngModel)]="escalera"
+                            placeholder="{{this.placeholderEscalera}}"
+                            #esc="ngModel"
+                            required
+                        >
+                        </ion-input>
+                    </ion-item>
+                    <div id="item"></div>
+                    <div id="link">
+                        <small *ngIf="esc.invalid && esc.touched" class="text-danger"
+                            >Campo obligatorio</small
+                        >
+                    </div>
+                </ion-col>
+
+                <ion-col style="text-align: end; margin-top: 5px">
+                    <div (click)="ubicacion()">
+                        <img id="imgGPS" src="../../assets/icon/ubicacion.svg" />
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col></ion-col>
+                <ion-col>
+                    <ion-button
+                        [disabled]="esc.invalid || c_post.invalid || port.invalid || pue.invalid || num.invalid || pis.invalid || call.invalid || !this.datos.getcoordenada()"
+                        type="submit"
+                        (click)="editar()"
+                    >
+                        <span style="padding-top: 2px">Aceptar</span>
+                    </ion-button>
+                </ion-col>
+
+                <ion-col></ion-col>
+            </ion-row>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+    </ion-row>
+</ion-content>

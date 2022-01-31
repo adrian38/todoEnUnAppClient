@@ -35,7 +35,7 @@ export class TaskSubcategoryPage implements OnInit {
 
     subscriptions() {
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.navCtrl.navigateRoot('/new-task', {
+            this.navCtrl.navigateRoot('/task-new', {
                 animated: true,
                 animationDirection: 'back',
             });
@@ -52,7 +52,7 @@ export class TaskSubcategoryPage implements OnInit {
             this._serv.setTitulo(this.subTaskTypes[selected]);
 
             setTimeout(() => {
-                this.navCtrl.navigateRoot('/tutorial-new-request', {
+                this.navCtrl.navigateRoot('/tutorial-request-new', {
                     animated: true,
                     animationDirection: 'forward',
                 });

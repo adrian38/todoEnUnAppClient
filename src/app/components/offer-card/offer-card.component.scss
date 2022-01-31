@@ -1,0 +1,19 @@
+#item {
+    border-bottom: 2px solid rgba(246, 183, 118, 0.7);
+}
+
+#fotopersonal {
+    width: 60px;
+    height: 60px;
+    border: 0.5px solid rgb(241, 241, 241);
+    border-radius: 7px 7px 7px 7px;
+    opacity: 0.9;
+}
+ion-label {
+    color: #313139;
+}
+
+ion-item {
+    --inner-padding-end: 0px;
+    --padding-start: 0px;
+}

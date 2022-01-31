@@ -8,6 +8,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
     styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+    test1 = 5;
+
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
@@ -70,6 +72,16 @@ export class HomePage implements OnInit {
         this.navController.navigateRoot('/login', {
             animated: true,
             animationDirection: 'back',
+        });
+    }
+
+    showTutorial() {
+        console.log('tutorial');
+
+        sessionStorage.setItem('tutorial', 'true');
+        this.navController.navigateRoot('/tutorial-options', {
+            animated: true,
+            animationDirection: 'forward',
         });
     }
 }

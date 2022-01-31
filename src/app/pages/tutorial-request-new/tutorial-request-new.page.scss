@@ -1,0 +1,92 @@
+:host ::ng-deep {
+    .p-toast-message-custom {
+        background-color: rgb(246, 183, 118);
+        border: solid rgb(246, 183, 118);
+        border-width: 0 0 0 6px;
+        width: 10px;
+        color: #2c1e30;
+        .p-toast-icon-close {
+            color: #2c1e30;
+        }
+    }
+}
+
+.btn_init_section {
+    --border-radius: 5px;
+    width: 100% !important;
+    min-width: 160px !important;
+    height: 40px;
+    font: normal 15px 'Helvetica-Roman', sans-serif !important;
+    //font: normal 15px "Helvetica-Bd", sans-serif;
+}
+
+.logo_principal {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 45%;
+    padding-bottom: 50px;
+}
+
+.welcome {
+    color: var(--ion-color-orange);
+    font: normal 22px 'Helvetica-Bd', sans-serif;
+    text-align: left;
+}
+
+.container {
+    height: 100%;
+    width: 100% !important;
+    padding: 0 55px 0 55px !important;
+}
+
+//   .btn_init_section {
+
+//     width: 100% !important;
+//     min-width: 160px !important;
+//     height: 32px;
+//     font: normal 15px 'Helvetica-Roman', sans-serif !important;
+//     --border-radius: 5px;
+//     //font: normal 15px "Helvetica-Bd", sans-serif;
+//   }
+
+.div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 56px;
+    width: 100%;
+    min-width: 160px;
+    margin-bottom: 15px;
+}
+
+.forgotten_pass {
+    color: rgb(42, 176, 185);
+    text-decoration: none;
+    text-align: left;
+    font: normal 12px sans-serif, verdana;
+    min-width: 160px !important;
+}
+
+.forgotten_pass_div {
+    width: 100% !important;
+    height: 40px !important;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+}
+
+.custom_input {
+    border: none;
+    border-radius: 8px !important;
+    background-color: var(--ion-color-gray);
+    width: 100% !important;
+    // --padding-top: 15px;
+    // --padding-start: 15px;
+    // --padding-bottom: 8px;
+    // --padding-end: 15px;
+    text-align: left;
+    // font-family: "Helvetica-Md", sans-serif;
+    font-size: 12px !important;
+    outline: none !important;
+}

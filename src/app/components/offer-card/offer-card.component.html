@@ -1,0 +1,40 @@
+<ion-row style="width: 100% !important" class="animated fadeIn">
+    <ion-item-sliding style="padding: 0px">
+        <ion-item lines="none" id="item" class="ion-no-padding" style="width: 100% !important">
+            <ion-col size="3" style="padding: 0; padding-bottom: 10px">
+                <img
+                    id="fotopersonal"
+                    style="margin-top: 15px"
+                    src="{{ offer.photoProvider }}"
+                    onError="this.src='../../assets/images/noImage.svg'"
+                    (click)="showDialog()"
+                />
+            </ion-col>
+
+            <ion-col size="7" style="padding: 0">
+                <ion-row>
+                    <ion-label style="font-size: 16px"> {{ offer.provider_name }} </ion-label>
+                </ion-row>
+
+                <ion-row style="margin-top: 5px">
+                    <ion-label style="color: rgb(246, 183, 118); font-size: 16px">
+                        {{ offer.materials + offer.work_force }} €
+                    </ion-label>
+                </ion-row>
+            </ion-col>
+
+            <ion-col size="2" style="display: flex">
+                <img
+                    style="width: 24px; height: 35px; margin: auto"
+                    src="../../assets/icon/chat.svg"
+                    (click)="openChat()"
+                />
+            </ion-col>
+        </ion-item>
+        <ion-item-options side="end" style="padding: 0px">
+            <ion-item-option (click)="cancelOffer()" color="tertiary" expandable
+                >cancelar
+            </ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+</ion-row>

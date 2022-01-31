@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
             }
 
             this.btn_disabled = false;
-            this.navController.navigateRoot('/new-task', {
+            this.navController.navigateRoot('/task-new', {
                 animated: true,
                 animationDirection: 'forward',
             });

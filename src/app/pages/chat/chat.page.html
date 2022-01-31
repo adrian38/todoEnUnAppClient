@@ -1,0 +1,102 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<ion-header class="ion-no-border">
+    <app-header headerText="CHAT" [fillBackground]="false"></app-header>
+
+    <ion-row class="nav_down" style="padding-bottom: 0px">
+        <div class="container_button">
+            <div class="one_button">
+                <p-button
+                    [disabled]="btn_unable"
+                    label="ACEPTAR OFERTA"
+                    (onClick)="alertaDateChange()"
+                >
+                    <img
+                        alt="logo"
+                        src="/assets/icon/check-circle-outline.svg"
+                        style="width: 1.5rem"
+                    />
+                </p-button>
+            </div>
+        </div>
+    </ion-row>
+</ion-header>
+
+<ion-content #content>
+    <div class="flex_column" style="height: 100%; width: 100%">
+        <div
+            style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px"
+        >
+            <div class="div_chat" #target *ngIf="messagesList.length > 0">
+                <ion-row
+                    class="chat_bubble"
+                    lines="none"
+                    [ngClass]="(user.partner_id ==  message.author_id) ? 'align_right' : 'align_left'"
+                    *ngFor="let message of messagesList"
+                >
+                    <ng-container
+                        *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate"
+                    >
+                        <div
+                            style="width: auto; height: auto; max-width: 80%"
+                            [ngClass]="( message.message === ultimo_sms) ? 'bubble_chat_me' : 'bubble_chat_me_old'"
+                        >
+                            <div>{{ message.message }}</div>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <div
+                            style="width: auto; height: auto; max-width: 80%"
+                            [ngClass]="( message.message === sms_cliente) ? 'bubble_chat_others' : 'bubble_chat_others_old'"
+                        >
+                            <div>{{ message.message }}</div>
+                        </div>
+                    </ng-template>
+                </ion-row>
+            </div>
+
+            <div *ngIf=" messagesList.length ===0 " class="flex_column">
+                <div class="flex_row" class="flex_centered" style="margin-top: 60px">
+                    <img style="width: 55%; height: 55%" src="../../../assets/icon/empty.svg" />
+                </div>
+                <div class="flex_row" class="flex_centered" style="margin-top: 0px">
+                    <h4 style="color: lightgray; margin-top: 0px">Chat vacio</h4>
+                </div>
+            </div>
+
+            <div style="height: 100%; width: 5%"></div>
+        </div>
+        <!-- ************************************************** -->
+
+        <ion-footer class="ion-no-border">
+            <div style="display: flex; justify-content: center">
+                <div class="flex_row chat_container">
+                    <ion-textarea
+                        class="text_area"
+                        auto-grow
+                        cols="1"
+                        rows="1"
+                        inputmode="text"
+                        placeholder="Escriba un mensaje..."
+                        autofocus
+                        [(ngModel)]="message.message"
+                    >
+                    </ion-textarea>
+
+                    <div style="display: flex; flex-direction: column; justify-content: flex-end">
+                        <ion-button fill="clear" class="send_btn" (click)="pushToChat()">
+                            <ion-icon
+                                name="send"
+                                color="greenblue"
+                                style="min-width: 25px; min-height: 30px"
+                            ></ion-icon>
+                        </ion-button>
+                    </div>
+                </div>
+            </div>
+        </ion-footer>
+    </div>
+</ion-content>

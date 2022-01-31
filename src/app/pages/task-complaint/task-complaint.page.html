@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border">
+    <app-header headerText="Denunciar" [fillBackground]="false"></app-header>
+</ion-header>
+
+<ion-content>
+    <div class="flex_row" style="margin-top: 50px"></div>
+    <div class="flex_row" style="justify-content: space-evenly">
+        <div class="flex_col">
+            <ion-img class="img" src="{{task.photoProvider}}"></ion-img>
+        </div>
+        <div class="flex_col" style="justify-content: start">
+            <div style="display: flex">
+                <ion-label
+                    style="font-family: 'Helvetica-Roman', sans-serif !important; font-size: larger"
+                    >{{task.provider_name}}</ion-label
+                >
+            </div>
+            <div style="display: flex; margin-top: 5px">
+                <ion-label style="font-size: large">{{task.type}}</ion-label>
+            </div>
+        </div>
+    </div>
+    <div class="flex_row" style="justify-content: stretch; margin-top: 20px">
+        <div style="display: flex">
+            <ion-label
+                style="
+                    font-family: 'Helvetica-Roman', sans-serif !important;
+                    font-size: x-large;
+                    margin-left: 30px;
+                "
+                >{{task.title}}</ion-label
+            >
+        </div>
+    </div>
+
+    <div class="flex_row" style="justify-content: stretch; margin-top: 25px">
+        <div style="display: flex">
+            <ion-label
+                style="
+                    font-family: 'Helvetica-Roman', sans-serif !important;
+
+                    font-size: medium;
+                    margin-left: 30px;
+                "
+                >Evidencia</ion-label
+            >
+        </div>
+    </div>
+
+    <div class="flex_row" style="justify-content: space-evenly; margin-top: 8px">
+        <ion-img class="imgtocar" [src]="foto1" (click)="onclickFoto1(0)"></ion-img>
+        <ion-img class="imgtocar" [src]="foto2" (click)="onclickFoto1(1)"></ion-img>
+        <ion-img class="imgtocar" [src]="foto3" (click)="onclickFoto1(2)"></ion-img>
+    </div>
+    <div class="flex_row" style="justify-content: space-evenly; margin-top: 20px">
+        <textarea
+            name="Text1"
+            cols="10"
+            rows="3"
+            [(ngModel)]="comentario_evidencia"
+            placeholder="Escriba su comentario"
+            style="max-width: 85%; width: 85%; flex: display; padding: 10px"
+        ></textarea>
+    </div>
+    <div class="flex_row" class="init_div">
+        <ion-button
+            type="submit"
+            color="orange"
+            style="
+                min-width: 100px;
+                height: 30px !important;
+                font: normal 16px 'Helvetica-Roman', sans-serif;
+                --border-radius: 7px;
+            "
+            (click)="evidenciar()"
+        >
+            <span style="padding-top: 5px">ENVIAR</span>
+        </ion-button>
+    </div>
+    <div class="flex_row" style="margin-bottom: 5px"></div>
+</ion-content>

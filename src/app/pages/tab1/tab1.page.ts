@@ -11,6 +11,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
     selector: 'app-tab1',
     templateUrl: 'tab1.page.html',
     styleUrls: ['tab1.page.scss'],
+    providers: [MessageService],
 })
 export class Tab1Page implements OnInit {
     btn_animacion: boolean = false;
@@ -231,11 +232,11 @@ export class Tab1Page implements OnInit {
         this.task = this.solicitudesList[this.cant];
         this._taskOdoo.setTaskCesar(this.task);
 
-        this.navCtrl.navigateRoot('/ofertas', { animated: true, animationDirection: 'forward' });
+        this.navCtrl.navigateRoot('/task-offer', { animated: true, animationDirection: 'forward' });
     }
 
     irSolicitud() {
-        this.navCtrl.navigateRoot('/new-task', { animated: true, animationDirection: 'forward' });
+        this.navCtrl.navigateRoot('/task-new', { animated: true, animationDirection: 'forward' });
     }
 
     async presentAlert() {

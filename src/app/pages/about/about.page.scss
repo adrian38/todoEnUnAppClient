@@ -1,0 +1,104 @@
+#barraSuperior {
+    width: 100%;
+    height: 40px;
+
+    background-color: rgb(246, 183, 118);
+}
+
+#barraInferior {
+    width: 100%;
+    height: 70px;
+    border-radius: 0px 0px 20px 0px;
+    background-color: rgb(49, 49, 57);
+}
+
+#logo {
+    width: 40px;
+    height: 40px;
+    margin-top: 13px;
+    margin-left: 6px;
+}
+
+#item {
+    border-bottom: 1px solid rgb(246, 183, 118);
+    margin-top: 2px;
+}
+
+#link {
+    color: rgb(101, 173, 172);
+}
+
+ion-button {
+    margin-top: 135px;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px 5px 5px 5px;
+    font-family: 'Helvetica-Bd';
+    background-color: rgb(246, 183, 118);
+    color: rgb(49, 49, 57);
+}
+
+:host ::ng-deep {
+    .p-toast-message-custom {
+        background-color: rgb(246, 183, 118);
+        border: solid rgb(246, 183, 118);
+        border-width: 0 0 0 6px;
+        width: 10px;
+        color: #2c1e30;
+        .p-toast-icon-close {
+            color: #2c1e30;
+        }
+    }
+}
+
+ion-input {
+    border: 1px transparent;
+    background-color: rgb(245, 245, 245);
+    fill: round($number: 7);
+
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 5px;
+}
+
+ion-input.ng-invalid.ng-touched {
+    border: 2px solid rgb(101, 173, 172) !important;
+}
+
+/* #notificacion{
+  width: 25px;
+  height: 25px;
+  margin-top: 20px;
+  margin-right: 20px;
+
+
+} */
+
+#notificacion {
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+    // margin-right: 20px;
+}
+
+#punto_notificacion {
+    width: 10px;
+    height: 10px;
+    margin-top: 13px;
+    //  margin-right: 20px;
+}
+
+.primary-color-point {
+    width: 5px;
+    height: 5px;
+    background-color: rgb(246, 183, 118);
+    border-radius: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.text-name {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    font-size: 13px;
+}

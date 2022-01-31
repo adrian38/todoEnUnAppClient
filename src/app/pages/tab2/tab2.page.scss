@@ -1,0 +1,103 @@
+#ServHist {
+    background-color: rgb(246, 183, 118);
+}
+
+// h6{
+//     font-family: $font-aero;
+//     /* font-size: 32; */
+//     margin-top: 0px;
+//     font-size: 5vw;
+// }
+
+.text-helvetica {
+    font-family: 'Helvetica-Roman' !important;
+    /*  font-size: 18 !important; */
+    font-size: 5vw !important;
+}
+
+/* #imagen{
+    margin-top: 30px;
+    width: 90px;
+    height: 89px;
+    border-radius: 20px 3px 3px 3px;
+    object-fit: cover;
+    opacity: 0.9;
+} */
+
+.image-left {
+    &::before {
+        content: '';
+        position: absolute;
+        margin-top: 7px;
+        /*   width: 90px;
+        height: 89px; */
+        height: 93px !important;
+        width: 91px !important;
+        min-height: 93px;
+        min-width: 91px;
+        /* width: 91%;
+        height: 15vh; */
+        background-color: rgb(246, 183, 118);
+        opacity: 30%;
+        border-radius: 20px 3px 3px 5px;
+    }
+    img {
+        object-fit: cover;
+        /*    width: 90px;
+        height: 89px; */
+        height: 93px !important;
+        width: 91px !important;
+        min-height: 93px;
+        min-width: 91px;
+        /*     width: 100%;
+        height: 15vh; */
+        border-radius: 20px 3px 3px 5px;
+    }
+}
+
+#item {
+    border-bottom: 2px solid rgba(246, 183, 118, 0.7);
+}
+
+#icocheck {
+    width: 100%;
+    height: 90%;
+}
+
+.cat_title {
+    // font-family: $font-aero;
+    // font-size: 16px;
+    text-transform: uppercase;
+    font: normal 16px 'Helvetica-Bd', sans-serif;
+    text-align: left;
+    margin: 5px 0 12px 0;
+}
+
+.text-helvetica {
+    font: normal 16px 'Helvetica-Roman', sans-serif;
+    text-align: left;
+}
+
+.segment {
+    --background: var(--ion-color-orange);
+    height: 44px !important;
+}
+
+.segment_btn {
+    font: normal 15px 'Helvetica-Roman', sans-serif;
+    color: var(--ion-color-black);
+    --color-checked: var(--ion-color-black);
+    --indicator-height: 4px !important;
+    min-height: 44px !important;
+    z-index: 5 !important;
+    //z-index: 500 !important;
+    width: 50%;
+}
+
+.font_bold {
+    font-weight: bold;
+}
+
+ion-segment .segment-button-checked {
+    font: normal 15px 'Helvetica-Bd', sans-serif;
+}

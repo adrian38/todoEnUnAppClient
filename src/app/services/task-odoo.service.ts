@@ -360,7 +360,7 @@ export class TaskOdooService {
                                     }
                                 }
 
-                                if (route === '/ofertas') {
+                                if (route === '/task-offer') {
                                     ////console.log("mandando la notificacion", id_po)
 
                                     task$.next({ type: 4, task: id_po_offert });
@@ -374,7 +374,7 @@ export class TaskOdooService {
                                     typeof applicationList !== 'undefined' &&
                                     applicationList.length > 0
                                 ) {
-                                    if (route === '/ofertas') {
+                                    if (route === '/task-offer') {
                                         task$.next({ type: 9, task: new_offert });
                                         notifications$.next(true);
                                         notificationBoolean = true;
@@ -727,7 +727,8 @@ export class TaskOdooService {
                 note: task.description,
                 partner_id: task.client_id,
                 title: task.title,
-                //commitment_date: task.date_planned + ' ' + task.time,
+                // commitment_date: task.date_planned + ' ' + task.time,
+                commitment_date:'2020-10-20 07:30:30',
                 require_materials: task.require_materials,
                 require_payment: false,
                 require_signature: false,
@@ -1800,6 +1801,7 @@ export class TaskOdooService {
         applicationList = [];
         hiredList = [];
         recordList = [];
+
         let SO_origin = [];
         let SO_origin_hired = [];
         let PO_id = [];
@@ -2197,7 +2199,7 @@ export class TaskOdooService {
                             return po.state === 'sent' || po.state === 'purchase';
                         });
 
-                        ////console.log(value, "valores de PO")
+                        console.log(value, 'valores de PO');
 
                         for (let task of value) {
                             let temp = applicationList.findIndex(
@@ -2495,7 +2497,7 @@ export class TaskOdooService {
                         notificationError$.next({ type: 1 });
                     } else {
                         offsetApplication += limit;
-                        console.log(value, 'task');
+                        //console.log(value, 'task');
 
                         for (let order of value) {
                             let temp = new TaskModel();
@@ -4340,8 +4342,8 @@ export class TaskOdooService {
     getProvidersInfoOffer(provider_id: any[], SO_id: number) {
         let coment: Comments;
 
-        console.log(provider_id, 'id provider');
-        console.log(jaysonServer, 'jayson Server');
+        // console.log(provider_id, 'id provider');
+        // console.log(jaysonServer, 'jayson Server');
 
         let list_msg_ids = () => {
             let inParams = [];

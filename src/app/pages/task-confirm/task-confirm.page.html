@@ -1,0 +1,175 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<ion-header class="ion-no-border">
+    <div style="background: var(--ion-color-orange)">
+        <!-- <app-tab-header titulo="Factura"></app-tab-header> -->
+        <app-header headerText="Factura" [fillBackground]="false"></app-header>
+    </div>
+
+    <div class="flex_row">
+        <div class="page_subheader">
+            <ion-label
+                style="
+                    min-width: 45%;
+                    text-align: left;
+                    font: normal 16px 'Helvetica-Md', sans-serif;
+                    padding-left: 15px;
+                "
+            >
+                Servicio</ion-label
+            >
+            <ion-label
+                style="
+                    min-width: 45%;
+                    text-align: right;
+                    font: normal 16px 'Helvetica-Md', sans-serif;
+                    padding-right: 15px;
+                "
+            >
+                Precio</ion-label
+            >
+        </div>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div class="flex_column" style="align-items: center; padding-top: 6px">
+        <div class="flex_row div">
+            <ion-label class="label_text">Mano de obra</ion-label>
+            <ion-label class="custom_costo">{{ manoObra }}€</ion-label>
+        </div>
+
+        <!-- <div class="flex_row div" *ngIf="requiereMateriales"> -->
+        <div class="flex_row div" *ngIf="!task.require_materials">
+            <ion-label class="label_text">Materiales</ion-label>
+            <ion-label class="custom_costo">{{ materiales }}€</ion-label>
+        </div>
+
+        <!--  <div class="flex_row div">
+      <ion-label class="label_text">Impuesto (Plataforma 5%)</ion-label>
+      <ion-label class="label_right">{{ impuestoPlataforma}}€</ion-label>
+    </div> -->
+
+        <div class="flex_row div">
+            <ion-label class="label_text">Impuesto (IVA 21%)</ion-label>
+            <ion-label class="label_right">{{ impuesto }}€</ion-label>
+        </div>
+
+        <div class="flex_row div">
+            <ion-label class="label_text">Impuesto (Stripe 2.9%)</ion-label>
+            <ion-label class="label_right">{{ impuestoStrike }}€</ion-label>
+        </div>
+
+        <div class="flex_row div">
+            <ion-label class="label_text">TOTAL</ion-label>
+            <ion-label class="custom_costo">{{ total }}€</ion-label>
+        </div>
+    </div>
+
+    <div class="flex_column" style="padding: 20px 10% !important">
+        <ion-label class="label2" style="margin-top: 30px">
+            Ingrese sus datos para efectuar el pago
+        </ion-label>
+
+        <div class="div_1">
+            <ion-input
+                class="custom_input"
+                required
+                [ngClass]="((t.invalid && t.touched) || correct_card ) ? 'green_border':'no_border'"
+                [(ngModel)]="numero_tarjeta"
+                type="tel"
+                placeholder="NUMERO DE TARJETA"
+                maxlength="19"
+                minlength="16"
+                (ngModelChange)="mychange($event)"
+                #t="ngModel"
+                style="width: 80% !important"
+            >
+            </ion-input>
+
+            <ion-label *ngIf="(t.invalid && t.touched) || correct_card" class="mandatory">
+                *
+            </ion-label>
+        </div>
+
+        <div class="flex_row">
+            <div class="div_2">
+                <ion-input
+                    class="custom_input"
+                    type="tel"
+                    [(ngModel)]="month"
+                    [ngClass]="((m.invalid && m.touched) || mes_correcto ) ? 'green_border':'no_border'"
+                    placeholder="M M"
+                    required
+                    maxlength="2"
+                    minlength="2"
+                    #m="ngModel"
+                    style="width: 80% !important"
+                >
+                </ion-input>
+
+                <ion-label *ngIf="(m.invalid && m.touched) ||  mes_correcto" class="mandatory">
+                    *
+                </ion-label>
+            </div>
+
+            <div class="div_3">
+                <ion-label>/</ion-label>
+            </div>
+
+            <div class="div_1">
+                <ion-input
+                    class="custom_input"
+                    type="tel"
+                    [(ngModel)]="year"
+                    [ngClass]="((y.invalid && y.touched) || year_correcto ) ? 'green_border':'no_border'"
+                    required
+                    maxlength="2"
+                    minlength="2"
+                    placeholder="A A"
+                    #y="ngModel"
+                    style="width: 23% !important"
+                >
+                </ion-input>
+                <ion-label *ngIf="(y.invalid && y.touched) ||  year_correcto" class="mandatory">
+                    *
+                </ion-label>
+            </div>
+        </div>
+
+        <div class="div_1">
+            <ion-input
+                class="custom_input"
+                type="tel"
+                [(ngModel)]="cvc"
+                [ngClass]="((c.invalid && c.touched) || cvc_correcto ) ? 'green_border':'no_border'"
+                placeholder="CVC"
+                required
+                pattern="[1-9]{3}"
+                maxlength="3"
+                minlength="2"
+                #c="ngModel"
+                style="width: 17% !important"
+            >
+            </ion-input>
+            <ion-label *ngIf="(c.invalid && c.touched) ||  cvc_correcto" class="mandatory">
+                *
+            </ion-label>
+        </div>
+    </div>
+
+    <div class="home_buttons">
+        <div class="two_up_buttons">
+            <p-button [disabled]="btn_unable" label="PAGAR" (onClick)="btn_pagar()"></p-button>
+            <p-button
+                id="down"
+                [disabled]="btn_unable"
+                label="CANCELAR"
+                (click)="btn_cancelar()"
+            ></p-button>
+        </div>
+    </div>
+</ion-content>

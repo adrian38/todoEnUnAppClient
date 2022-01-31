@@ -1,0 +1,68 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+}
+
+.page_header {
+    height: 60px;
+    width: 100%;
+    background: var(--ion-color-black);
+    border-radius: 0px 0px 20px 0px;
+    box-shadow: var(--ion-color-black) 1px 1px 2px;
+    -webkit-box-shadow: var(--ion-color-black) 1px 1px 2px;
+    z-index: 100;
+}
+.logo_tabs {
+    height: 30px !important;
+    width: 30px !important;
+}
+
+.notificaciones {
+    height: 22px !important;
+    width: 18px !important;
+}
+.notificaciones_campana {
+    height: 21px !important;
+    width: 21px !important;
+    margin-left: 5px;
+}
+
+.notificaciones_punto {
+    height: 7px !important;
+    width: 7px !important;
+    margin-top: 15px;
+    margin-right: 22px;
+}
+
+.page_title {
+    color: var(--ion-color-orange) !important;
+    font-family: 'Helvetica-Bd', sans-serif !important;
+    font-size: 22px;
+}
+
+#div_back {
+    height: 60px;
+    width: 100%;
+}
+
+#item {
+    border-bottom: 1px solid var(--ion-color-orange);
+    margin-top: 10px;
+}
+
+.img {
+    margin: 5px auto;
+    color: var(--ion-color-orange);
+}
+
+.prom_title {
+    font: bold 14px 'Helvetica-Roman', sans-serif;
+    margin-bottom: 2px;
+}
+
+.prom_text {
+    font: normal 14px 'Helvetica-Roman', sans-serif;
+}

@@ -1,0 +1,126 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<ion-header class="ion-no-border">
+    <app-header headerText="CHAT" [fillBackground]="false"></app-header>
+    <div class="flex_row barra"></div>
+
+    <div class="pres_container">
+        <ion-row style="padding-bottom: 0px">
+            <ion-col size="10" style="padding-left: 20px; padding-top: 20px">
+                <ion-label class="label_presupuesto">PRESUPUESTO: {{ task.So_budget}} €</ion-label>
+            </ion-col>
+            <!-- <ion-col size="1" style="padding: 20px 5px 0px 0px">
+                <img
+                    style="width: 20px; height: 20px"
+                    (click)="alertaDateChange()"
+                    src="../../../assets/icons/lapiz_chat.svg"
+                />
+            </ion-col> -->
+
+            <ion-col size="1" style="padding: 20px 5px 0px 0px">
+                <img
+                    style="width: 20px; height: 20px"
+                    (click)="onClose()"
+                    src="../../../assets/icon/close.svg"
+                />
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row style="padding-top: 0px">
+            <ion-col size="1.5" style="padding: 0px 0px 5px 5px; text-align: center">
+                <img
+                    style="width: 15px; height: 15px"
+                    (click)="verFactura()"
+                    src="../../../assets/icons/ojo.svg"
+                />
+            </ion-col>
+            <ion-col size="3" style="padding-top: 0px; padding-left: 0px">
+                <p
+                    style="margin: 0px 0px; font-size: 11px; text-decoration: underline"
+                    (click)="verFactura()"
+                >
+                    Ver factura total
+                </p>
+            </ion-col>
+            <ion-col size="7.5"></ion-col>
+        </ion-row> -->
+    </div>
+</ion-header>
+
+<ion-content #content>
+    <div class="flex_column" style="height: 100%; width: 100%">
+        <div
+            style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px"
+        >
+            <div class="div_chat" #target *ngIf="!chat_vacia">
+                <ion-row
+                    class="chat_bubble"
+                    lines="none"
+                    [ngClass]="(user.partner_id ==  message.author_id) ? 'align_right' : 'align_left'"
+                    *ngFor="let message of messagesList"
+                >
+                    <ng-container
+                        *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate"
+                    >
+                        <div
+                            style="width: auto; height: auto; max-width: 80%"
+                            [ngClass]="( message.message === ultimo_sms) ? 'bubble_chat_me' : 'bubble_chat_me_old'"
+                        >
+                            <div>{{ message.message }}</div>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <div
+                            style="width: auto; height: auto; max-width: 80%"
+                            [ngClass]="( message.message === sms_cliente) ? 'bubble_chat_others' : 'bubble_chat_others_old'"
+                        >
+                            <div>{{ message.message }}</div>
+                        </div>
+                    </ng-template>
+                </ion-row>
+            </div>
+
+            <div *ngIf="chat_vacia" class="flex_column">
+                <div class="flex_row" class="flex_centered" style="margin-top: 60px">
+                    <img style="width: 55%; height: 55%" src="../../../assets/icon/empty.svg" />
+                </div>
+                <div class="flex_row" class="flex_centered" style="margin-top: 0px">
+                    <h4 style="color: lightgray; margin-top: 0px">Chat vacio</h4>
+                </div>
+            </div>
+
+            <div style="height: 100%; width: 5%"></div>
+        </div>
+        <!-- ************************************************** -->
+
+        <ion-footer class="ion-no-border">
+            <div style="display: flex; justify-content: center">
+                <div class="flex_row chat_container">
+                    <ion-textarea
+                        class="text_area"
+                        auto-grow
+                        cols="1"
+                        rows="1"
+                        inputmode="text"
+                        placeholder="Escriba un mensaje..."
+                        autofocus
+                        [(ngModel)]="message.message"
+                    >
+                    </ion-textarea>
+
+                    <div style="display: flex; flex-direction: column; justify-content: flex-end">
+                        <ion-button fill="clear" class="send_btn" (click)="pushToChat()">
+                            <ion-icon
+                                name="send"
+                                color="greenblue"
+                                style="min-width: 25px; min-height: 30px"
+                            ></ion-icon>
+                        </ion-button>
+                    </div>
+                </div>
+            </div>
+        </ion-footer>
+    </div>
+</ion-content>

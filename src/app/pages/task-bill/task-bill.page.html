@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+    <div style="background: var(--ion-color-orange)">
+        <!-- <app-tab-header titulo="Factura"></app-tab-header> -->
+        <app-header headerText="Factura" [fillBackground]="false"></app-header>
+    </div>
+
+    <div class="flex_row">
+        <div class="page_subheader">
+            <ion-label
+                style="
+                    min-width: 45%;
+                    text-align: left;
+                    font: normal 16px 'Helvetica-Md', sans-serif;
+                    padding-left: 15px;
+                "
+            >
+                Servicio</ion-label
+            >
+            <ion-label
+                style="
+                    min-width: 45%;
+                    text-align: right;
+                    font: normal 16px 'Helvetica-Md', sans-serif;
+                    padding-right: 15px;
+                "
+            >
+                Precio</ion-label
+            >
+        </div>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div class="flex_column" style="align-items: center; padding-top: 6px; height: 100%">
+        <div class="flex_row div">
+            <ion-label class="label_text">Mano de obra</ion-label>
+            <ion-label class="custom_costo">{{ manoObra }}€</ion-label>
+        </div>
+
+        <!-- <div class="flex_row div" *ngIf="requiereMateriales"> -->
+        <div class="flex_row div" *ngIf="!task.require_materials">
+            <ion-label class="label_text">Materiales</ion-label>
+            <ion-label class="custom_costo">{{ materiales }}€</ion-label>
+        </div>
+
+        <!--  <div class="flex_row div">
+      <ion-label class="label_text">Impuesto (Plataforma 5%)</ion-label>
+      <ion-label class="label_right">{{ impuestoPlataforma}}€</ion-label>
+    </div> -->
+
+        <div class="flex_row div">
+            <ion-label class="label_text">Impuesto (IVA 21%)</ion-label>
+            <ion-label class="label_right">{{ impuesto }}€</ion-label>
+        </div>
+
+        <div class="flex_row div">
+            <ion-label class="label_text">Impuesto (Stripe 2.9%)</ion-label>
+            <ion-label class="label_right">{{ impuestoStrike }}€</ion-label>
+        </div>
+
+        <div class="flex_row div">
+            <ion-label class="label_text">TOTAL</ion-label>
+            <ion-label class="custom_costo">{{ total }}€</ion-label>
+        </div>
+
+        <div class="flex_centered" style="width: 100%; height: 100%">
+            <ion-button class="btn_close" color="orange" (click)="onClose()">
+                <span style="padding-top: 5px">CERRAR</span>
+            </ion-button>
+        </div>
+    </div>
+</ion-content>

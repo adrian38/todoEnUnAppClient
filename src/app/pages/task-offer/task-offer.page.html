@@ -1,0 +1,306 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<ion-header>
+    <app-header headerText="Solicitudes" [fillBackground]="true"></app-header>
+
+    <div id="ServHist">
+        <ion-segment (ionChange)="segChange($event)" style="color: rgb(49, 49, 57)" color="dark">
+            <ion-segment-button class="segment_btn" value="ofertas">
+                <ion-label style="color: rgb(49, 49, 57)">OFERTAS</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="segment_btn" value="detalle">
+                <ion-label style="color: rgb(49, 49, 57)">DETALLES</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="veroferta">
+        <div *ngIf="!task.So_offers || task.So_offers.length === 0">
+            <ion-row style="margin-top: 75px">
+                <ion-col size="4"></ion-col>
+                <ion-col size="4" style="text-align: center">
+                    <ion-row>
+                        <div>
+                            <img
+                                style="width: 85%; height: 85%"
+                                src="../../../assets/icon/empty.svg"
+                            />
+                        </div>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="4"></ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="3"></ion-col>
+                <ion-col size="6" style="text-align: center">
+                    <h4 style="color: lightgray; margin-top: 0px">No hay ofertas</h4>
+                </ion-col>
+                <ion-col size="3"></ion-col>
+            </ion-row>
+        </div>
+
+        <div *ngIf="task.So_offers || task.So_offers.length > 0">
+            <ion-row *ngFor="let offer of offersList ; let i = index">
+                <ion-col size="0.5"></ion-col>
+                <ion-col size="11">
+                    <app-offer-card
+                        style="width: 100%"
+                        [offer]="offer"
+                        [index]="i"
+                        (outputShowDialog)="showDialog($event)"
+                        (outputOpenChat)="openChat($event)"
+                        (outputCancelOffer)="cancelPOclient($event)"
+                    ></app-offer-card>
+                </ion-col>
+
+                <ion-col size="0.5"></ion-col>
+            </ion-row>
+        </div>
+
+        <p-dialog
+            header=" "
+            [(visible)]="display"
+            [modal]="true"
+            [style]="{ width: '85vw' }"
+            [baseZIndex]="1000"
+            [draggable]="false"
+            [resizable]="false"
+            [dismissableMask]="true"
+        >
+            <ion-row>
+                <ion-col size="4">
+                    <img
+                        style="
+                            width: 65px;
+                            height: 65px;
+                            border: 0.5px solid rgb(241, 241, 241);
+                            border-radius: 7px 7px 7px 7px;
+                            margin-top: 17px;
+                        "
+                        src="{{tempInfoProvider.photoProvider}}"
+                        onError="this.src='../../../assets/images/noImage.svg'"
+                    />
+                </ion-col>
+                <ion-col size="8">
+                    <h2>{{tempInfoProvider.provider_name}}</h2>
+
+                    <p-rating
+                        [ngModel]="tempInfoProvider.ranking_provider"
+                        [cancel]="false"
+                    ></p-rating>
+                </ion-col>
+            </ion-row>
+
+            <ion-content style="max-height: 180px; height: 180px">
+                <ion-row>
+                    <div
+                        *ngIf="tempInfoProvider.opinions_provider.length >= 0"
+                        style="margin-top: 5px"
+                    >
+                        <div *ngFor="let comments of tempInfoProvider.opinions_provider">
+                            <h2>{{comments.author }}</h2>
+                            {{comments.comment}}
+                        </div>
+                    </div>
+                    <p *ngIf="tempInfoProvider.opinions_provider.length == 0 ">
+                        No hay comentarios del trabajador
+                    </p>
+
+                    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+                        <ion-infinite-scroll-content
+                            loadingSpinner="bubbles"
+                            loadingText="Cargando mas opiniones..."
+                        >
+                        </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
+                </ion-row>
+            </ion-content>
+        </p-dialog>
+    </div>
+
+    <div class="animated fadeIn" *ngIf="verdetalles">
+        <ion-list style="padding: 15px 25px 90px 25px !important">
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <ion-label class="h2_title">{{ task.type }}</ion-label>
+                    <ion-label class="h6_title ion-text-wrap">{{ task.title }}</ion-label>
+                </div>
+            </ion-item>
+
+            <!-- <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_calendar" src="/assets/icon/calendario.svg"></ion-img>
+                        <ion-label class="h3_title">Fecha</ion-label>
+                    </div>
+                    <ion-label class="h6_title ion-text-wrap"
+                        >{{ task.date_planned |date:'EEEE d.MMMM yyyy' | lowercase }}</ion-label
+                    >
+                </div>
+            </ion-item>
+
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_schedule" src="/assets/icon/hora.svg"></ion-img>
+                        <ion-label class="h3_title">Horario</ion-label>
+                    </div>
+                    <ion-label class="h6_title ion-text-wrap"
+                        >{{ task.time |date: 'h:mm a' }}</ion-label
+                    >
+                </div>
+            </ion-item> -->
+
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_direction" src="/assets/icon/direccion.svg"></ion-img>
+                        <ion-label class="h3_title">Dirección</ion-label>
+                    </div>
+
+                    <div class="flex_row">
+                        <div class="flex_column">
+                            <ion-label class="h6_title ion-text-wrap"
+                                >{{ task.address.street}}, Numero: {{ task.address.number
+                                }},</ion-label
+                            >
+                            <div class="flex_row">
+                                <ion-label
+                                    class="h6_title ion-text-wrap"
+                                    *ngIf=" task.address.portal"
+                                    >Portal: {{ task.address.portal }},
+                                </ion-label>
+                                <ion-label
+                                    class="h6_title ion-text-wrap"
+                                    *ngIf=" task.address.stair"
+                                    >Escalera: {{ task.address.stair }},
+                                </ion-label>
+                                <ion-label
+                                    class="h6_title ion-text-wrap"
+                                    *ngIf=" task.address.floor"
+                                    >Piso: {{ task.address.floor }},
+                                </ion-label>
+                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.door"
+                                    >Puerta: {{ task.address.door }},
+                                </ion-label>
+                            </div>
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.cp"
+                                >Codigo_Postal: {{ task.address.cp }},
+                            </ion-label>
+                        </div>
+
+                        <div class="flex_centered">
+                            <img
+                                class="img_location"
+                                src="/assets/icon/ubicacion.svg"
+                                (click)="onClickLocation()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_schedule" src="/assets/icon/materials.svg"></ion-img>
+                        <ion-label class="h3_title">Materiales</ion-label>
+                    </div>
+                    <ion-label class="h6_title ion-text-wrap"
+                        >{{ task.require_materials?'Dispone de materiales':'No dispone de
+                        materiales'}}</ion-label
+                    >
+                </div>
+            </ion-item>
+
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_photo" src="/assets/icon/camara.svg"></ion-img>
+                        <ion-label class="h3_title">Fotos</ion-label>
+                    </div>
+                    <div class="flex_column">
+                        <!-- <ion-label class="h6_title">Antes</ion-label> -->
+                        <div class="flex_row">
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_0"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[0])"
+                                        src="{{task.photoSO[0]}}"
+                                        onError="this.src='../../../assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_1"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[1])"
+                                        src="{{task.photoSO[1]}}"
+                                        onError="this.src='../../../assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_2"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[2])"
+                                        src="{{task.photoSO[2]}}"
+                                        onError="this.src='../../../assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item class="last_module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_schedule" src="/assets/icon/edit.svg"></ion-img>
+                        <ion-label class="h3_title">Descripción</ion-label>
+                    </div>
+                    <p class="h6_title ion-text-wrap">
+                        {{ task.description?task.description:'Sin descripción' }}
+                    </p>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

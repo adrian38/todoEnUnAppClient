@@ -4,21 +4,23 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewTaskPageRoutingModule } from './new-task-routing.module';
+import { TutorialRequestChatPageRoutingModule } from './tutorial-request-chat-routing.module';
 
-import { NewTaskPage } from './new-task.page';
+import { TutorialRequestChatPage } from './tutorial-request-chat.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
-        ButtonModule,
         CommonModule,
         FormsModule,
         IonicModule,
-        NewTaskPageRoutingModule,
+        TutorialRequestChatPageRoutingModule,
         ComponentsModule,
+        ToastModule,
+        ButtonModule,
     ],
-    declarations: [NewTaskPage],
+    declarations: [TutorialRequestChatPage],
 })
-export class NewTaskPageModule {}
+export class TutorialRequestChatPageModule {}

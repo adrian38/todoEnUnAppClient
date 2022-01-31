@@ -3,11 +3,11 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 
 @Component({
-    selector: 'app-new-task',
-    templateUrl: './new-task.page.html',
-    styleUrls: ['./new-task.page.scss'],
+    selector: 'app-task-new',
+    templateUrl: './task-new.page.html',
+    styleUrls: ['./task-new.page.scss'],
 })
-export class NewTaskPage implements OnInit {
+export class TaskNewPage implements OnInit {
     taskTypes: string[] = ['Fontaneria', 'Carpinteria', 'Electricidad', 'Masajes'];
 
     constructor(

@@ -18,11 +18,7 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
     },
-    {
-        path: 'new-task',
-        loadChildren: () =>
-            import('./pages/new-task/new-task.module').then((m) => m.NewTaskPageModule),
-    },
+
     {
         path: 'task-subcategory',
         loadChildren: () =>
@@ -79,6 +75,117 @@ const routes: Routes = [
         path: 'map-detail',
         loadChildren: () =>
             import('./pages/map-detail/map-detail.module').then((m) => m.MapDetailPageModule),
+    },
+    {
+        path: 'task-new',
+        loadChildren: () =>
+            import('./pages/task-new/task-new.module').then((m) => m.TaskNewPageModule),
+        canActivate: [AuthGuardTutorialsService],
+    },
+    {
+        path: 'task-offer',
+        loadChildren: () =>
+            import('./pages/task-offer/task-offer.module').then((m) => m.TaskOfferPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'chat',
+        loadChildren: () => import('./pages/chat/chat.module').then((m) => m.ChatPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'task-confirm',
+        loadChildren: () =>
+            import('./pages/task-confirm/task-confirm.module').then((m) => m.TaskConfirmPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'task-hired',
+        loadChildren: () =>
+            import('./pages/task-hired/task-hired.module').then((m) => m.TaskHiredPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'task-bill',
+        loadChildren: () =>
+            import('./pages/task-bill/task-bill.module').then((m) => m.TaskBillPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'task-complaint',
+        loadChildren: () =>
+            import('./pages/task-complaint/task-complaint.module').then(
+                (m) => m.TaskComplaintPageModule
+            ),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'user-data',
+        loadChildren: () =>
+            import('./pages/user-data/user-data.module').then((m) => m.UserDataPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'user-password',
+        loadChildren: () =>
+            import('./pages/user-password/user-password.module').then(
+                (m) => m.UserPasswordPageModule
+            ),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'promotions',
+        loadChildren: () =>
+            import('./pages/promotions/promotions.module').then((m) => m.PromotionsPageModule),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'notifications',
+        loadChildren: () =>
+            import('./pages/notifications/notifications.module').then(
+                (m) => m.NotificationsPageModule
+            ),
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'about',
+        loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutPageModule),
+    },
+
+    {
+        path: 'tutorial-options',
+        loadChildren: () =>
+            import('./pages/tutorial-options/tutorial-options.module').then(
+                (m) => m.TutorialOptionsPageModule
+            ),
+    },
+    {
+        path: 'tutorial-requests',
+        loadChildren: () =>
+            import('./pages/tutorial-requests/tutorial-requests.module').then(
+                (m) => m.TutorialRequestsPageModule
+            ),
+    },
+    {
+        path: 'tutorial-request-detail',
+        loadChildren: () =>
+            import('./pages/tutorial-request-detail/tutorial-request-detail.module').then(
+                (m) => m.TutorialRequestDetailPageModule
+            ),
+    },
+    {
+        path: 'tutorial-request-chat',
+        loadChildren: () =>
+            import('./pages/tutorial-request-chat/tutorial-request-chat.module').then(
+                (m) => m.TutorialRequestChatPageModule
+            ),
+    },
+    {
+        path: 'tutorial-request-new',
+        loadChildren: () =>
+            import('./pages/tutorial-request-new/tutorial-request-new.module').then(
+                (m) => m.TutorialRequestNewPageModule
+            ),
     },
 ];
 @NgModule({

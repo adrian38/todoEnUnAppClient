@@ -1,0 +1,52 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
+
+<app-header headerText="Solicitud" [fillBackground]="false"></app-header>
+
+<ion-content>
+    <div style="width: 80%; text-align: left; margin: auto; margin-top: 60px; font-weight: bold">
+        Introduzca sus datos básicos
+    </div>
+
+    <div style="width: 80%; text-align: center; margin: auto; margin-top: 40px">
+        <form #formulario="ngForm" (ngSubmit)="onSubmit()">
+            <ion-input
+                class="custom_input"
+                name="name"
+                [(ngModel)]="name"
+                placeholder="NOMBRE"
+                required
+            >
+            </ion-input>
+            <div class="div" style="margin-top: 5px">
+                <ion-input
+                    class="custom_input"
+                    name="lastName"
+                    [(ngModel)]="lastName"
+                    placeholder="APELLIDOS"
+                    required
+                >
+                </ion-input>
+            </div>
+            <ion-row style="margin-top: 10px">
+                <div class="flex_centered" style="width: 30px" (click)="ubicacion()">
+                    <img class="img_location" src="/assets/icon/ubicacion.svg" />
+                </div>
+                <ion-label style="margin: auto">Ubique su dirección en el mapa</ion-label>
+            </ion-row>
+            <div class="div" style="margin-top: 20px">
+                <ion-button
+                    class="btn_init_section"
+                    type="submit"
+                    color="orange"
+                    expand="block"
+                    [disabled]="formulario.invalid || btn_deshabilitar"
+                >
+                    <span style="padding-top: 5px">CONTINUAR</span>
+                </ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>
