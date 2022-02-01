@@ -52,7 +52,7 @@ export class TaskSubcategoryPage implements OnInit {
             this._serv.setTitulo(this.subTaskTypes[selected]);
 
             setTimeout(() => {
-                this.navCtrl.navigateRoot('/tutorial-request-new', {
+                this.navCtrl.navigateRoot('/task-photos', {
                     animated: true,
                     animationDirection: 'forward',
                 });

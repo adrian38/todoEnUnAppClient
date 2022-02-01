@@ -2,6 +2,30 @@ ion-label {
     color: #313139;
 }
 
+.selecf {
+    width: 79px;
+    height: 79px;
+    object-fit: cover;
+}
+
+.icon_photo {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.h3_title {
+    font: normal 14px 'Helvetica-Md', sans-serif !important;
+    margin: 8px 5px 8px 10px !important;
+    text-align: left;
+    width: 100%;
+}
+
+.module {
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid var(--ion-color-orange) !important;
+    margin-top: 10px !important;
+}
+
 :host ::ng-deep {
     .p-toast-message-custom {
         background-color: rgb(246, 183, 118);

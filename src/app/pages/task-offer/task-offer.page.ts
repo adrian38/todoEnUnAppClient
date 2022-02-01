@@ -342,7 +342,7 @@ export class TaskOfferPage implements OnInit {
     }
 
     onClickLocation() {
-        this.subServ.setruta('/ofertas');
+        this.subServ.setruta('/task-offer');
         this.navCtrl.navigateRoot('/map-detail', {
             animated: true,
             animationDirection: 'back',

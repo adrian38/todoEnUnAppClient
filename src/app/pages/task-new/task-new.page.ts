@@ -9,6 +9,7 @@ import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 })
 export class TaskNewPage implements OnInit {
     taskTypes: string[] = ['Fontaneria', 'Carpinteria', 'Electricidad', 'Masajes'];
+    tutorial = sessionStorage.getItem('tutorial');
 
     constructor(
         private _serv: ObtSubSService,

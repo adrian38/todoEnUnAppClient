@@ -41,6 +41,7 @@
         "ajv": "^6.9.1",
         "cordova-plugin-android-permissions": "^1.1.2",
         "cordova-plugin-request-location-accuracy": "^2.3.0",
+        "emailjs-com": "^3.2.0",
         "i": "^0.3.7",
         "jayson": "github:tedeh/jayson#typescript",
         "ngx-google-map": "^1.0.0",

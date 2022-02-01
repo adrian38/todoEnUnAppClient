@@ -52,10 +52,19 @@ export class TaskPhotosPage implements OnInit {
     }
 
     goto() {
-        this.navCtrl.navigateRoot('/task-description', {
-            animated: true,
-            animationDirection: 'forward',
-        });
+        const tutorial = sessionStorage.getItem('tutorial');
+
+        if (tutorial === 'true') {
+            this.navCtrl.navigateRoot('/tutorial-request-new', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        } else {
+            this.navCtrl.navigateRoot('/task-description', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        }
     }
 
     async takePhoto(posc: number) {

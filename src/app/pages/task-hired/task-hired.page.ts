@@ -90,6 +90,7 @@ export class TaskHiredPage implements OnInit {
         private alertCtrl: AlertController,
         public photoService: PhotoService,
         private messageService: MessageService,
+        private platform: Platform,
         // private screenOrientation: ScreenOrientation,
         private router: Router
     ) {
@@ -154,6 +155,15 @@ export class TaskHiredPage implements OnInit {
     }
 
     subscriptions() {
+        this.platform.backButton.subscribeWithPriority(10, () => {
+            this.platform.backButton.subscribeWithPriority(10, () => {
+                this.navCtrl.navigateRoot('/tabs/tab2', {
+                    animated: true,
+                    animationDirection: 'back',
+                });
+            });
+        });
+
         this.notificationError$ = this._taskOdoo.getNotificationError$();
         this.subscriptionsNotificationError = this.notificationError$.subscribe(
             (notificationError) => {
@@ -420,23 +430,25 @@ export class TaskHiredPage implements OnInit {
     }
 
     onClickUbicacion() {
+        this.datos.setruta('/task-hired');
         this.datos.setLatitud(parseFloat(this.task.address.latitude));
         this.datos.setLongitud(parseFloat(this.task.address.longitude));
-        this.navCtrl.navigateRoot('/maparesumen', {
+        this.navCtrl.navigateRoot('/map-detail', {
             animated: true,
             animationDirection: 'forward',
         });
     }
 
-    onClickCostoEntrada() {
-        this.navCtrl.navigateRoot('/costo-extra', {
-            animated: true,
-            animationDirection: 'forward',
-        });
-    }
+    // onClickCostoEntrada() {
+    //     this.navCtrl.navigateRoot('/costo-extra', {
+    //         animated: true,
+    //         animationDirection: 'forward',
+    //     });
+    // }
 
     onClickFactura() {
         this._taskOdoo.setTaskChat(this.task);
+        this._taskOdoo.setLastRoute('task-hired');
         this.navCtrl.navigateRoot('/task-bill', {
             animated: true,
             animationDirection: 'forward',

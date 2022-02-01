@@ -1,11 +1,12 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { LoadingController, NavController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, Platform } from '@ionic/angular';
 import { TaskModel } from 'src/app/models/task.model';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 import { TaskOdooService } from 'src/app/services/task-odoo.service';
 import { Observable, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ImagenmodalPage } from '../imagenmodal/imagenmodal.page';
 
 @Component({
     selector: 'app-tutorial-request-detail',
@@ -29,6 +30,12 @@ export class TutorialRequestDetailPage implements OnInit {
     tempInfoProvider: TaskModel = new TaskModel();
     display: boolean = false;
 
+    habilitar_0: boolean = true;
+    habilitar_1: boolean = true;
+    habilitar_2: boolean = true;
+
+    loading1: any;
+
     constructor(
         private _taskOdoo: TaskOdooService,
         private ngZone: NgZone,
@@ -37,13 +44,21 @@ export class TutorialRequestDetailPage implements OnInit {
         public loadingController: LoadingController,
         private messageService: MessageService,
         private router: Router,
-        private platform: Platform
+        private platform: Platform,
+        private modalCtrl: ModalController
     ) {
         this.task = this._taskOdoo.getTaskCesar();
     }
 
     ngOnInit() {
         this.subscriptions();
+
+        if (!this.task.downloadPhotoSo) {
+            this.temporal('Cargando Fotos...');
+            this._taskOdoo.requestPhotoSo(this.task);
+        } else {
+            this.disableImages();
+        }
 
         if (typeof this.task.So_offers !== 'undefined' && this.task.So_offers.length > 0) {
             let tempPoid = [];
@@ -223,16 +238,16 @@ export class TutorialRequestDetailPage implements OnInit {
                         break;
 
                     case 8:
-                        // this.disableImages()
+                        this.disableImages();
 
-                        // if (this.loading1) {
-                        //   this.loading1.dismiss()
-                        // }
+                        if (this.loading1) {
+                            this.loading1.dismiss();
+                        }
 
-                        // this.messageService.add({
-                        //   severity: 'success',
-                        //   detail: 'Fotos cargadas correctamente',
-                        // })
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Fotos cargadas correctamente',
+                        });
 
                         break;
 
@@ -284,11 +299,11 @@ export class TutorialRequestDetailPage implements OnInit {
                         break;
 
                     case 11:
-                        //this.task.downloadPhotoSo = true
+                        this.task.downloadPhotoSo = true;
 
-                        // if (this.loading1) {
-                        //   this.loading1.dismiss()
-                        // }
+                        if (this.loading1) {
+                            this.loading1.dismiss();
+                        }
 
                         break;
 
@@ -404,5 +419,43 @@ export class TutorialRequestDetailPage implements OnInit {
         );
 
         //setTimeout(function(){ event.target.complete(); }, 2000);
+    }
+
+    imageClick(imagen) {
+        this.modalCtrl
+            .create({
+                component: ImagenmodalPage,
+                componentProps: {
+                    imagen: imagen,
+                },
+            })
+            .then((modal) => modal.present());
+    }
+
+    async temporal(message: string) {
+        this.loading1 = await this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message,
+        });
+
+        return this.loading1.present();
+    }
+
+    disableImages() {
+        if (this.task.photoSO.length == 1) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = true;
+            this.habilitar_2 = true;
+        }
+        if (this.task.photoSO.length == 2) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = false;
+            this.habilitar_2 = true;
+        }
+        if (this.task.photoSO.length == 3) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = false;
+            this.habilitar_2 = false;
+        }
     }
 }

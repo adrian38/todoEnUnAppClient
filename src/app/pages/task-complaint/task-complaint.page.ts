@@ -66,7 +66,7 @@ export class TaskComplaintPage implements OnInit {
         console.log('nuevooooooo', this.task);
 
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.navCtrl.navigateRoot('/contratados', {
+            this.navCtrl.navigateRoot('/task-hired', {
                 animated: true,
                 animationDirection: 'back',
             });

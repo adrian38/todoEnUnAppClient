@@ -62,7 +62,7 @@ export class ObtSubSService {
     private subServicioActual: string;
     /*
     foto0:string = '../../../assets/fotoadd.png'; */
-    fotoRegistro: string = '../../../assets/registro.svg';
+    fotoRegistro: string = '../../../assets/images/registro.svg';
 
     foto0: string = '';
     foto1: string = '';

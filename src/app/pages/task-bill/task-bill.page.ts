@@ -47,7 +47,7 @@ export class TaskBillPage implements OnInit {
             this.impuestoStrike;
 
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.navCtrl.navigateRoot('/contratados', {
+            this.navCtrl.navigateRoot(this._taskOdoo.getLastRoute(), {
                 animated: true,
                 animationDirection: 'back',
             });

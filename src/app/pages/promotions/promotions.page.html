@@ -1,9 +1,41 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>promotions</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border">
+    <div style="background: var(--ion-color-orange)">
+        <app-header headerText="Perfil" [fillBackground]="false"></app-header>
+    </div>
+    <div id="barraSuperior">
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8" style="text-align: center; padding-top: 0px">
+                <ion-label
+                    style="
+                        color: rgb(49, 49, 57);
+                        font-family: 'HelveticaNeueLTStd-Bd';
+                        font-size: 19px;
+                        display: flex;
+                        justify-content: center;
+                        align-content: center;
+                        flex-direction: column;
+                        text-align: center;
+                        margin-top: 8px;
+                    "
+                    >PROMOCIONES</ion-label
+                >
+            </ion-col>
+        </ion-row>
+    </div>
 </ion-header>
 
 <ion-content>
-
+    <div class="flex_centered" style="width: 100%; padding-top: 15px; padding-bottom: 20px">
+        <ion-list style="width: 80% !important">
+            <ion-item
+                class="item"
+                *ngFor="let promocion of promociones, let i = index"
+                lines="none"
+            >
+                <app-promo-card [Promo]="promocion" (outputPromoInfo)="showPromoInfo($event)">
+                </app-promo-card>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>

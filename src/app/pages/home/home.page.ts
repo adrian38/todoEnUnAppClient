@@ -75,6 +75,13 @@ export class HomePage implements OnInit {
         });
     }
 
+    signUp() {
+        this.navController.navigateRoot('/registration-contract', {
+            animated: true,
+            animationDirection: 'back',
+        });
+    }
+
     showTutorial() {
         console.log('tutorial');
 

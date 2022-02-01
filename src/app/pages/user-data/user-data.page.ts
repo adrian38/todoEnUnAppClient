@@ -242,7 +242,7 @@ export class UserDataPage implements OnInit {
 	console.log("nuevo",this.usuario.address.cp); */
 
         if (this.usuario.avatar.length == 0) {
-            this.avatarusuario = '../../../assets/registro.svg';
+            this.avatarusuario = '../../../assets/images/registro.svg';
         } else {
             this.avatarusuario = this.usuario.avatar;
         }

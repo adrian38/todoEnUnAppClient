@@ -728,7 +728,7 @@ export class TaskOdooService {
                 partner_id: task.client_id,
                 title: task.title,
                 // commitment_date: task.date_planned + ' ' + task.time,
-                commitment_date:'2020-10-20 07:30:30',
+                commitment_date: '2020-10-20 07:30:30',
                 require_materials: task.require_materials,
                 require_payment: false,
                 require_signature: false,
@@ -3881,6 +3881,9 @@ export class TaskOdooService {
     }
 
     requestPhotoSo(Task: TaskModel) {
+        console.log(Task);
+        console.log(user, 'usuario anonimo');
+
         let get_photo_so = () => {
             let inParams = [];
             inParams.push([['res_id', '=', Task.So_id]]);
@@ -5591,6 +5594,7 @@ export class TaskOdooService {
         user.partner_id = 217;
         user.id = 129;
         user.password = 'anonimo';
+        let count: number;
 
         //let count: number;
 
@@ -5715,6 +5719,52 @@ export class TaskOdooService {
             );
         };
 
+        let create_SO_attachment = function (SO_id: number) {
+            let attachement = {
+                name: 'photoSolicitud_' + count + '.jpg',
+                datas: task.photoSO[count],
+                type: 'binary',
+                description: 'photoSolicitud_' + count.toString + '.jpg',
+                res_model: 'sale.order',
+                res_id: SO_id,
+            };
+            let inParams = [];
+            inParams.push(attachement);
+
+            let params = [];
+            params.push(inParams);
+
+            let fparams = [];
+            fparams.push(jaysonServer.db);
+            fparams.push(user.id);
+            fparams.push(jaysonServer.password);
+            fparams.push('ir.attachment'); //model
+            fparams.push('create'); //method
+
+            for (let i = 0; i < params.length; i++) {
+                fparams.push(params[i]);
+            }
+
+            client.request(
+                'call',
+                { service: 'object', method: 'execute_kw', args: fparams },
+                function (err, error, value) {
+                    if (err || !value) {
+                        console.log(err, 'Error create_SO_attachment');
+                        //cancelSOclientSelected(SO_id);
+                        notificationError$.next({ type: 8 });
+                    } else {
+                        count--;
+                        if (count >= 0) {
+                            create_SO_attachment(SO_id);
+                        } else {
+                            confirmService(SO_id);
+                        }
+                    }
+                }
+            );
+        };
+
         let createService = function () {
             //count = 0;
 
@@ -5779,12 +5829,12 @@ export class TaskOdooService {
                     } else {
                         //console.log(value, 'createService')
 
-                        // if (task.photoSO.length) {
-                        //     count = task.photoSO.length - 1;
-                        //     create_SO_attachment(value);
-                        // } else {
-                        confirmService(value);
-                        //}
+                        if (task.photoSO.length) {
+                            count = task.photoSO.length - 1;
+                            create_SO_attachment(value);
+                        } else {
+                            confirmService(value);
+                        }
                     }
                 }
             );

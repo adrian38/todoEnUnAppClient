@@ -52,6 +52,8 @@ export class TutorialRequestNewPage implements OnInit {
     subscriptionNotificationNewSoClient: Subscription;
     subscriptionNotificationError: Subscription;
 
+    taskToSend;
+
     constructor(
         private navCon: NavController,
         private datos: ObtSubSService,
@@ -176,6 +178,16 @@ export class TutorialRequestNewPage implements OnInit {
             this.task.anonimus = true;
             this.task.anonimus_author = this.name + ' ' + this.lastName;
 
+            if (this.datos.getfoto00() !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto00());
+            }
+            if (this.datos.getfoto11() !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto11());
+            }
+            if (this.datos.getfoto22() !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto22());
+            }
+
             // this.task.date_planned = this.fecha;
             // this.task.time = this.hora;
 
@@ -183,6 +195,21 @@ export class TutorialRequestNewPage implements OnInit {
             this.task.time = '07:30:30';
 
             this.task.client_id = 217;
+
+            this.taskToSend = { ...this.task };
+            this.taskToSend.photoSO = [...this.task.photoSO];
+            console.log('before', this.taskToSend);
+
+            for (let [index, element] of this.taskToSend.photoSO.entries()) {
+                if (
+                    Buffer.from(element.substring(element.indexOf(',') + 1)).length / 1e6 >
+                    0.322216
+                ) {
+                    this.resizedataURL(element, 1280, 960, index);
+                } else {
+                    element = element.substring(element.indexOf(',') + 1);
+                }
+            }
 
             //console.log(this.task, "tarea a crear")
             this.btn_deshabilitar = true;
@@ -195,7 +222,7 @@ export class TutorialRequestNewPage implements OnInit {
 
             //console.log(dateTime)
 
-            this._taskOdoo.newTaskAnonimus(this.task);
+            this._taskOdoo.newTaskAnonimus(this.taskToSend);
         } else {
             this.messageService.add({
                 severity: 'error',
@@ -226,6 +253,8 @@ export class TutorialRequestNewPage implements OnInit {
         this.datos.setServ('');
         this.datos.setAnonimusName('');
         this.datos.setAnonimusLastName('');
+
+        this.datos.deleteFields();
         // this.datos.setcalle('');
         // this.datos.setpuerta('');
         // this.datos.setpiso('');
@@ -241,5 +270,23 @@ export class TutorialRequestNewPage implements OnInit {
         // this.datos.setfoto0('');
         // this.datos.setfoto1('');
         // this.datos.setfoto2('');
+    }
+
+    resizedataURL(datas, wantedWidth, wantedHeight, index) {
+        //console.log(datas, 'como llega al resize');
+
+        var img = document.createElement('img');
+        img.src = datas;
+        img.onload = () => {
+            let ratio = img.width / img.height;
+            wantedWidth = wantedHeight * ratio;
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.width = wantedWidth;
+            canvas.height = wantedHeight;
+            ctx.drawImage(img, 0, 0, wantedWidth, wantedHeight);
+            let temp = canvas.toDataURL('image/jpeg', [0.0, 1.0]);
+            this.taskToSend.photoSO[index] = temp.substring(temp.indexOf(',') + 1);
+        };
     }
 }
