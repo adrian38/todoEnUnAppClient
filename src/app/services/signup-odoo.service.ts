@@ -44,7 +44,7 @@ export class SignUpOdooService {
                 login: usuario.username,
                 email: usuario.username,
                 password: usuario.password,
-                //'image_1920': usuario.avatar,
+                image_1920: usuario.avatar,
                 groups_id: [22, 1, 11, 17, 34, 23, 6, 35, 20, 19],
                 /* groups_id son los mismos para custumer y vendor para admin son: [2,21,36,22,26,7,1,11,17,34,3,23,6,35,20,19]*/
             };
@@ -166,31 +166,35 @@ export class SignUpOdooService {
         );
     }
 
-    updateUser(usuario: UsuarioModel) {
+    updateUser(tempUser: UsuarioModel) {
+        // console.log(tempUser, 'servicio ');
+        // console.log(tempUser.avatar, 'servicio avatar');
+
         let user_to_update = {
-            image_1920: usuario.avatar,
+            image_1920: tempUser.avatar,
         };
 
         let partner_update = {
-            address_street: usuario.address.street,
-            address_floor: usuario.address.floor,
-            address_portal: usuario.address.portal,
-            address_number: usuario.address.number,
-            address_door: usuario.address.door,
-            address_stairs: usuario.address.stair,
-            address_zip_code: usuario.address.cp,
-            address_latitude: usuario.address.latitude,
-            address_longitude: usuario.address.longitude,
+            address_street: tempUser.address.street,
+            address_floor: tempUser.address.floor,
+            address_portal: tempUser.address.portal,
+            address_number: tempUser.address.number,
+            address_door: tempUser.address.door,
+            address_stairs: tempUser.address.stair,
+            address_zip_code: tempUser.address.cp,
+            address_latitude: tempUser.address.latitude,
+            address_longitude: tempUser.address.longitude,
         };
 
-        //console.log(partner_update, "info a actualizar");
+        // console.log(partner_update, 'info a actualizar');
+        // console.log(user_to_update, 'photo a actualizar');
 
         let updatePatner = function () {
             /* let path = '/jsonrpc';
       let client = jayson.https('https://' + host + ':' + port + path); */
 
             let inParams = [];
-            inParams.push(usuario.partner_id);
+            inParams.push(tempUser.partner_id);
             inParams.push(partner_update);
             let params = [];
             params.push(inParams);
@@ -224,7 +228,7 @@ export class SignUpOdooService {
         let client = jayson.https('https://' + host + ':' + port + path);
 
         let inParams = [];
-        inParams.push(usuario.id);
+        inParams.push(tempUser.id);
         inParams.push(user_to_update);
         let params = [];
         params.push(inParams);

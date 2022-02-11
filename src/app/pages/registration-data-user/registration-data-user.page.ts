@@ -367,12 +367,11 @@ export class RegistrationDataUserPage implements OnInit {
             this.resizedataURL(foto, 1280, 960);
         } else {
             this.usuario.avatar = foto.substring(foto.indexOf(',') + 1);
+            this._signupOdoo.newUser(this.usuario);
+            this.presentLoading();
         }
 
-        console.log('todoantes', this.usuario);
-
-        // this._signupOdoo.newUser(this.usuario);
-        // this.presentLoading();
+        // console.log('todoantes', this.usuario);
     }
 
     resizedataURL(datas, wantedWidth, wantedHeight) {
@@ -388,6 +387,8 @@ export class RegistrationDataUserPage implements OnInit {
             ctx.drawImage(img, 0, 0, wantedWidth, wantedHeight);
             let temp = canvas.toDataURL('image/jpeg', [0.0, 1.0]);
             this.usuario.avatar = temp.substring(temp.indexOf(',') + 1);
+            this._signupOdoo.newUser(this.usuario);
+            this.presentLoading();
         };
     }
     async presentLoading() {

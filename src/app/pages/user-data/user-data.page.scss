@@ -113,3 +113,16 @@ ion-card {
     margin-top: 13px;
     //  margin-right: 20px;
 }
+
+:host ::ng-deep {
+    .p-toast-message-custom {
+        background-color: rgb(246, 183, 118);
+        border: solid rgb(246, 183, 118);
+        border-width: 0 0 0 6px;
+        width: 10px;
+        color: #2c1e30;
+        .p-toast-icon-close {
+            color: #2c1e30;
+        }
+    }
+}

@@ -1,3 +1,7 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
 <ion-header class="ion-no-border">
     <div style="background: var(--ion-color-orange)">
         <app-header headerText="Perfil" [fillBackground]="false"></app-header>
@@ -49,18 +53,17 @@
                             [(ngModel)]="calle"
                             placeholder="{{placeholderCalle}}"
                             #call="ngModel"
-                            required
                         >
                         </ion-input>
                     </ion-item>
 
                     <div id="item"></div>
 
-                    <div id="link">
+                    <!-- <div id="link">
                         <small *ngIf="call.invalid && call.touched" class="text-danger"
                             >Campo obligatorio</small
                         >
-                    </div>
+                    </div> -->
                 </ion-col>
 
                 <ion-col>
@@ -71,16 +74,15 @@
                             [(ngModel)]="piso"
                             placeholder="{{placeholderPiso}}"
                             #pis="ngModel"
-                            required
                         >
                         </ion-input>
                     </ion-item>
                     <div id="item"></div>
-                    <div id="link">
+                    <!-- <div id="link">
                         <small *ngIf="pis.invalid && pis.touched" class="text-danger"
                             >Campo obligatorio</small
                         >
-                    </div>
+                    </div> -->
                 </ion-col>
             </ion-row>
 
@@ -94,34 +96,26 @@
                             [(ngModel)]="numero"
                             placeholder="{{this.placeholderNumero}}"
                             #num="ngModel"
-                            required
                         ></ion-input>
                     </ion-item>
                     <div id="item"></div>
-                    <div id="link">
+                    <!-- <div id="link">
                         <small *ngIf="num.invalid && num.touched" class="text-danger"
                             >Campo obligatorio</small
                         >
-                    </div>
+                    </div> -->
                 </ion-col>
                 <ion-col>
                     <ion-item lines="none">
-                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
                         <ion-input
                             type="text"
                             name="nombre"
                             [(ngModel)]="puerta"
-                            placeholder="{{this.placeholderPuerta}}"
+                            placeholder="{{placeholderPuerta}}"
                             #pue="ngModel"
-                            required
                         ></ion-input>
                     </ion-item>
                     <div id="item"></div>
-                    <div id="link">
-                        <small *ngIf="pue.invalid && pue.touched" class="text-danger"
-                            >Campo obligatorio</small
-                        >
-                    </div>
                 </ion-col>
             </ion-row>
 
@@ -135,19 +129,16 @@
                             [(ngModel)]="cpostal"
                             placeholder="{{this.placeholderCp}}"
                             #c_post="ngModel"
-                            required
                         >
                         </ion-input>
                     </ion-item>
                     <div id="item"></div>
-                    <div id="link">
+                    <!-- <div id="link">
                         <small *ngIf="c_post.invalid && c_post.touched" class="text-danger"
                             >Campo obligatorio</small
                         >
-                    </div>
+                    </div> -->
                 </ion-col>
-
-                <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             </ion-row>
 
             <ion-row>
@@ -160,16 +151,15 @@
                             [(ngModel)]="escalera"
                             placeholder="{{this.placeholderEscalera}}"
                             #esc="ngModel"
-                            required
                         >
                         </ion-input>
                     </ion-item>
                     <div id="item"></div>
-                    <div id="link">
+                    <!-- <div id="link">
                         <small *ngIf="esc.invalid && esc.touched" class="text-danger"
                             >Campo obligatorio</small
                         >
-                    </div>
+                    </div> -->
                 </ion-col>
 
                 <ion-col style="text-align: end; margin-top: 5px">
@@ -184,7 +174,7 @@
     </ion-row>
     <div class="task_materials_buttons">
         <div class="one_button">
-            <p-button (onClick)="editar()" label="GUARDAR"> </p-button>
+            <p-button (onClick)="editar()" [disabled]="process" label="GUARDAR"> </p-button>
         </div>
     </div>
 </ion-content>

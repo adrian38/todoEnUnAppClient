@@ -187,18 +187,27 @@ const routes: Routes = [
                 (m) => m.TutorialRequestNewPageModule
             ),
     },
-  {
-    path: 'registration-contract',
-    loadChildren: () => import('./pages/registration-contract/registration-contract.module').then( m => m.RegistrationContractPageModule)
-  },
-  {
-    path: 'registration-data-user',
-    loadChildren: () => import('./pages/registration-data-user/registration-data-user.module').then( m => m.RegistrationDataUserPageModule)
-  },
-  {
-    path: 'user-password-lost',
-    loadChildren: () => import('./pages/user-password-lost/user-password-lost.module').then( m => m.UserPasswordLostPageModule)
-  },
+    {
+        path: 'registration-contract',
+        loadChildren: () =>
+            import('./pages/registration-contract/registration-contract.module').then(
+                (m) => m.RegistrationContractPageModule
+            ),
+    },
+    {
+        path: 'registration-data-user',
+        loadChildren: () =>
+            import('./pages/registration-data-user/registration-data-user.module').then(
+                (m) => m.RegistrationDataUserPageModule
+            ),
+    },
+    {
+        path: 'user-password-lost',
+        loadChildren: () =>
+            import('./pages/user-password-lost/user-password-lost.module').then(
+                (m) => m.UserPasswordLostPageModule
+            ),
+    },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
