@@ -6,6 +6,7 @@ import { Address } from '../../models/task.model';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 import { Photo } from 'src/app/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 import { Observable, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
@@ -79,7 +80,7 @@ export class RegistrationDataUserPage implements OnInit {
     loading: HTMLIonLoadingElement = null;
 
     constructor(
-        public photoService: PhotoService,
+        public _photoService: PhotoService,
         public datos: ObtSubSService,
         public navCtrl: NavController,
         public alertController: AlertController,
@@ -94,6 +95,7 @@ export class RegistrationDataUserPage implements OnInit {
     }
 
     ngOnInit() {
+        defineCustomElements(window);
         this.obtener_campos();
 
         this.platform.backButton.subscribeWithPriority(10, () => {
@@ -140,55 +142,64 @@ export class RegistrationDataUserPage implements OnInit {
     }
 
     async presentAlertConfirm() {
-        // const alert = await this.alertController.create({
-        // 	cssClass: 'my-custom-class',
-        // 	header: '¿Desea colocar una foto?',
-        // 	message: 'Selecione la opcion de camara o galeria para la foto ',
-        // 	buttons: [
-        // 		{
-        // 			text: 'Camara',
-        // 			handler: async () => {
-        // 				let photo: Photo = await this.photoService.addNewToCamara();
-        // 				if (photo) {
-        // 					this.avatarusuario = photo.webviewPath;
-        // 					// console.log('this.avatarusuario', this.avatarusuario);
-        // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
-        // 					//console.log('this.avatarusuario64', this.avatarusuario64);
-        // 					this.selectFoto = true;
-        // 					this.datos.setselectfoto(true);
-        // 					// console.log('this.avatarusuario64puroinicio',this.avatarusuario64.slice(0,22));
-        // 					// console.log('this.avatarusuario64purofin',this.avatarusuario64.slice(22));
-        // 				}
-        // 			}
-        // 		},
-        // 		{
-        // 			text: 'Galeria',
-        // 			handler: async () => {
-        // 				this.photoService.photos = [];
-        // 				let photos: Photo[] = await this.photoService.addNewToGallery();
-        // 				if (photos.length == 1) {
-        // 					this.avatarusuario = photos[0].webviewPath;
-        // 					//this.avatarusuario64 = this.photoService.devuelve64();
-        // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
-        // 					console.log('this.avatarusuario64', this.avatarusuario64);
-        // 					this.selectFoto = true;
-        // 					this.datos.setselectfoto(true);
-        // 				}
-        // 			}
-        // 		},
-        // 		{
-        // 			text: 'Cancelar',
-        // 			role: 'cancel',
-        // 			cssClass: 'secondary',
-        // 			handler: (blah) => {
-        // 				this.avatarusuario = '../../../assets/registro.svg';
-        // 				this.avatarusuario64 = '';
-        // 				this.selectFoto = false;
-        // 			}
-        // 		}
-        // 	]
-        // });
-        //	await alert.present();
+        try {
+            // const alert = await this.alertController.create({
+            // 	cssClass: 'my-custom-class',
+            // 	header: '¿Desea colocar una foto?',
+            // 	message: 'Selecione la opcion de camara o galeria para la foto ',
+            // 	buttons: [
+            // 		{
+            // 			text: 'Camara',
+            // 			handler: async () => {
+            // 				let photo: Photo = await this.photoService.addNewToCamara();
+            // 				if (photo) {
+            // 					this.avatarusuario = photo.webviewPath;
+            // 					// console.log('this.avatarusuario', this.avatarusuario);
+            // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
+            // 					//console.log('this.avatarusuario64', this.avatarusuario64);
+            // 					this.selectFoto = true;
+            // 					this.datos.setselectfoto(true);
+            // 					// console.log('this.avatarusuario64puroinicio',this.avatarusuario64.slice(0,22));
+            // 					// console.log('this.avatarusuario64purofin',this.avatarusuario64.slice(22));
+            // 				}
+            // 			}
+            // 		},
+            // 		{
+            // 			text: 'Galeria',
+            // 			handler: async () => {
+            // 				this.photoService.photos = [];
+            // 				let photos: Photo[] = await this.photoService.addNewToGallery();
+            // 				if (photos.length == 1) {
+            // 					this.avatarusuario = photos[0].webviewPath;
+            // 					//this.avatarusuario64 = this.photoService.devuelve64();
+            // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
+            // 					console.log('this.avatarusuario64', this.avatarusuario64);
+            // 					this.selectFoto = true;
+            // 					this.datos.setselectfoto(true);
+            // 				}
+            // 			}
+            // 		},
+            // 		{
+            // 			text: 'Cancelar',
+            // 			role: 'cancel',
+            // 			cssClass: 'secondary',
+            // 			handler: (blah) => {
+            // 				this.avatarusuario = '../../../assets/registro.svg';
+            // 				this.avatarusuario64 = '';
+            // 				this.selectFoto = false;
+            // 			}
+            // 		}
+            // 	]
+            // });
+            //	await alert.present();
+
+            let temp = await this._photoService.addNewToCamera();
+            this.avatarusuario64 = temp;
+            this.avatarusuario = temp;
+            return 'ok';
+        } catch (err) {
+            console.log('no photo');
+        }
     }
 
     iniciar() {
@@ -260,10 +271,6 @@ export class RegistrationDataUserPage implements OnInit {
         this.lat = this.datos.getlatitud();
         this.avatarusuario = this.datos.getfotoRegis();
         this.avatarusuario64 = this.datos.getfoto0();
-
-        console.log('lon', this.long);
-        console.log('lat', this.lat);
-        console.log('coo', this.coordenadas_puesta);
     }
     vaciar_campos() {
         this.datos.setfoto0('');
@@ -402,16 +409,7 @@ export class RegistrationDataUserPage implements OnInit {
         this.usuario.address.longitude = String(this.long);
         this.usuario.address.latitude = String(this.lat);
 
-        //this.usuario.address.longitude = "-34.00000";
-        //this.usuario.address.latitude = "19.00000";
-
-        // console.log('this.avatarusuario64purofin',this.avatarusuario64.slice(22));
-        // this.usuario.avatar = foto;
-        // console.log('fotos',this.avatarusuario);
-        console.log('fotos64', this.avatarusuario64);
         let foto = this.avatarusuario64;
-
-        console.log('foto', foto);
 
         if (Buffer.from(foto.substring(foto.indexOf(',') + 1)).length / 1e6 > 0.322216) {
             this.resizedataURL(foto, 1280, 960);
@@ -419,11 +417,11 @@ export class RegistrationDataUserPage implements OnInit {
             this.usuario.avatar = foto.substring(foto.indexOf(',') + 1);
         }
         this.usuario.avatar = foto;
-        console.log('todoantes', this.usuario);
-        this._signupOdoo.newUser(this.usuario);
 
-        this.presentLoading();
-        console.log('todoluego', this.usuario);
+        console.log('todoantes', this.usuario);
+
+        // this._signupOdoo.newUser(this.usuario);
+        // this.presentLoading();
     }
 
     resizedataURL(datas, wantedWidth, wantedHeight) {

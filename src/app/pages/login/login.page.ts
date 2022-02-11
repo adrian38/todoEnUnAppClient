@@ -125,4 +125,11 @@ export class LoginPage implements OnInit {
 
         return this.loading.present();
     }
+
+    forgottenPassword() {
+        this.navController.navigateRoot('/user-password-lost', {
+            animated: true,
+            animationDirection: 'forward',
+        });
+    }
 }

@@ -68,19 +68,23 @@ export class TaskPhotosPage implements OnInit {
     }
 
     async takePhoto(posc: number) {
-        let temp = await this._photoService.addNewToCamera();
+        try {
+            let temp = await this._photoService.addNewToCamera();
 
-        if (posc == 0) {
-            this.foto0 = temp;
-            this._serv.setfoto00(temp);
-        }
-        if (posc == 1) {
-            this.foto1 = temp;
-            this._serv.setfoto11(temp);
-        }
-        if (posc == 2) {
-            this.foto2 = temp;
-            this._serv.setfoto22(temp);
+            if (posc == 0) {
+                this.foto0 = temp;
+                this._serv.setfoto00(temp);
+            }
+            if (posc == 1) {
+                this.foto1 = temp;
+                this._serv.setfoto11(temp);
+            }
+            if (posc == 2) {
+                this.foto2 = temp;
+                this._serv.setfoto22(temp);
+            }
+        } catch (e) {
+            console.error('no photo');
         }
     }
 

@@ -40,7 +40,7 @@ ion-button {
     width: 155px;
     height: 39px;
     border-radius: 5px 5px 5px 5px;
-    font-family: 'HelveticaNeueLTStd-Bd';
+    font-family: 'Helvetica-Bd';
     background-color: rgb(246, 183, 118);
     color: rgb(49, 49, 57);
 }
@@ -258,3 +258,31 @@ ion-card {
 //    object-fit: cover;
 
 //   }
+:host ::ng-deep .task_materials_buttons {
+    width: 80%;
+    margin-left: 10%;
+    // position: absolute;
+    bottom: 5%;
+
+    .one_button {
+        width: 100%;
+        //padding-top: 15%;
+
+        .p-button {
+            margin-top: 10%;
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: rgb(49, 49, 57);
+            border: solid var(--ion-color-primary);
+            background: var(--ion-color-primary);
+            width: 100%;
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
+}

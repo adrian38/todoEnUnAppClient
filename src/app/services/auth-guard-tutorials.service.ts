@@ -16,7 +16,7 @@ export class AuthGuardTutorialsService {
             return true;
         } else {
             console.error('Guard!!! PleaseLogin');
-            this.route.navigateByUrl('/inicio');
+            this.route.navigateByUrl('/home');
             return false;
         }
     }

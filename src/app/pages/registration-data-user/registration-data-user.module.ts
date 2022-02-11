@@ -8,6 +8,7 @@ import { RegistrationDataUserPageRoutingModule } from './registration-data-user-
 
 import { RegistrationDataUserPage } from './registration-data-user.page';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { ToastModule } from 'primeng/toast';
         IonicModule,
         RegistrationDataUserPageRoutingModule,
         ToastModule,
+        ButtonModule,
     ],
     declarations: [RegistrationDataUserPage],
 })
