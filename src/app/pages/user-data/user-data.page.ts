@@ -8,6 +8,8 @@ import { SignUpOdooService } from 'src/app/services/signup-odoo.service';
 import { AuthOdooService } from 'src/app/services/auth-odoo.service';
 import { MessageService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-data',
@@ -58,20 +60,19 @@ export class UserDataPage implements OnInit {
         public datos: ObtSubSService,
         public alertController: AlertController,
         private _signupOdoo: SignUpOdooService,
-        public photoService: PhotoService,
+        public _photoService: PhotoService,
         public _authOdoo: AuthOdooService,
         private ngZone: NgZone,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private router: Router
     ) {}
 
     ngOnInit() {
+        defineCustomElements(window);
         this.usuario = this._authOdoo.getUser();
 
         console.log(this.usuario);
 
-        /* console.log('foto',this.usuario.avatar);
-		console.log('lat',this.usuario.address.latitude);
-		console.log('lon',this.usuario.address.longitude); */
         this.placeholder();
 
         this.obtener_campos();
@@ -137,73 +138,26 @@ export class UserDataPage implements OnInit {
         this.usuario.address.latitude = String(this.datos.getlatitud());
         this.usuario.address.longitude = String(this.datos.getlongitud());
 
-        /*  console.log(this.usuario,"nuevo usuario"); */
+        console.log(this.usuario, 'nuevo usuario');
         this.datos.setcoordenada(false);
 
-        this._signupOdoo.newUser(this.usuario);
+        this._signupOdoo.updateUser(this.usuario);
     }
 
     async presentAlertConfirm() {
-        //   const alert = await this.alertController.create({
-        //       cssClass: 'my-custom-class',
-        //       header: '¿Desea colocar una foto?',
-        //       message: 'Selecione la opcion de camara o galeria para la foto ',
-        //       buttons: [
-        //           {
-        //               text: 'Camara',
-        //               handler: async () => {
-        //                   /*   this.photoService.photos=[];
-        // this.verFoto=true;
-        // this.verFotoInicial=false;
-        // this.photoService.addNewToCamara();
-        //  this.avatarusuario= this.photoService.devuelve64();
-        // console.log(this.avatarusuario); */
-        //                   let photo: Photo = await this.photoService.addNewToCamara();
-        //                   console.log('Foto', photo.webviewPath);
-        //                   if (photo) {
-        //                       this.avatarusuario = photo.webviewPath;
-        //                       console.log(this.avatarusuario);
-        //                       this.avatarusuario64 = this.photoService.devuelve64();
-        //                   }
-        //               },
-        //           },
-        //           {
-        //               text: 'Galeria',
-        //               handler: async () => {
-        //                   this.photoService.photos = [];
-        //                   let photos: Photo[] = await this.photoService.addNewToGallery();
-        //                   console.log('Fotos', JSON.stringify(this.photoService.photos));
-        //                   if (photos.length == 1) {
-        //                       this.avatarusuario = photos[0].webviewPath;
-        //                       console.log(this.avatarusuario);
-        //                       this.avatarusuario64 = this.photoService.devuelve64();
-        //                   }
-        //               },
-        //           },
-        //           {
-        //               text: 'Cancelar',
-        //               role: 'cancel',
-        //               cssClass: 'secondary',
-        //               handler: (blah) => {
-        //                   /*   this.verFoto=false;
-        // this.verFotoInicial=true; */
-        //                   if (this.usuario.avatar.length == 0) {
-        //                       this.avatarusuario = '../../../assets/registro.svg';
-        //                   } else {
-        //                       this.avatarusuario = this.usuario.avatar;
-        //                   }
-        //                   this.avatarusuario64 = '';
-        //                   console.log('Confirm Cancel: blah');
-        //               },
-        //           },
-        //       ],
-        //   });
-        //   await alert.present();
+        try {
+            let temp = await this._photoService.addNewToCamera();
+            this.avatarusuario64 = temp;
+            this.avatarusuario = temp;
+            return 'ok';
+        } catch (err) {
+            console.log('no photo');
+        }
     }
 
     ubicacion() {
         this.entrar_campos();
-        this.datos.setruta('datospersonales');
+        this.datos.setruta(this.router.url);
         this.navCtrl.navigateRoot('/map', { animated: true, animationDirection: 'forward' });
     }
 
@@ -215,7 +169,7 @@ export class UserDataPage implements OnInit {
 
         this.datos.setcalle(this.calle);
         this.datos.setpiso(this.piso);
-        this.datos.setnumero(this.numero);
+        this.datos.setnumero(parseInt(this.numero));
         this.datos.setpuerta(this.puerta);
         this.datos.setportal(this.portal);
         this.datos.setescalera(this.escalera);
@@ -229,12 +183,17 @@ export class UserDataPage implements OnInit {
         this.pass = this.datos.getcontraseña();
 
         this.calle = this.datos.getcalle();
-        this.numero = this.datos.getnumero();
+        if (this.datos.getnumero()) {
+            this.numero = this.datos.getnumero().toString();
+        }
         this.piso = this.datos.getpiso();
         this.puerta = this.datos.getpuerta();
         this.portal = this.datos.getportal();
         this.escalera = this.datos.getescalera();
         this.cpostal = this.datos.getcod_postal();
+        if (this.datos.getfoto0() != '') {
+            this.avatarusuario64 = this.datos.getfoto0();
+        }
     }
 
     placeholder() {
@@ -246,24 +205,6 @@ export class UserDataPage implements OnInit {
         } else {
             this.avatarusuario = this.usuario.avatar;
         }
-
-        // if (this.usuario.realname.length == 0) {
-        // 	this.placeholderNombre = 'Nombre';
-        // } else {
-        // 	this.placeholderNombre = this.usuario.realname;
-        // }
-
-        // if (this.usuario.date.length == 0) {
-        // 	this.placeholderFecha = 'Fecha de nacimiento';
-        // } else {
-        // 	this.placeholderFecha = this.usuario.date;
-        // }
-
-        // if (this.usuario.username.length == 0) {
-        // 	this.placeholderUser = 'Usuario';
-        // } else {
-        // 	this.placeholderUser = this.usuario.username;
-        // }
 
         if (this.usuario.address.street == '') {
             this.placeholderCalle = 'Calle';

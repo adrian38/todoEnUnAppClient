@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, NavController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, Platform } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
 import { UsuarioModel } from 'src/app/models/usuario.model';
@@ -8,7 +8,7 @@ import { ChatOdooService } from 'src/app/services/chat-odoo.service';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 import { TaskOdooService } from 'src/app/services/task-odoo.service';
 import { Address, TaskModel } from '../../models/task.model';
-
+import { ImagenmodalPage } from '../imagenmodal/imagenmodal.page';
 @Component({
     selector: 'app-tutorial-request-new',
     templateUrl: './tutorial-request-new.page.html',
@@ -20,7 +20,7 @@ export class TutorialRequestNewPage implements OnInit {
     btn_deshabilitado: boolean = false;
 
     //user: UsuarioModel;
-    task: TaskModel;
+    task: TaskModel = new TaskModel();
     btn_deshabilitar: boolean = false;
     usuario: UsuarioModel;
 
@@ -46,6 +46,10 @@ export class TutorialRequestNewPage implements OnInit {
     foto2: string = '';
     city: string = '';
 
+    habilitar_0: boolean = true;
+    habilitar_1: boolean = true;
+    habilitar_2: boolean = true;
+
     notificationNewSoClient$: Observable<any>;
     notificationError$: Observable<any>;
 
@@ -64,7 +68,8 @@ export class TutorialRequestNewPage implements OnInit {
         public loadingController: LoadingController,
         private _chatOdoo: ChatOdooService,
         private router: Router,
-        private platform: Platform
+        private platform: Platform,
+        private modalCtrl: ModalController
     ) {}
 
     ngOnInit() {
@@ -84,12 +89,54 @@ export class TutorialRequestNewPage implements OnInit {
         // this.numero = this.datos.getnumero();
         //this.user = this._authOdoo.getUser();
 
+        if (this.datos.getfoto00() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto00());
+        }
+        if (this.datos.getfoto11() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto11());
+        }
+        if (this.datos.getfoto22() !== '/assets/images/fotoadd.png') {
+            this.task.photoSO.push(this.datos.getfoto22());
+        }
+
+        //console.log(this.task.photoSO);
+
+        this.disableImages();
+
         this.name = this.datos.getAnonimusName();
         this.lastName = this.datos.getAnonimusLastName();
 
         this.subscriptions();
     }
 
+    disableImages() {
+        if (this.task.photoSO.length == 1) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = true;
+            this.habilitar_2 = true;
+        }
+        if (this.task.photoSO.length == 2) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = false;
+            this.habilitar_2 = true;
+        }
+        if (this.task.photoSO.length == 3) {
+            this.habilitar_0 = false;
+            this.habilitar_1 = false;
+            this.habilitar_2 = false;
+        }
+    }
+
+    imageClick(imagen) {
+        this.modalCtrl
+            .create({
+                component: ImagenmodalPage,
+                componentProps: {
+                    imagen: imagen,
+                },
+            })
+            .then((modal) => modal.present());
+    }
     ngOnDestroy() {
         this.subscriptionNotificationError.unsubscribe();
         this.subscriptionNotificationNewSoClient.unsubscribe();

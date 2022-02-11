@@ -1,0 +1,85 @@
+.page_subheader {
+    background     : var(--ion-color-orange);
+    height         : 45px;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    z-index        : 1;
+    width          : 100%;
+}
+
+.page_subheader_title {
+    font          : normal 17px 'Helvetica-Md', sans-serif;
+    text-transform: uppercase;
+}
+
+.item {
+    width          : 100%;
+    border-bottom  : 1px solid var(--ion-color-orange);
+    padding        : 12px 0 !important;
+    --padding-start: 0;
+}
+
+.prom_title {
+    font         : bold 14px 'Helvetica-Roman', sans-serif;
+    margin-bottom: 2px;
+}
+
+.prom_text {
+    font: normal 14px 'Helvetica-Roman', sans-serif;
+}
+
+ion-fab ion-fab-button ion-icon {
+    color: white;
+}
+
+ion-fab-button {
+    width : 45px;
+    height: 45px;
+}
+
+
+#barraSuperior{
+    width: 100%;
+    height: 40px;
+
+    background-color: rgb(246, 183, 118);
+}
+
+#barraInferior{
+    width: 100%;
+    height: 70px;
+    border-radius: 0px 0px 20px 0px;
+    background-color: rgb(49 ,49 ,57);
+}
+
+#logo{
+    width: 40px;
+    height: 40px;
+    margin-top: 13px;
+    margin-left: 6px;
+
+}
+
+#item{
+
+    border-bottom: 1px solid  rgb(246, 183, 118);
+  margin-top: 2px;
+}
+
+
+#notificacion{
+    width: 25px;
+    height: 25px;
+    margin-top: 20px;
+   // margin-right: 20px;
+
+
+}
+
+#punto_notificacion{
+    width: 10px;
+    height: 10px;
+    margin-top: 13px;
+  //  margin-right: 20px;
+}

@@ -117,6 +117,6 @@ export class HeaderComponent implements OnInit {
 
     vernotificaciones() {
         console.log('toque la campana');
-        this.navCon.navigateRoot('/notificaciones', { animated: true, animationDirection: 'back' });
+        this.navCon.navigateRoot('/notifications', { animated: true, animationDirection: 'back' });
     }
 }

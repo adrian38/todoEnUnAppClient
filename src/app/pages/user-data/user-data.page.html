@@ -66,7 +66,7 @@
                 <ion-col>
                     <ion-item lines="none">
                         <ion-input
-                            type="text"
+                            type="numero"
                             name="puerta"
                             [(ngModel)]="piso"
                             placeholder="{{placeholderPiso}}"
@@ -89,7 +89,7 @@
                     <ion-item lines="none">
                         <!-- <ion-label position="floating">Contraseña</ion-label> -->
                         <ion-input
-                            type="text"
+                            type="numero"
                             name="nombre"
                             [(ngModel)]="numero"
                             placeholder="{{this.placeholderNumero}}"
@@ -130,26 +130,7 @@
                     <ion-item lines="none">
                         <!-- <ion-label position="floating">Contraseña</ion-label> -->
                         <ion-input
-                            type="text"
-                            name="nombre"
-                            [(ngModel)]="portal"
-                            placeholder="{{this.placeholderPortal}}"
-                            #port="ngModel"
-                            required
-                        ></ion-input>
-                    </ion-item>
-                    <div id="item"></div>
-                    <div id="link">
-                        <small *ngIf="port.invalid && port.touched" class="text-danger"
-                            >Campo obligatorio</small
-                        >
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <ion-item lines="none">
-                        <!-- <ion-label position="floating">Contraseña</ion-label> -->
-                        <ion-input
-                            type="text"
+                            type="number"
                             name="nombre"
                             [(ngModel)]="cpostal"
                             placeholder="{{this.placeholderCp}}"
@@ -197,23 +178,13 @@
                     </div>
                 </ion-col>
             </ion-row>
-
-            <ion-row>
-                <ion-col></ion-col>
-                <ion-col>
-                    <ion-button
-                        [disabled]="esc.invalid || c_post.invalid || port.invalid || pue.invalid || num.invalid || pis.invalid || call.invalid || !this.datos.getcoordenada()"
-                        type="submit"
-                        (click)="editar()"
-                    >
-                        <span style="padding-top: 2px">Aceptar</span>
-                    </ion-button>
-                </ion-col>
-
-                <ion-col></ion-col>
-            </ion-row>
         </ion-col>
 
         <ion-col size="1"></ion-col>
     </ion-row>
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button (onClick)="editar()" label="GUARDAR"> </p-button>
+        </div>
+    </div>
 </ion-content>

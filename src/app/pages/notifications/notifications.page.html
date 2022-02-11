@@ -6,65 +6,68 @@
     <ion-row style="margin-top: 80px">
         <ion-label></ion-label>
     </ion-row>
+    <div *ngIf="notificaciones.length > 0">
+        <ion-row
+            style="margin-top: 10px"
+            *ngFor="let notificacion of notificaciones, let i = index"
+        >
+            <ion-col size="1"></ion-col>
 
-    <ion-row style="margin-top: 10px" *ngFor="let notificacion of notificaciones, let i = index">
-        <ion-col size="1"></ion-col>
+            <ion-col size="1" style="padding-top: 2%">
+                <div *ngIf="notificacion.notificationType == 1">
+                    <ion-img
+                        src="../../../assets/notificaciones.svg"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            margin: 5px auto;
+                            color: var(--ion-color-orange);
+                        "
+                    ></ion-img>
+                </div>
 
-        <ion-col size="1" style="padding-top: 2%">
-            <div *ngIf="notificacion.notificationType == 1">
-                <ion-img
-                    src="../../../assets/notificaciones.svg"
-                    style="
-                        width: 20px;
-                        height: 20px;
-                        margin: 5px auto;
-                        color: var(--ion-color-orange);
-                    "
-                ></ion-img>
-            </div>
+                <div *ngIf="notificacion.notificationType == 3">
+                    <ion-img
+                        src="../../../assets/notificaciones.svg"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            margin: 5px auto;
+                            color: var(--ion-color-orange);
+                        "
+                    ></ion-img>
+                </div>
 
-            <div *ngIf="notificacion.notificationType == 3">
-                <ion-img
-                    src="../../../assets/notificaciones.svg"
-                    style="
-                        width: 20px;
-                        height: 20px;
-                        margin: 5px auto;
-                        color: var(--ion-color-orange);
-                    "
-                ></ion-img>
-            </div>
+                <div *ngIf="notificacion.notificationType == 4">
+                    <ion-img
+                        (click)="detalles()"
+                        src="../../../assets/icons/bocina.svg"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            margin: 5px auto;
+                            color: var(--ion-color-orange);
+                        "
+                    ></ion-img>
+                </div>
+            </ion-col>
 
-            <div *ngIf="notificacion.notificationType == 4">
-                <ion-img
-                    (click)="detalles()"
-                    src="../../../assets/icons/bocina.svg"
-                    style="
-                        width: 20px;
-                        height: 20px;
-                        margin: 5px auto;
-                        color: var(--ion-color-orange);
-                    "
-                ></ion-img>
-            </div>
-        </ion-col>
+            <ion-col size="9">
+                <div class="flex_column" style="width: 100%; margin-left: 20px">
+                    <ion-label class="prom_title" *ngIf="notificacion.notificationType == 3"
+                        >Nuevo Mensaje</ion-label
+                    >
+                    <ion-label class="prom_title" *ngIf="notificacion.notificationType == 2"
+                        >Nueva Oferta</ion-label
+                    >
+                    <ion-label class="prom_text ion-text-wrap"
+                        >En la solicitud {{ notificacion.title }}</ion-label
+                    >
+                </div>
+                <div id="item"></div>
+            </ion-col>
 
-        <ion-col size="9">
-            <div class="flex_column" style="width: 100%; margin-left: 20px">
-                <ion-label class="prom_title" *ngIf="notificacion.notificationType == 3"
-                    >Nuevo Mensaje</ion-label
-                >
-                <ion-label class="prom_title" *ngIf="notificacion.notificationType == 2"
-                    >Nueva Oferta</ion-label
-                >
-                <ion-label class="prom_text ion-text-wrap"
-                    >En la solicitud {{ notificacion.title }}</ion-label
-                >
-            </div>
-            <div id="item"></div>
-        </ion-col>
-
-        <!-- <ion-col size="8" style="margin-top: 5px; margin-left: 15px; padding: 0px">
+            <!-- <ion-col size="8" style="margin-top: 5px; margin-left: 15px; padding: 0px">
       <ion-list style="padding: 0px">
 
         <ion-row *ngIf="notificacion.notificationType == 3">
@@ -87,6 +90,28 @@
       </ion-list>
     </ion-col> -->
 
-        <ion-col size="1"></ion-col>
-    </ion-row>
+            <ion-col size="1"></ion-col>
+        </ion-row>
+    </div>
+    <div *ngIf="notificaciones.length === 0">
+        <ion-row style="margin-top: 75px">
+            <ion-col size="4"></ion-col>
+            <ion-col size="4" style="text-align: center">
+                <ion-row>
+                    <div>
+                        <img style="width: 85%; height: 85%" src="../../../assets/icon/empty.svg" />
+                    </div>
+                </ion-row>
+            </ion-col>
+            <ion-col size="4"></ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="3"></ion-col>
+            <ion-col size="6" style="text-align: center">
+                <h4 style="color: lightgray; margin-top: 0px">No hay notificaciones</h4>
+            </ion-col>
+            <ion-col size="3"></ion-col>
+        </ion-row>
+    </div>
 </ion-content>

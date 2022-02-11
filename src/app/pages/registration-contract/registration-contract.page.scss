@@ -17,12 +17,12 @@
 }
 
 #terminos {
-    height: 100%;
     text-align: justify;
     font: normal 12px verdana, sans-serif;
     overflow: auto;
     margin-top: 30px;
-    height: 406px;
+    margin-bottom: 10px;
+    height: 500px;
     width: 100%;
 }
 
@@ -51,4 +51,36 @@ ion-checkbox::part(container) {
     min-width: 160px !important;
     height: 32px;
     font: normal 15px 'Helvetica-Roman', sans-serif !important;
+}
+
+:host ::ng-deep .task_materials_buttons {
+    width: 80%;
+    margin-left: 10%;
+    //bottom: 0;
+    // padding-bottom: 10%;
+    //margin: 0, auto;
+    position: absolute;
+    bottom: 5%;
+
+    .one_button {
+        width: 100%;
+        //padding-top: 15%;
+
+        .p-button {
+            margin-top: 10%;
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: rgb(49, 49, 57);
+            border: solid var(--ion-color-primary);
+            background: var(--ion-color-primary);
+            width: 100%;
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
 }

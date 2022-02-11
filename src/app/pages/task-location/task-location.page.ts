@@ -196,7 +196,7 @@ export class TaskLocationPage implements OnInit {
         this._serv.setpiso(this.piso);
         this._serv.setescalera(this.escalera);
         this._serv.setcod_postal(this.cod_postal);
-        this._serv.setnumero(this.numero);
+        this._serv.setnumero(parseInt(this.numero));
         this._serv.setportal(this.portal);
         this._serv.setradiobuton(false);
     }
@@ -207,7 +207,7 @@ export class TaskLocationPage implements OnInit {
             this._serv.setpiso(this.piso);
             this._serv.setescalera(this.escalera);
             this._serv.setcod_postal(this.cod_postal);
-            this._serv.setnumero(this.numero);
+            this._serv.setnumero(parseInt(this.numero));
             this._serv.setportal(this.portal);
             this._serv.setLatitud(parseFloat(this.latitud));
             this._serv.setLongitud(parseFloat(this.longitud));
@@ -218,7 +218,9 @@ export class TaskLocationPage implements OnInit {
             this.piso = this._serv.getpiso();
             this.escalera = this._serv.getescalera();
             this.cod_postal = this._serv.getcod_postal();
-            this.numero = this._serv.getnumero();
+            if (this._serv.getnumero()) {
+                this.numero = this._serv.getnumero().toString();
+            }
             this.portal = this._serv.getportal();
             this.latitud = String(this._serv.getlatitud());
             this.longitud = String(this._serv.getlongitud());

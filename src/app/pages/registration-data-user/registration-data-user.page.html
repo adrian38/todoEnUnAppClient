@@ -103,7 +103,7 @@
                                     name="user"
                                     pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                                     required
-                                    placeholder="USUARIO"
+                                    placeholder="CORREO"
                                     #usuario="ngModel"
                                 >
                                 </ion-input>
@@ -228,7 +228,7 @@
                                 <ion-input
                                     class="custom_input"
                                     [ngClass]="((numero.invalid && numero.touched) || number_vacio) ? 'green_border':'no_border'"
-                                    type="text"
+                                    type="number"
                                     [(ngModel)]="number"
                                     name="number"
                                     required
@@ -282,7 +282,7 @@
                             <ion-col size="5" style="margin-right: 5px">
                                 <ion-input
                                     name="puerta"
-                                    type="number"
+                                    type="text"
                                     placeholder="PUERTA"
                                     [(ngModel)]="puerta"
                                     #pue="ngModel"
@@ -306,7 +306,7 @@
                                 ></ion-input>
                             </ion-col>
 
-                            <ion-col size="5" style="text-align: center; margin-top: 5px">
+                            <ion-col size="5" style="text-align: end; margin-top: 5px">
                                 <div *ngIf=" !obligatorioGPS" (click)="ubicacion()">
                                     <img id="imgGPS" src="../../assets/icon/ubicacion.svg" />
                                 </div>

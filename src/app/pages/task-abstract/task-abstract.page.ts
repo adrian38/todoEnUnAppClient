@@ -72,7 +72,7 @@ export class TaskAbstractPage implements OnInit {
         this.task.address.stair = this.datos.getescalera();
         this.task.address.portal = this.datos.getportal();
         this.task.address.cp = this.datos.getcod_postal();
-        this.task.address.number = this.datos.getnumero();
+        this.task.address.number = this.datos.getnumero().toString();
         this.task.address.floor = this.datos.getpiso();
         this.task.address.latitude = String(this.datos.getlatitud());
         this.task.address.longitude = String(this.datos.getlongitud());

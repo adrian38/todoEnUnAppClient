@@ -1,0 +1,12 @@
+<div class="flex_row" style="width: 100%" (click)="getPromoInfo()">
+    <img
+        class="image"
+        src="../../../assets/images/noImage.svg"
+        style="width: 50px; height: 50px; margin: auto; border-radius: 7px"
+    />
+
+    <div class="flex_column" style="width: 100%; margin-left: 20px">
+        <ion-label class="prom_title">{{ Promo.titulo }}</ion-label>
+        <ion-label class="prom_text ion-text-wrap">{{ Promo.text }}</ion-label>
+    </div>
+</div>

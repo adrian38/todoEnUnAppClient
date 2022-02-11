@@ -15,7 +15,7 @@ export class ObtSubSService {
     notificationSetTabs3$ = new Subject<boolean>();
 
     calle: string = '';
-    numero: string = '';
+    numero: number;
     portal: string = '';
     escalera: string = '';
     piso: string = '';
@@ -95,7 +95,7 @@ export class ObtSubSService {
         this.foto22 = '/assets/images/fotoadd.png';
 
         this.calle = '';
-        this.numero = '';
+        this.numero;
         this.portal = '';
         this.escalera = '';
         this.piso = '';
@@ -266,7 +266,7 @@ export class ObtSubSService {
     setpiso(v1: string) {
         this.piso = v1;
     }
-    setnumero(v1: string) {
+    setnumero(v1: number) {
         this.numero = v1;
     }
 

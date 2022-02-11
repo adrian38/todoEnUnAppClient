@@ -8,6 +8,7 @@ import { TutorialOptionsPageRoutingModule } from './tutorial-options-routing.mod
 
 import { TutorialOptionsPage } from './tutorial-options.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
         IonicModule,
         TutorialOptionsPageRoutingModule,
         ComponentsModule,
+        ButtonModule,
     ],
     declarations: [TutorialOptionsPage],
 })

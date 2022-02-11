@@ -11,6 +11,7 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { Observable, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { SignUpOdooService } from 'src/app/services/signup-odoo.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-registration-data-user',
@@ -39,7 +40,7 @@ export class RegistrationDataUserPage implements OnInit {
     //phone:string = "";
     phone: number;
     streetNumber = '';
-    number = '';
+    number;
     portal = '';
     avatarusuario = '../../../assets/images/registro.svg';
     avatarusuario64: string = '';
@@ -89,7 +90,8 @@ export class RegistrationDataUserPage implements OnInit {
         private messageService: MessageService,
         private ngZone: NgZone,
         private _signupOdoo: SignUpOdooService,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        private router: Router
     ) {
         this.selectFoto = this.datos.getselectfoto();
     }
@@ -126,7 +128,7 @@ export class RegistrationDataUserPage implements OnInit {
 
                     setTimeout(() => {
                         this.vaciar_campos();
-                        this.navCtrl.navigateRoot('/inicio', {
+                        this.navCtrl.navigateRoot('/login', {
                             animated: true,
                             animationDirection: 'back',
                         });
@@ -143,56 +145,6 @@ export class RegistrationDataUserPage implements OnInit {
 
     async presentAlertConfirm() {
         try {
-            // const alert = await this.alertController.create({
-            // 	cssClass: 'my-custom-class',
-            // 	header: '¿Desea colocar una foto?',
-            // 	message: 'Selecione la opcion de camara o galeria para la foto ',
-            // 	buttons: [
-            // 		{
-            // 			text: 'Camara',
-            // 			handler: async () => {
-            // 				let photo: Photo = await this.photoService.addNewToCamara();
-            // 				if (photo) {
-            // 					this.avatarusuario = photo.webviewPath;
-            // 					// console.log('this.avatarusuario', this.avatarusuario);
-            // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
-            // 					//console.log('this.avatarusuario64', this.avatarusuario64);
-            // 					this.selectFoto = true;
-            // 					this.datos.setselectfoto(true);
-            // 					// console.log('this.avatarusuario64puroinicio',this.avatarusuario64.slice(0,22));
-            // 					// console.log('this.avatarusuario64purofin',this.avatarusuario64.slice(22));
-            // 				}
-            // 			}
-            // 		},
-            // 		{
-            // 			text: 'Galeria',
-            // 			handler: async () => {
-            // 				this.photoService.photos = [];
-            // 				let photos: Photo[] = await this.photoService.addNewToGallery();
-            // 				if (photos.length == 1) {
-            // 					this.avatarusuario = photos[0].webviewPath;
-            // 					//this.avatarusuario64 = this.photoService.devuelve64();
-            // 					this.avatarusuario64 = this.photoService.devuelve64().slice(22);
-            // 					console.log('this.avatarusuario64', this.avatarusuario64);
-            // 					this.selectFoto = true;
-            // 					this.datos.setselectfoto(true);
-            // 				}
-            // 			}
-            // 		},
-            // 		{
-            // 			text: 'Cancelar',
-            // 			role: 'cancel',
-            // 			cssClass: 'secondary',
-            // 			handler: (blah) => {
-            // 				this.avatarusuario = '../../../assets/registro.svg';
-            // 				this.avatarusuario64 = '';
-            // 				this.selectFoto = false;
-            // 			}
-            // 		}
-            // 	]
-            // });
-            //	await alert.present();
-
             let temp = await this._photoService.addNewToCamera();
             this.avatarusuario64 = temp;
             this.avatarusuario = temp;
@@ -228,7 +180,7 @@ export class RegistrationDataUserPage implements OnInit {
 
     ubicacion() {
         this.entrar_campos();
-        this.datos.setruta('registration-data-user');
+        this.datos.setruta(this.router.url);
         this.navCtrl.navigateRoot('/map', { animated: true, animationDirection: 'forward' });
     }
 
@@ -260,7 +212,7 @@ export class RegistrationDataUserPage implements OnInit {
         this.confirmPass = this.datos.getcontraseñaConfirmafa().trim();
         this.phone = this.datos.gettelefono();
         this.streetNumber = this.datos.getcalle().trim();
-        this.number = this.datos.getnumero().trim();
+        this.number = this.datos.getnumero();
         this.piso = this.datos.getpiso().trim();
         this.puerta = this.datos.getpuerta().trim();
         this.portal = this.datos.getportal().trim();
@@ -282,7 +234,7 @@ export class RegistrationDataUserPage implements OnInit {
         this.datos.setcontraseñaConfirmafa('');
         this.datos.settelefono('');
         this.datos.setcalle('');
-        this.datos.setnumero('');
+        this.datos.setnumero(0);
         this.datos.setpiso('');
         this.datos.setpuerta('');
         this.datos.setportal('');
@@ -312,7 +264,7 @@ export class RegistrationDataUserPage implements OnInit {
                     text: 'Aceptar',
                     handler: (datos) => {
                         this.vaciar_campos();
-                        this.navCtrl.navigateRoot('/inicio', {
+                        this.navCtrl.navigateRoot('/home', {
                             animated: true,
                             animationDirection: 'back',
                         });
@@ -372,7 +324,7 @@ export class RegistrationDataUserPage implements OnInit {
             this.streetNumber_vacio = true;
         }
 
-        if (this.number != '') {
+        if (this.number) {
             this.number_vacio = false;
         } else {
             this.number_vacio = true;
@@ -403,7 +355,7 @@ export class RegistrationDataUserPage implements OnInit {
         this.usuario.address.stair = this.escalera;
         this.usuario.address.portal = this.portal;
         this.usuario.address.cp = this.cod_postal;
-        this.usuario.address.number = this.number;
+        this.usuario.address.number = this.number.toString();
         this.usuario.address.floor = this.piso;
 
         this.usuario.address.longitude = String(this.long);
@@ -416,7 +368,6 @@ export class RegistrationDataUserPage implements OnInit {
         } else {
             this.usuario.avatar = foto.substring(foto.indexOf(',') + 1);
         }
-        this.usuario.avatar = foto;
 
         console.log('todoantes', this.usuario);
 
@@ -449,35 +400,6 @@ export class RegistrationDataUserPage implements OnInit {
         return this.loading.present();
     }
 
-    // validarMayorDeEdad(date: string) {
-    //     // Ver si se puede mejorar este algoritmo
-
-    //     const inputDate = new Date(date);
-    //     const currentDate = new Date(Date.now());
-
-    //     const bYears = inputDate.getFullYear();
-    //     const timeYears = currentDate.getFullYear();
-
-    //     const difYears = timeYears - bYears;
-
-    //     // Cantidad de meses entre las 2 fechas
-    //     const months = difYears * 12 + (currentDate.getMonth() - inputDate.getMonth());
-
-    //     // 18 años son 12 meses por 18 asi que son 216 meses
-    //     // si la diferencia de meses entre las 2 fechas es mayor que 216 meses entonces
-    //     // la persona es mayor de 18 años.
-    //     // Este algoritmo no toma en cuenta los dias que quedan en el mismo mes, asi que si cumple 18
-    //     // en el mismo mes en curso pero no los ha cumplido todavia, se toma en consideración.
-
-    //     if (months >= 216) {
-    //         //console.log("Es mayor de edad");
-    //         this.esMayorEdad = true;
-    //     } else {
-    //         //console.log("No es mayor de edad");
-    //         this.esMayorEdad = false;
-    //     }
-    // }
-
     compararContraea(cp) {
         if (cp == '') {
             this.confirmPass_vacia = true;
@@ -494,27 +416,3 @@ export class RegistrationDataUserPage implements OnInit {
         }
     }
 }
-
-// async ToastFoto() {
-// 	const toast = await this.toastController.create({
-// 		message: 'Ingrese una foto',
-// 		duration: 2000
-// 	});
-// 	toast.present();
-// }
-
-// async ToastCampos() {
-// 	const toast = await this.toastController.create({
-// 		message: 'Introduzca todos los campos',
-// 		duration: 2000
-// 	});
-// 	toast.present();
-// }
-
-// async ToastCoordenadas() {
-// 	const toast = await this.toastController.create({
-// 		message: 'Indique su geolocalización',
-// 		duration: 2000
-// 	});
-// 	toast.present();
-// }

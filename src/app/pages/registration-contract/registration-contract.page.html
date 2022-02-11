@@ -12,6 +12,19 @@
                 style="height: 100px; justify-content: flex-start; align-items: center"
             >
                 <ion-list>
+                    <ion-item class="ion-no-padding" lines="none" (click)="nayorEdad()">
+                        <ion-label style="font: normal 12px verdana, sans-serif"
+                            >Soy mayor de 18 años</ion-label
+                        >
+                        <ion-checkbox
+                            mode="ios"
+                            color="orange"
+                            slot="start"
+                            value="select"
+                            style="width: 15px; height: 15px"
+                        >
+                        </ion-checkbox>
+                    </ion-item>
                     <ion-item class="ion-no-padding" lines="none" (click)="condiciones()">
                         <ion-label style="font: normal 12px verdana, sans-serif"
                             >Acepto los términos y condiciones</ion-label
@@ -27,18 +40,11 @@
                     </ion-item>
                 </ion-list>
             </div>
-
-            <div class="div_btn">
-                <ion-button
-                    id="accept_btn"
-                    color="orange"
-                    expand="block"
-                    [disabled]="aceptar"
-                    (click)="aceptarregistro()"
-                >
-                    <span style="padding-top: 2px">ACEPTAR</span>
-                </ion-button>
-            </div>
+        </div>
+    </div>
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button id="accept_btn" (onClick)="aceptarregistro()" label="ACEPTAR"> </p-button>
         </div>
     </div>
 </ion-content>

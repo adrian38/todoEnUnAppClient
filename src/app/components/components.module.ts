@@ -6,6 +6,7 @@ import { HiredCardComponent } from './hired-card/hired-card.component';
 import { RecordCardComponent } from './record-card/record-card.component';
 import { OfferCardComponent } from './offer-card/offer-card.component';
 import { AnonimusCardComponent } from './anonimus-card/anonimus-card.component';
+import { PromoCardComponent } from './promo-card/promo-card.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,6 +18,7 @@ import { IonicModule } from '@ionic/angular';
         RecordCardComponent,
         OfferCardComponent,
         AnonimusCardComponent,
+        PromoCardComponent,
     ],
     exports: [
         ApplicationCardComponent,
@@ -25,6 +27,7 @@ import { IonicModule } from '@ionic/angular';
         RecordCardComponent,
         OfferCardComponent,
         AnonimusCardComponent,
+        PromoCardComponent,
     ],
     imports: [CommonModule, IonicModule],
 })

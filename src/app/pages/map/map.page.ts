@@ -65,7 +65,7 @@ export class MapPage implements OnInit {
         // if (this.mapType) {
         //     console.log('poner geo');
         if (this.calle) {
-            this.numero = this.datos.getnumero();
+            this.numero = this.datos.getnumero().toString();
             this.getLocaleDirection();
         } else {
             this.getMyLocation(false);
@@ -108,6 +108,7 @@ export class MapPage implements OnInit {
 		}); */
 
         this.platform.backButton.subscribeWithPriority(10, () => {
+            console.log('backbutton', this.datos.getruta());
             this.navCtrl.navigateRoot(this.datos.getruta(), {
                 animated: true,
                 animationDirection: 'back',
@@ -281,6 +282,7 @@ export class MapPage implements OnInit {
     }
 
     getBack() {
+        console.log('getBack', this.datos.getruta());
         if (this.marcadores.length > 0) {
             this.navCtrl.navigateRoot(this.datos.getruta(), {
                 animated: true,

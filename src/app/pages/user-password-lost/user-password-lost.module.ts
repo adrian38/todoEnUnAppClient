@@ -8,6 +8,7 @@ import { UserPasswordLostPageRoutingModule } from './user-password-lost-routing.
 
 import { UserPasswordLostPage } from './user-password-lost.page';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { ToastModule } from 'primeng/toast';
         IonicModule,
         ToastModule,
         UserPasswordLostPageRoutingModule,
+        ButtonModule,
     ],
     declarations: [UserPasswordLostPage],
 })

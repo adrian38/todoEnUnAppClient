@@ -36,16 +36,87 @@
                 </div>
                 <ion-label style="margin: auto">Ubique su dirección en el mapa</ion-label>
             </ion-row>
-            <div class="div" style="margin-top: 20px">
-                <ion-button
-                    class="btn_init_section"
-                    type="submit"
-                    color="orange"
-                    expand="block"
-                    [disabled]="formulario.invalid || btn_deshabilitar"
-                >
-                    <span style="padding-top: 5px">CONTINUAR</span>
-                </ion-button>
+
+            <ion-item class="module ion-no-padding" style="margin-top: 20%" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_photo" src="/assets/icon/camara.svg"></ion-img>
+                        <ion-label class="h3_title">Fotos</ion-label>
+                    </div>
+                    <div class="flex_column">
+                        <!-- <ion-label class="h6_title">Antes</ion-label> -->
+                        <div class="flex_row">
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_0"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[0])"
+                                        src="{{task.photoSO[0]}}"
+                                        onError="this.src='assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_1"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[1])"
+                                        src="{{task.photoSO[1]}}"
+                                        onError="this.src='assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                            <div class="flex_column">
+                                <ion-card
+                                    [disabled]="habilitar_2"
+                                    style="
+                                        border: 0.5px solid rgb(49, 49, 57);
+                                        width: 80px;
+                                        height: 80px;
+                                        border-radius: 5px 5px 5px 5px;
+                                        margin: 10px 0px;
+                                    "
+                                >
+                                    <img
+                                        class="selecf"
+                                        (click)="imageClick(task.photoSO[2])"
+                                        src="{{task.photoSO[2]}}"
+                                        onError="this.src='assets/images/noImage.svg'"
+                                    />
+                                </ion-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+
+            <div class="task_materials_buttons">
+                <div class="one_button">
+                    <p-button
+                        type="submit"
+                        [disabled]="formulario.invalid || btn_deshabilitar"
+                        label="CONTINUAR"
+                    >
+                    </p-button>
+                </div>
             </div>
         </form>
     </div>
