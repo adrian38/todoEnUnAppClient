@@ -240,16 +240,20 @@ export class Tab2Page {
 
     in(i: number) {
         this.cant = i;
-        this.subServ.setposicion(this.cant);
+        if (!this.contratadosList[this.cant].legal_status) {
+            this.subServ.setposicion(this.cant);
 
-        this.task = this.contratadosList[this.cant];
-        this._taskOdoo.setTaskCesar(this.task);
-        this.subServ.setidString(this.id_string);
-        this.subServ.setruta('tabs/tab2');
-        this.navCtrl.navigateRoot('/task-hired', {
-            animated: true,
-            animationDirection: 'forward',
-        });
+            this.task = this.contratadosList[this.cant];
+            this._taskOdoo.setTaskCesar(this.task);
+            this.subServ.setidString(this.id_string);
+
+            this.subServ.setruta('tabs/tab2');
+
+            this.navCtrl.navigateRoot('/task-hired', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        }
     }
 
     // inhistorial(j: number) {

@@ -142,7 +142,7 @@
     </div>
 
     <div *ngIf="!barraChat" class="flex_column" style="height: 100%; width: 100%">
-        <ion-list style="padding: 15px 25px 90px 25px !important">
+        <ion-list style="padding: 15px 25px 60px 25px !important">
             <ion-item class="module ion-no-padding" lines="none">
                 <div class="flex_column">
                     <ion-label class="h2_title">{{ task.type }}</ion-label>
@@ -369,19 +369,15 @@
                             <span style="padding-top: 5px">DENUNCIAR</span>
                         </ion-button>
                     </div>
+
+                    <img
+                        id="fotopersonal"
+                        style="margin-top: 15px"
+                        src="{{ task.photoProvider }}"
+                        onError="this.src='../../assets/images/noImage.svg'"
+                    />
                 </div>
             </ion-item>
-
-            <div class="next_button_div">
-                <ion-button
-                    class="btn_finish"
-                    color="orange"
-                    (click)="onClickFinalizar( $event )"
-                    [disabled]="finish"
-                >
-                    <span style="padding-top: 5px">FINALIZAR TAREA</span>
-                </ion-button>
-            </div>
         </ion-list>
 
         <p-dialog
@@ -450,7 +446,7 @@
                     [disabled]="opinion"
                     (click)="btn_enviarClasificacion()"
                 >
-                    <span style="padding-top: 5px">CLASIFICAR</span>
+                    <span style="padding-top: 5px">CALIFICAR</span>
                 </ion-button>
             </div>
 
@@ -466,5 +462,16 @@
                 </ion-button>
             </div>
         </p-dialog>
+
+        <div class="task_materials_buttons">
+            <div class="one_button">
+                <p-button
+                    [disabled]="finish"
+                    (click)="onClickFinalizar( $event )"
+                    label="FINALIZAR TAREA"
+                >
+                </p-button>
+            </div>
+        </div>
     </div>
 </ion-content>

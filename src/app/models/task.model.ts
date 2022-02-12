@@ -97,6 +97,7 @@ export class TaskModel {
     anonimus_author: string;
     anonimus: boolean;
     complaint_Photo?: any[];
+    complaint_description?: string;
 
     constructor(
         type: string = '',
@@ -154,7 +155,8 @@ export class TaskModel {
         budget = 0,
         anonimus_author = '',
         anonimus = false,
-        complaint_Photo = []
+        complaint_Photo = [],
+        complaint_description = ''
     ) {
         this.type = type;
         this.client_id = client_id;
@@ -215,5 +217,7 @@ export class TaskModel {
 
         this.anonimus = anonimus;
         this.anonimus_author = anonimus_author;
+
+        this.complaint_description = complaint_description;
     }
 }

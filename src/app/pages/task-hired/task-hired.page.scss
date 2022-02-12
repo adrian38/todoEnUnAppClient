@@ -3,6 +3,46 @@
     height: 44px !important;
 }
 
+#fotopersonal {
+    width: 60px;
+    height: 60px;
+    border: 0.5px solid rgb(241, 241, 241);
+    border-radius: 7px 7px 7px 7px;
+    opacity: 0.9;
+}
+
+:host ::ng-deep .task_materials_buttons {
+    width: 80%;
+    // margin: 0, auto;
+    margin-left: 10%;
+    //bottom: 0;
+    padding-bottom: 10%;
+    //position: absolute;
+    // bottom: 5%;
+
+    .one_button {
+        width: 100%;
+        //padding-top: 15%;
+
+        .p-button {
+            margin-top: 10%;
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: rgb(49, 49, 57);
+            border: solid var(--ion-color-primary);
+            background: var(--ion-color-primary);
+            width: 100%;
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
+}
+
 .segment_btn {
     font: normal 15px 'Helvetica-Roman', sans-serif;
     color: var(--ion-color-black);
@@ -286,7 +326,8 @@ ion-button {
 .btn {
     font: normal 10px 'Helvetica-Roman', sans-serif !important;
     //font: bold 10px "Helvetica-Roman", sans-serif;
-    height: 20px !important;
+    height: 25px !important;
+    width: 270px;
 }
 
 .next_button_div {

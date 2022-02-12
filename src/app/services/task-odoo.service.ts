@@ -3772,6 +3772,13 @@ export class TaskOdooService {
                 }
 
                 break;
+            case 8:
+                temp = hiredList.findIndex((element) => element.So_id === So_id);
+                if (temp != -1) {
+                    hiredList[temp].legal_status = true;
+                    hiredList[temp].legal_status_solved = 1;
+                }
+                break;
         }
     }
 
@@ -6152,7 +6159,7 @@ export class TaskOdooService {
     }
 
     createComplaintClient(Task: TaskModel) {
-        let count: number;
+        let count: number = 0;
 
         let create_Complaint_attachment = function () {
             let attachement = {
@@ -6193,7 +6200,7 @@ export class TaskOdooService {
                         if (count >= 0) {
                             create_Complaint_attachment();
                         } else {
-                            console.log('Denuncia hecha correctamente');
+                            task$.next({ type: 20 });
                         }
                     }
                 }

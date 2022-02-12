@@ -1,3 +1,7 @@
+<p-toast
+    [baseZIndex]="3000"
+    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
+></p-toast>
 <ion-header class="ion-no-border">
     <app-header headerText="Denunciar" [fillBackground]="false"></app-header>
 </ion-header>
@@ -62,20 +66,12 @@
             style="max-width: 85%; width: 85%; flex: display; padding: 10px"
         ></textarea>
     </div>
-    <div class="flex_row" class="init_div">
-        <ion-button
-            type="submit"
-            color="orange"
-            style="
-                min-width: 100px;
-                height: 30px !important;
-                font: normal 16px 'Helvetica-Roman', sans-serif;
-                --border-radius: 7px;
-            "
-            (click)="evidenciar()"
-        >
-            <span style="padding-top: 5px">ENVIAR</span>
-        </ion-button>
-    </div>
+
     <div class="flex_row" style="margin-bottom: 5px"></div>
+
+    <div class="task_materials_buttons">
+        <div class="one_button">
+            <p-button [disabled]="finish" (click)="evidenciar()" label="ENVIAR"> </p-button>
+        </div>
+    </div>
 </ion-content>

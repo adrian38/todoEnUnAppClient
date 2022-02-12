@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 
 @Component({
     selector: 'app-tutorial-options',
@@ -7,9 +7,16 @@ import { NavController } from '@ionic/angular';
     styleUrls: ['./tutorial-options.page.scss'],
 })
 export class TutorialOptionsPage implements OnInit {
-    constructor(private navCon: NavController) {}
+    constructor(private navCon: NavController, private platform: Platform) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.platform.backButton.subscribeWithPriority(10, () => {
+            this.navCon.navigateRoot('/home', {
+                animated: true,
+                animationDirection: 'back',
+            });
+        });
+    }
 
     createNewRequest() {
         this.navCon.navigateRoot('/task-new', { animated: true, animationDirection: 'forward' });

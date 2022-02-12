@@ -28,7 +28,8 @@ import { MessageService } from 'primeng/api';
     styleUrls: ['./task-complaint.page.scss'],
 })
 export class TaskComplaintPage implements OnInit {
-    task: TaskModel;
+    task: TaskModel = new TaskModel();
+    taskToSend: TaskModel = new TaskModel();
     comentario_evidencia: string = '';
 
     habilitar_0: boolean = true;
@@ -44,6 +45,14 @@ export class TaskComplaintPage implements OnInit {
     foto164: string = '../../../assets/images/fotoadd.png';
     foto264: string = '../../../assets/images/fotoadd.png';
     foto364: string = '../../../assets/images/fotoadd.png';
+    finish: boolean = false;
+    loading;
+
+    notificationNewSoClient$: Observable<any>;
+    notificationError$: Observable<any>;
+
+    subscriptionNotificationNewSoClient: Subscription;
+    subscriptionNotificationError: Subscription;
 
     constructor(
         private _taskOdoo: TaskOdooService,
@@ -56,102 +65,110 @@ export class TaskComplaintPage implements OnInit {
         private ngZone: NgZone,
         public loadingController: LoadingController,
         private alertCtrl: AlertController,
-        public photoService: PhotoService,
+        public _photoService: PhotoService,
         private messageService: MessageService //private screenOrientation: ScreenOrientation
     ) {
         this.task = this._taskOdoo.getTaskCesar();
     }
 
     ngOnInit() {
-        console.log('nuevooooooo', this.task);
+        this.subscriptions();
+    }
 
+    ngOnDestroy(): void {
+        this.subscriptionNotificationError.unsubscribe();
+        this.subscriptionNotificationNewSoClient.unsubscribe();
+    }
+
+    subscriptions() {
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.navCtrl.navigateRoot('/task-hired', {
                 animated: true,
                 animationDirection: 'back',
             });
         });
+
+        this.notificationError$ = this._taskOdoo.getNotificationError$();
+        this.subscriptionNotificationError = this.notificationError$.subscribe(
+            (notificationError) => {
+                this.ngZone.run(() => {
+                    switch (notificationError.type) {
+                        case 0:
+                            if (this.loading) {
+                                this.loading.dismiss();
+                            }
+
+                            this.messageService.add({
+                                severity: 'error',
+                                detail: 'Error en su conexión',
+                            });
+                            this.finish = false;
+                            break;
+
+                        case 8:
+                            if (this.loading) {
+                                this.loading.dismiss();
+                            }
+                            this.messageService.add({
+                                severity: 'error',
+                                detail: 'No se guardo la denuncia',
+                            });
+                            this.finish = false;
+                            break;
+                    }
+                });
+            }
+        );
+
+        this.notificationNewSoClient$ = this._taskOdoo.getRequestedTask$();
+        this.subscriptionNotificationNewSoClient = this.notificationNewSoClient$.subscribe(
+            (notificationNewSoClient) => {
+                this.ngZone.run(() => {
+                    switch (notificationNewSoClient.type) {
+                        case 20:
+                            if (this.loading) {
+                                this.loading.dismiss();
+                            }
+
+                            this.messageService.add({
+                                severity: 'success',
+                                detail: 'Denuncia guardada correctamente',
+                            });
+
+                            this._taskOdoo.aplicationListEdit(this.task.So_id, 8);
+
+                            setTimeout(() => {
+                                this.navCtrl.navigateRoot('/tabs/tab2', {
+                                    animated: true,
+                                    animationDirection: 'back',
+                                });
+                            }, 2000);
+                            break;
+                    }
+                });
+            }
+        );
     }
 
     onclickFoto1(posicion) {
         this.presentAlert(posicion);
     }
-
     async presentAlert(posicion) {
-        // const alert = await this.alertCtrl.create({
-        //     header: '¿Desea colocar una foto?',
-        //     message: 'Selecione la opcion de camara o galeria para la foto ',
-        //     buttons: [
-        //         {
-        //             text: 'Cámara',
-        //             handler: async () => {
-        //                 let photo: Photo = await this.photoService.addNewToCamara();
-        //                 //console.log("Foto", photo.webviewPath);
-        //                 if (photo) {
-        //                     if (posicion == 0) {
-        //                         //this.foto1 = photo.webviewPath;
-        //                         this.foto1 = this.photoService.devuelve64();
-        //                         //console.log(this.foto1.slice(22));
-        //                     }
-        //                     if (posicion == 1) {
-        //                         //this.foto2 = photo.webviewPath;
-        //                         //console.log(this.foto2);
-        //                         this.foto2 = this.photoService.devuelve64();
-        //                     }
-        //                     if (posicion == 2) {
-        //                         //this.foto3 = photo.webviewPath;
-        //                         //console.log(this.foto3);
-        //                         this.foto3 = this.photoService.devuelve64();
-        //                     }
-        //                 }
-        //             },
-        //         },
-        //         {
-        //             text: 'Galería',
-        //             handler: async () => {
-        //                 this.photoService.photos = [];
-        //                 let photos: Photo[] = await this.photoService.addNewToGallery();
-        //                 // //console.log("Fotos",JSON.stringify(this.photoService.photos));
-        //                 if (photos.length == 1) {
-        //                     if (posicion == 0) {
-        //                         this.foto1 = photos[0].webviewPath;
-        //                         console.log('l', posicion);
-        //                         // this.foto164= this.photoService.devuelve64();
-        //                     }
-        //                     if (posicion == 1) {
-        //                         this.foto2 = photos[0].webviewPath;
-        //                         console.log('l', posicion);
-        //                         ////console.log(this.foto1);
-        //                         //this.foto264= this.photoService.devuelve64();
-        //                     }
-        //                     if (posicion == 2) {
-        //                         this.foto3 = photos[0].webviewPath;
-        //                         console.log('l', this.foto3);
-        //                         ////console.log(this.foto1);
-        //                         this.foto364 = this.photoService.devuelve64();
-        //                     }
-        //                 }
-        //             },
-        //         },
-        //         {
-        //             text: 'Cancelar',
-        //             role: 'cancel',
-        //             handler: (event) => {
-        //                 if (posicion == 0) {
-        //                     this.foto1 = '../../../assets/images/fotoadd.png';
-        //                 }
-        //                 if (posicion == 1) {
-        //                     this.foto2 = '../../../assets/images/fotoadd.png';
-        //                 }
-        //                 if (posicion == 2) {
-        //                     this.foto3 = '../../../assets/images/fotoadd.png';
-        //                 }
-        //                 ////console.log('Confirm Cancel');
-        //             },
-        //         },
-        //     ],
-        // });
-        // await alert.present();
+        try {
+            let temp = await this._photoService.addNewToCamera();
+
+            if (posicion == 0) {
+                this.foto1 = temp;
+            }
+            if (posicion == 1) {
+                this.foto1 = temp;
+            }
+            if (posicion == 2) {
+                this.foto3 = temp;
+            }
+        } catch (e) {
+            console.error('no photo');
+        }
     }
 
     evidenciar() {
@@ -161,20 +178,69 @@ export class TaskComplaintPage implements OnInit {
                 this.foto3 != '../../../assets/images/fotoadd.png') &&
             this.comentario_evidencia != ''
         ) {
-            ////valorles que puedes tomar.estas son las variables
+            this.finish = true;
 
-            //this.comentario_evidencia
-            //this.foto1.slice(22);
-            //this.foto2.slice(22);
-            //this.foto3.slice(22);
+            this.task.complaint_description = this.comentario_evidencia;
 
-            this.navCtrl.navigateRoot('/contratados', {
-                animated: true,
-                animationDirection: 'back',
-            });
+            if (this.foto1 !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto00());
+            }
+            if (this.foto2 !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto11());
+            }
+            if (this.foto3 !== '/assets/images/fotoadd.png') {
+                this.task.photoSO.push(this.datos.getfoto22());
+            }
+
+            this.presentLoading();
+            this.taskToSend = { ...this.task };
+            this.taskToSend.photoSO = [...this.task.photoSO];
+
+            for (let [index, element] of this.taskToSend.photoSO.entries()) {
+                if (
+                    Buffer.from(element.substring(element.indexOf(',') + 1)).length / 1e6 >
+                    0.322216
+                ) {
+                    this.resizedataURL(element, 1280, 960, index);
+                } else {
+                    element = element.substring(element.indexOf(',') + 1);
+                }
+            }
+
+            this._taskOdoo.createComplaintClient(this.task);
         } else {
-            // No se cumple aqui puedes hacer lo del cartel
-            console.log('ssss');
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Coloque al menos una foto y su respectivo comentario.',
+            });
         }
+    }
+
+    resizedataURL(datas, wantedWidth, wantedHeight, index) {
+        //console.log(datas, 'como llega al resize');
+
+        var img = document.createElement('img');
+        img.src = datas;
+        img.onload = () => {
+            let ratio = img.width / img.height;
+            wantedWidth = wantedHeight * ratio;
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.width = wantedWidth;
+            canvas.height = wantedHeight;
+            ctx.drawImage(img, 0, 0, wantedWidth, wantedHeight);
+            let temp = canvas.toDataURL('image/jpeg', [0.0, 1.0]);
+            this.task.complaint_Photo[index] = temp.substring(temp.indexOf(',') + 1);
+        };
+    }
+
+    async presentLoading() {
+        this.loading = await this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Guardando su denuncia...',
+        });
+
+        return this.loading.present();
     }
 }

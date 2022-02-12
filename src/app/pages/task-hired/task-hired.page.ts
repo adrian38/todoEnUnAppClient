@@ -150,17 +150,14 @@ export class TaskHiredPage implements OnInit {
         this.subscriptionpoHired.unsubscribe();
         this.subscriptionsNotificationError.unsubscribe();
         this.subscriptionMessList.unsubscribe();
-
         this._taskOdoo.aplicationListEdit(this.task.So_id, 3, this.task);
     }
 
     subscriptions() {
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.platform.backButton.subscribeWithPriority(10, () => {
-                this.navCtrl.navigateRoot('/tabs/tab2', {
-                    animated: true,
-                    animationDirection: 'back',
-                });
+            this.navCtrl.navigateRoot('/tabs/tab2', {
+                animated: true,
+                animationDirection: 'back',
             });
         });
 
