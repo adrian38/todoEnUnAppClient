@@ -29,6 +29,8 @@ import localeEsAr from '@angular/common/locales/es-AR';
 registerLocaleData(localeEsAr, 'es');
 import { registerLocaleData } from '@angular/common';
 
+import { AppUpdate } from '@ionic-native/app-update/ngx';
+
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -54,6 +56,7 @@ import { registerLocaleData } from '@angular/common';
         SplashScreen,
         DatePipe,
         MessageService,
+        AppUpdate,
         {
             provide: LOCALE_ID,
             useValue: 'es',

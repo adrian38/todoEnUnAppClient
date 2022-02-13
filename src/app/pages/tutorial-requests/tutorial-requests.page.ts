@@ -13,7 +13,7 @@ import {
 } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+//import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { ChatOdooService } from 'src/app/services/chat-odoo.service';
 
 @Component({
@@ -69,9 +69,9 @@ export class TutorialRequestsPage implements OnInit {
         private messageService: MessageService,
         public loadingController: LoadingController,
 
-        private _location: Location,
-        private splashScreen: SplashScreen
-    ) {
+        private _location: Location
+    ) //private splashScreen: SplashScreen
+    {
         this.user.id = 129;
         this.user.partner_id = 217;
         this.user.password = 'anonimo';

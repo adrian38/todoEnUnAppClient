@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+//import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
     selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomePage implements OnInit {
 
     constructor(
         private platform: Platform,
-        private splashScreen: SplashScreen,
+        // private splashScreen: SplashScreen,
         public alertController: AlertController,
         private navController: NavController
     ) {}
@@ -22,9 +22,9 @@ export class HomePage implements OnInit {
     }
 
     subscriptions() {
-        this.platform.ready().then(() => {
-            this.splashScreen.hide();
-        });
+        // this.platform.ready().then(() => {
+        //     this.splashScreen.hide();
+        // });
 
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.showExitAlert();
