@@ -640,8 +640,8 @@ export class TaskOdooService {
                         task.So_id = SO_id;
                         task.notificationNewSo = true;
 
-                        task.date_planned = Date.now().toString();
-                        task.time = Date.now().toString();
+                        task.date_created = Date.now().toString();
+                        task.time_created = Date.now().toString();
 
                         if (typeof task.photoSO !== 'undefined' && task.photoSO.length > 0) {
                             for (let i = 0; i < task.photoSO.length; i++) {

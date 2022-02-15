@@ -1,9 +1,9 @@
 {
-    "appId": "io.ionic.starter",
-    "appName": "todoEnUnAppClient",
+    "appId": "io.ionic.gremios.cliente",
+    "appName": "todoEnUnAppCliente",
     "webDir": "www",
     "bundledWebRuntime": false,
     "server": {
-        "allowNavigation": ["*"]
+        "allowNavigation": ["todoenunapp.com"]
     }
 }

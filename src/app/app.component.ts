@@ -30,7 +30,7 @@ export class AppComponent {
             this.appUpdate
                 .checkAppUpdate(updateUrl)
                 .then((update) => {
-                    alert('Update Status:  ' + update.msg);
+                    alert('Verificando actualizaciones:  ' + update.msg);
                 })
                 .catch((error) => {
                     alert('Error: ' + error.msg);
