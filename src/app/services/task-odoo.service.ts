@@ -2519,8 +2519,8 @@ export class TaskOdooService {
                             temp.date_created = order['date_order'];
                             temp.time_created = String(order['date_order']);
 
-                            temp.date_planned = String(order['commitment_date']).slice(0, 10);
-                            temp.time = String(order['commitment_date']);
+                            // temp.date_planned = String(order['commitment_date']).slice(0, 10);
+                            // temp.time = String(order['commitment_date']);
 
                             temp.notificationNewChat = order['new_chat'];
                             //temp.notificationNewOffert = order['po_agreement'];
