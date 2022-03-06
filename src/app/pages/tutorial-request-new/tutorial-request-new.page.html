@@ -108,6 +108,18 @@
                 </div>
             </ion-item>
 
+            <ion-item class="last_module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_schedule" src="/assets/icon/edit.svg"></ion-img>
+                        <ion-label class="h3_title">Descripción</ion-label>
+                    </div>
+                    <p class="h6_title ion-text-wrap">
+                        {{ task.description?task.description:'Sin descripción' }}
+                    </p>
+                </div>
+            </ion-item>
+
             <div class="task_materials_buttons">
                 <div class="one_button">
                     <p-button

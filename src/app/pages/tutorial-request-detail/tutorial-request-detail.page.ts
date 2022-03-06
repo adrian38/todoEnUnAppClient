@@ -71,18 +71,28 @@ export class TutorialRequestDetailPage implements OnInit {
             }
 
             if (typeof tempPoid !== 'undefined' && tempPoid.length > 0) {
-                this.presentLoading();
+                if (this.task.downloadPhotoSo) {
+                    this.presentLoading();
+                }
                 this._taskOdoo.getProvidersInfoOfferAnonimus(tempPoid, this.task.So_id);
             }
         }
 
-        // if (
-        //   typeof this.task.Up_coming_Offer !== 'undefined' &&
-        //   this.task.Up_coming_Offer.length > 0
-        // ) {
-        //   this.presentLoading();
-        //   this._taskOdoo.requestPo(this.task.Up_coming_Offer, this.task.So_id)
-        // }
+        if (
+            typeof this.task.Up_coming_Offer !== 'undefined' &&
+            this.task.Up_coming_Offer.length > 0
+        ) {
+            if (this.task.downloadPhotoSo) {
+                this.presentLoading();
+            }
+            this._taskOdoo.requestPo(this.task.Up_coming_Offer, this.task.So_id);
+        }
+    }
+
+    ngOnDestroy() {
+        this.subscriptionOffersList.unsubscribe();
+        this.subscriptionsNotificationError.unsubscribe();
+        this.task.Up_coming_Offer = [];
     }
 
     subscriptions() {
@@ -169,29 +179,6 @@ export class TutorialRequestDetailPage implements OnInit {
 
                 switch (offers.type) {
                     case 4:
-                        // if (
-                        //   typeof this.offersList !== 'undefined' &&
-                        //   this.offersList.length > 0
-                        // ) {
-                        //   for (let i = 0; i < offers.task.length; i++) {
-                        //     if (this.task.So_origin === offers.task[i]['origin']) {
-                        //       let temp = this.offersList.findIndex(
-                        //         (element) => element.Po_id === offers.task[i]['order_id'],
-                        //       )
-
-                        //       if (temp != -1) {
-                        //         this.offersList.splice(temp, 1)
-
-                        //       }
-                        //     }
-                        //   }
-
-                        //}
-                        // if(this.offersList.length === 0){
-                        //   this.showSubCard = false
-                        //   this.ofertaDisponible = true
-                        // }
-
                         if (this.loading) {
                             this.loading.dismiss();
                         }
@@ -199,41 +186,9 @@ export class TutorialRequestDetailPage implements OnInit {
                         break;
 
                     case 5:
-                        //console.log(this.task,"task actualizado")
-                        // for (let offer of this.offersList) {
-                        //   for (let tempInfo of offers.task) {
-                        //     if (tempInfo.provider_id === offer.provider_id) {
-
-                        //       offer.photoProvider = tempInfo.photoProvider
-                        //       offer.provider_name = tempInfo.provider_name
-                        //       offer.opinions_provider = tempInfo.opinions_provider
-                        //       offer.ranking_provider = tempInfo.ranking_provider
-                        //     }
-                        //   }
-                        // }
-
                         if (this.loading) {
                             this.loading.dismiss();
                         }
-                        // this.showSubCard = true
-                        // this.ofertaDisponible = false
-
-                        break;
-
-                    case 6:
-                        // this.loading1.dismiss()
-                        // this._taskOdoo.aplicationListEdit(this.tempPaid.So_id,6,this.tempPaid)
-                        // this.messageService.add({
-                        //   severity: 'success',
-                        //   detail: 'Pago ingresado correctamente',
-                        // })
-
-                        // setTimeout(() => {
-                        //   this.navCtrl.navigateRoot('/tabs/tab1', {
-                        //     animated: true,
-                        //     animationDirection: 'back',
-                        //   })
-                        // }, 2000)
 
                         break;
 
@@ -276,17 +231,6 @@ export class TutorialRequestDetailPage implements OnInit {
                         break;
 
                     case 10:
-                        // if (!(typeof this.offersList !== 'undefined' && this.offersList.length > 0)) {
-                        // //   this.offersList = [].concat(offers.task, this.offersList)
-
-                        // // } else {
-
-                        //   this.offersList = this.task.So_offers;
-                        //   console.log(this.offersList, "ofertas q tienes")
-                        //   this.showSubCard = true
-                        //   this.ofertaDisponible = false
-                        // }
-
                         if (this.loading) {
                             this.loading.dismiss();
                         }
@@ -307,63 +251,8 @@ export class TutorialRequestDetailPage implements OnInit {
 
                         break;
 
-                    // case 13:
-                    //   if (
-                    //     typeof this.offersList !== 'undefined' &&
-                    //     this.offersList.length > 0
-                    //   ) {
-                    //     for (let i = 0; i < offers.task.length; i++) {
-                    //       if (this.task.So_origin === offers.task[i].origin) {
-                    //         let temp = this.offersList.findIndex(
-                    //           (element) => element.Po_id === offers.task[i].order_id,
-                    //         )
-
-                    //         if (temp != -1) {
-                    //           switch (offers.task[i].product_id) {
-                    //             // case 39:
-
-                    //             // 	task.type = "Servicio de Fontanería"
-                    //             // 	break;
-
-                    //             case 40:
-                    //               this.offersList[temp].work_force +=
-                    //                 offers.task[i].price_unit
-                    //               break
-
-                    //             case 41:
-                    //               this.offersList[temp].materials +=
-                    //                 offers.task[i].price_unit
-                    //               break
-                    //           }
-                    //         }
-                    //       }
-                    //     }
-                    //   }
-                    //   break
-
                     case 19:
                         this.offsetComment += 2;
-
-                        //     if(offers.task != false){
-
-                        //       console.log("mas comentarios", offers.task)
-
-                        //     this.offsetComment += 2;
-
-                        //     // for (let offer of this.offersList) {
-                        //     //   for (let tempInfo of offers.task) {
-
-                        //     //     if (tempInfo.provider_id === offer.provider_id) {
-
-                        //     //       offer.opinions_provider =  tempInfo.opinions_provider
-                        //     //       this.tempInfoProvider.opinions_provider =  tempInfo.opinions_provider
-
-                        //     //     }
-                        //     //   }
-                        //     // }
-                        //   }
-
-                        //     //console.log("comentarios",this.tempInfoProvider.opinions_provider)
 
                         if (this.tempLoadingComment) {
                             this.tempLoadingComment.target.complete();
@@ -394,10 +283,8 @@ export class TutorialRequestDetailPage implements OnInit {
     }
 
     openChat(offer: TaskModel) {
-        //console.log("oferta selec", offer);
-        // offer.Up_coming_Chat = this.task.Up_coming_Chat
-        // this.displayAceptar = -1
-
+        console.log('oferta selec', offer);
+        offer.Up_coming_Chat = this.task.Up_coming_Chat;
         this._taskOdoo.setTaskChat(offer);
         this.navCtrl.navigateRoot(['/tutorial-request-chat'], {
             animated: true,

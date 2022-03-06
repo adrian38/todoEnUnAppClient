@@ -79,7 +79,7 @@ export class TutorialRequestNewPage implements OnInit {
         // this.fecha = this.datos.getCalendarioD();
         // this.hora1 = this.datos.getCalendarioT();
         //this.hora = this.date.transform(this.hora1, 'HH:mm:ss');
-        // this.comentario = this.datos.getcomentario();
+        this.task.description = this.datos.getcomentario();
         // this.calle = this.datos.getcalle();
         // this.portal = this.datos.getportal();
         // this.puerta = this.datos.getpuerta();
@@ -144,7 +144,10 @@ export class TutorialRequestNewPage implements OnInit {
 
     subscriptions() {
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.navCtrl.navigateRoot('/option', { animated: true, animationDirection: 'back' });
+            this.navCtrl.navigateRoot('/task-description', {
+                animated: true,
+                animationDirection: 'back',
+            });
         });
 
         this.notificationError$ = this._taskOdoo.getNotificationError$();
@@ -208,7 +211,7 @@ export class TutorialRequestNewPage implements OnInit {
             this.task.address = new Address('', '', '', '', '', '', '', '', '', 0);
 
             // this.task.require_materials = this.datos.getUtiles();
-            // this.task.description = this.datos.getcomentario();
+            this.task.description = this.datos.getcomentario();
             // this.task.address.street = this.datos.getcalle();
             // this.task.address.door = this.datos.getpuerta();
             // this.task.address.stair = this.datos.getescalera();

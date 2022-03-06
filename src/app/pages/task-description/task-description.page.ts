@@ -11,6 +11,7 @@ export class TaskDescriptionPage implements OnInit {
     servicio: string = '';
     espacio: string = '  ';
     comentario: string = '';
+    tutorial = sessionStorage.getItem('tutorial');
 
     constructor(
         private _serv: ObtSubSService,
@@ -37,10 +38,17 @@ export class TaskDescriptionPage implements OnInit {
     goto() {
         this._serv.setcomentario(this.comentario);
 
-        this.navCtrl.navigateRoot('/task-location', {
-            animated: true,
-            animationDirection: 'forward',
-        });
+        if (this.tutorial === 'true') {
+            this.navCtrl.navigateRoot('/tutorial-request-new', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        } else {
+            this.navCtrl.navigateRoot('/task-location', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        }
     }
 
     cerrarsolicitud() {
@@ -64,10 +72,17 @@ export class TaskDescriptionPage implements OnInit {
                     text: 'Aceptar',
                     handler: (datos) => {
                         this._serv.deleteFields();
-                        this.navCtrl.navigateRoot('/tabs/tab1', {
-                            animated: true,
-                            animationDirection: 'forward',
-                        });
+                        if (this.tutorial === 'true') {
+                            this.navCtrl.navigateRoot('/home', {
+                                animated: true,
+                                animationDirection: 'forward',
+                            });
+                        } else {
+                            this.navCtrl.navigateRoot('/tabs/tab1', {
+                                animated: true,
+                                animationDirection: 'forward',
+                            });
+                        }
                     },
                 },
             ],

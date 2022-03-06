@@ -20,6 +20,8 @@ export class TaskPhotosPage implements OnInit {
 
     servicio: string = '';
 
+    tutorial = sessionStorage.getItem('tutorial');
+
     constructor(
         private _serv: ObtSubSService,
         public navCtrl: NavController,
@@ -52,19 +54,10 @@ export class TaskPhotosPage implements OnInit {
     }
 
     goto() {
-        const tutorial = sessionStorage.getItem('tutorial');
-
-        if (tutorial === 'true') {
-            this.navCtrl.navigateRoot('/tutorial-request-new', {
-                animated: true,
-                animationDirection: 'forward',
-            });
-        } else {
-            this.navCtrl.navigateRoot('/task-description', {
-                animated: true,
-                animationDirection: 'forward',
-            });
-        }
+        this.navCtrl.navigateRoot('/task-description', {
+            animated: true,
+            animationDirection: 'forward',
+        });
     }
 
     async takePhoto(posc: number) {
@@ -105,10 +98,17 @@ export class TaskPhotosPage implements OnInit {
                     text: 'Aceptar',
                     handler: (datos) => {
                         this._serv.deleteFields();
-                        this.navCtrl.navigateRoot('/tabs/tab1', {
-                            animated: true,
-                            animationDirection: 'forward',
-                        });
+                        if (this.tutorial === 'true') {
+                            this.navCtrl.navigateRoot('/home', {
+                                animated: true,
+                                animationDirection: 'forward',
+                            });
+                        } else {
+                            this.navCtrl.navigateRoot('/tabs/tab1', {
+                                animated: true,
+                                animationDirection: 'forward',
+                            });
+                        }
                     },
                 },
             ],

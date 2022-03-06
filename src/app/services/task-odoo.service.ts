@@ -17,6 +17,7 @@ let knownTypes = {
 };
 
 let init: boolean = false;
+let initAnonimus: boolean = false;
 
 let user: UsuarioModel;
 
@@ -30,7 +31,7 @@ let offsetHired: number = 0;
 let offsetRecord: number = 0;
 let offsetPromo: number = 0;
 
-let limit: number = 5;
+let limit: number = 7;
 
 let taskCesar: TaskModel;
 let taskChat: TaskModel;
@@ -92,6 +93,14 @@ export class TaskOdooService {
         return init;
     }
 
+    setInitAnonimus(Init) {
+        initAnonimus = Init;
+    }
+
+    getInitAnonimus() {
+        return initAnonimus;
+    }
+
     setInitPromo(init) {
         initPromo = init;
     }
@@ -138,7 +147,7 @@ export class TaskOdooService {
         applicationList = [];
         hiredList = [];
         recordList = [];
-        limit = 6;
+        limit = 7;
 
         //console.log(jaysonServer,"el q se mantiene")
     }
@@ -235,7 +244,7 @@ export class TaskOdooService {
                         // console.log(value, "lo q esta llegando");
 
                         if (typeof value !== 'undefined' && value.length > 0) {
-                            console.log(value, 'lo q esta llegando notificacion');
+                            console.log(value, 'notificacion');
 
                             old_id_notification = value[value.length - 1].id;
 
@@ -360,7 +369,10 @@ export class TaskOdooService {
                                     }
                                 }
 
-                                if (route === '/task-offer') {
+                                if (
+                                    this.router.url === '/task-offer' ||
+                                    this.router.url === '/tutorial-request-detail'
+                                ) {
                                     ////console.log("mandando la notificacion", id_po)
 
                                     task$.next({ type: 4, task: id_po_offert });
@@ -374,7 +386,10 @@ export class TaskOdooService {
                                     typeof applicationList !== 'undefined' &&
                                     applicationList.length > 0
                                 ) {
-                                    if (route === '/task-offer') {
+                                    if (
+                                        this.router.url === '/task-offer' ||
+                                        this.router.url === '/tutorial-request-detail'
+                                    ) {
                                         task$.next({ type: 9, task: new_offert });
                                         notifications$.next(true);
                                         notificationBoolean = true;
@@ -417,9 +432,13 @@ export class TaskOdooService {
                             }
 
                             if (typeof id_messg !== 'undefined' && id_messg.length > 0) {
-                                console.log('trabajador envio mensaje');
+                                //console.log('trabajador envio mensaje');
 
-                                if (route === '/chat' || route === '/contratados') {
+                                if (
+                                    this.router.url === '/chat' ||
+                                    this.router.url === '/task-hired' ||
+                                    this.router.url === '/tutorial-request-chat'
+                                ) {
                                     task$.next({ type: 12, task: id_messg });
                                 } else {
                                     for (let mess of id_messg) {
@@ -435,6 +454,10 @@ export class TaskOdooService {
                                                 );
 
                                                 if (temp != -1) {
+                                                    console.log(
+                                                        '************* Aplication encontrada *************'
+                                                    );
+                                                    console.log();
                                                     applicationList[temp].notificationNewChat =
                                                         true;
                                                     applicationList[temp].Up_coming_Chat.push({
@@ -451,7 +474,7 @@ export class TaskOdooService {
                                                 }
                                             }
 
-                                            task$.next({ type: 12, task: id_messg });
+                                            //task$.next({ type: 12, task: id_messg });
                                             notifications$.next(true);
                                             notificationBoolean = true;
                                             notificationArray.unshift({
@@ -485,7 +508,7 @@ export class TaskOdooService {
                                                 }
                                             }
 
-                                            task$.next({ type: 12, task: id_messg });
+                                            //task$.next({ type: 12, task: id_messg });
                                             notifications$.next(true);
                                             notificationBoolean = true;
                                             notificationArray.unshift({
@@ -2024,7 +2047,7 @@ export class TaskOdooService {
         };
 
         let list_msg_ids = () => {
-            ////console.log(PO_id, "po_id requeridas");
+            console.log(PO_id, 'PO_id');
 
             let inParams = [];
             inParams.push([PO_id]);
@@ -2055,8 +2078,6 @@ export class TaskOdooService {
                         ////console.log(err, "Error list_msg_ids");
                         notificationError$.next({ type: 1 });
                     } else {
-                        ////console.log(value, "messages")
-
                         value = value.filter((messages) => {
                             return (
                                 messages.subtype_id === false ||
@@ -2069,6 +2090,9 @@ export class TaskOdooService {
                             for (let offer of task.So_offers) {
                                 for (let message of value) {
                                     if (message.res_id === offer.Po_id) {
+                                        console.log('************* Encontrado *************');
+                                        console.log();
+
                                         let tempMessage: MessageModel = new MessageModel(
                                             message['body'].slice(3, message['body'].length - 4),
                                             message['author_id'][1],
@@ -2082,12 +2106,8 @@ export class TaskOdooService {
                         }
 
                         for (let task of hiredList) {
-                            //////console.log(task, "lista de contratados");
-                            //////console.log(value, "lista de messaje");
                             for (let message of value) {
-                                //////console.log(message, "lista de messaje");
                                 if (message.res_id === task.Po_id) {
-                                    //////console.log("mensaje para contrato");
                                     let tempMessage: MessageModel = new MessageModel(
                                         message['body'].slice(3, message['body'].length - 4),
                                         message['author_id'][1],
@@ -2099,10 +2119,6 @@ export class TaskOdooService {
                             }
                         }
 
-                        // ////console.log(applicationList);
-                        // ////console.log(hiredList)
-
-                        //get_order_line();
                         get_facturation_lines();
                     }
                 }
@@ -2201,23 +2217,22 @@ export class TaskOdooService {
 
                         console.log(value, 'valores de PO');
 
-                        for (let task of value) {
-                            let temp = applicationList.findIndex(
-                                (element) => element.So_origin === task.origin
-                            );
-                            if (temp != -1) {
-                                applicationList[temp].notificationNewOffert = task['new_budget'];
-                                newTaskModel = new TaskModel();
-                                //provider_partner_id.push(temp['partner_id'][0]);
-                                newTaskModel.provider_id = task['partner_id'][0];
-                                newTaskModel.provider_name = task['partner_id'][1];
-                                newTaskModel.Po_id = task['id'];
-                                newTaskModel.So_id = applicationList[temp].So_id;
-                                newTaskModel.notificationNewOffert = task['new_budget'];
-                                PO_id.push(task['id']);
-                                newTaskModel.Po_order_line = task['order_line'];
-                                //task.budget = temp['amount_total'];
-                                applicationList[temp].So_offers.push(newTaskModel);
+                        for (let task of applicationList) {
+                            for (let offert of value) {
+                                if (task.So_origin === offert.origin) {
+                                    task.notificationNewOffert = offert['new_budget'];
+                                    newTaskModel = new TaskModel();
+                                    //provider_partner_id.push(temp['partner_id'][0]);
+                                    newTaskModel.provider_id = offert['partner_id'][0];
+                                    newTaskModel.provider_name = offert['partner_id'][1];
+                                    newTaskModel.Po_id = offert['id'];
+                                    newTaskModel.So_id = task.So_id;
+                                    newTaskModel.notificationNewOffert = offert['new_budget'];
+                                    PO_id.push(offert['id']);
+                                    newTaskModel.Po_order_line = offert['order_line'];
+                                    //task.budget = temp['amount_total'];
+                                    task.So_offers.push(newTaskModel);
+                                }
                             }
                         }
 
@@ -3665,6 +3680,7 @@ export class TaskOdooService {
                     );
                     if (temp1 != -1) {
                         applicationList[temp].So_offers[temp1].messageList = Task.messageList;
+                        applicationList[temp].Up_coming_Chat = [];
                     }
                 }
 
@@ -3888,8 +3904,8 @@ export class TaskOdooService {
     }
 
     requestPhotoSo(Task: TaskModel) {
-        console.log(Task);
-        console.log(user, 'usuario anonimo');
+        //console.log(Task);
+        //console.log(user, 'usuario anonimo');
 
         let get_photo_so = () => {
             let inParams = [];
@@ -3938,7 +3954,7 @@ export class TaskOdooService {
                             }
 
                             task$.next({ type: 8, task: tempTask });
-                            ////console.log(tempTask, 'so con fotos')
+                            //console.log(tempTask, 'so con fotos');
                         } else {
                             let temp = applicationList.findIndex(
                                 (element) => element.So_id === Task.So_id
@@ -3946,6 +3962,7 @@ export class TaskOdooService {
                             if (temp !== -1) {
                                 applicationList[temp].downloadPhotoSo = true;
                             }
+
                             task$.next({ type: 11 });
                         }
                     }
@@ -4738,7 +4755,7 @@ export class TaskOdooService {
         let get_po_of_task = () => {
             let inParams = [];
             inParams.push([['id', 'in', Po_id]]);
-            inParams.push(['partner_id', 'origin', 'order_line']);
+            inParams.push(['partner_id', 'origin', 'order_line', 'new_budget']);
 
             let params = [];
             params.push(inParams);
@@ -4762,28 +4779,29 @@ export class TaskOdooService {
                         ////console.log(err, 'Error requestOffersForTask');
                         //notificationError$.next({ type: 1 });
                     } else {
-                        //////console.log(value, "Po")
+                        console.log(value, 'NewOffert');
 
                         for (let task of applicationList) {
-                            let temp = value.find((element) => element.origin === task.So_origin);
-                            if (temp) {
-                                newTaskModel = new TaskModel();
-                                //provider_partner_id.push(temp['partner_id'][0]);
-                                newTaskModel.provider_id = temp['partner_id'][0];
-                                providerId.push(temp['partner_id'][0]);
-                                newTaskModel.provider_name = temp['partner_id'][1];
-                                newTaskModel.Po_id = temp['id'];
-                                newTaskModel.So_id = task.So_id;
-                                newTaskModel.notificationNewOffert = true;
-                                //newTaskModel.So_origin = temp['origin'];
-                                newTaskModel.Po_order_line = temp['order_line'];
-                                //task.budget = temp['amount_total'];
-                                //task.origin = temp['origin'];
-                                task.So_offers.push(newTaskModel);
-                                task.Up_coming_Offer = [];
-                                taskCesar.Up_coming_Offer = [];
-                                task.Up_coming_Chat = [];
-                                taskCesar.Up_coming_Chat = [];
+                            for (let offert of value) {
+                                if (task.So_origin === offert.origin) {
+                                    newTaskModel = new TaskModel();
+                                    //provider_partner_id.push(temp['partner_id'][0]);
+                                    newTaskModel.provider_id = offert['partner_id'][0];
+                                    providerId.push(offert['partner_id'][0]);
+                                    newTaskModel.provider_name = offert['partner_id'][1];
+                                    newTaskModel.Po_id = offert['id'];
+                                    newTaskModel.So_id = task.So_id;
+                                    newTaskModel.notificationNewOffert = true;
+                                    //newTaskModel.So_origin = temp['origin'];
+                                    newTaskModel.Po_order_line = offert['order_line'];
+                                    //task.budget = temp['amount_total'];
+                                    //task.origin = temp['origin'];
+                                    task.So_offers.push(newTaskModel);
+                                    // task.Up_coming_Offer = [];
+                                    // taskCesar.Up_coming_Offer = [];
+                                    // task.Up_coming_Chat = [];
+                                    // taskCesar.Up_coming_Chat = [];
+                                }
                             }
                         }
 
@@ -4971,8 +4989,74 @@ export class TaskOdooService {
         let SO_id = [];
 
         applicationList = [];
-
         let newTaskModel = new TaskModel();
+
+        let get_order_line = () => {
+            //console.log(PO_id, 'extra');
+
+            let inParams = [];
+            inParams.push([['order_id', 'in', PO_id]]);
+            inParams.push(['product_id', 'product_qty', 'price_unit', 'qty_invoiced']);
+            let params = [];
+            params.push(inParams);
+
+            let fparams = [];
+            fparams.push(jaysonServer.db);
+            fparams.push(user.id);
+            fparams.push(jaysonServer.password);
+            fparams.push('purchase.order.line'); //model
+            fparams.push('search_read'); //method
+
+            for (let i = 0; i < params.length; i++) {
+                fparams.push(params[i]);
+            }
+
+            client.request(
+                'call',
+                { service: 'object', method: 'execute_kw', args: fparams },
+                function (err, error, value) {
+                    if (err) {
+                        ////console.log(err, 'get_po_list');
+                        notificationError$.next({ type: 1 });
+                    } else {
+                        // console.log(value, 'order Line');
+
+                        for (let orderLine of value) {
+                            for (let task of applicationList) {
+                                for (let offer of task.So_offers) {
+                                    for (let line of offer.Po_order_line) {
+                                        //console.log(line, "lineas");
+                                        if (line === orderLine.id) {
+                                            switch (orderLine.product_id[0]) {
+                                                // case 39:
+
+                                                // 	task.type = "Servicio de Fontanería"
+                                                // 	break;
+
+                                                case 40:
+                                                    offer.work_force += orderLine.price_unit;
+                                                    break;
+
+                                                case 41:
+                                                    offer.materials += orderLine.price_unit;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        ////console.log(applicationList, 'con presupuesto');
+                        ////console.log(hiredList, 'contratadas');
+                        //console.log(recordList, 'historial');
+                        task$.next({ type: 1 });
+
+                        //get_photo_so();
+                    }
+                }
+            );
+        };
 
         let list_msg_ids = () => {
             let inParams = [];
@@ -5013,6 +5097,8 @@ export class TaskOdooService {
                         });
                         value.reverse();
 
+                        console.log(value, 'messages');
+
                         for (let task of applicationList) {
                             for (let offer of task.So_offers) {
                                 for (let message of value) {
@@ -5028,12 +5114,8 @@ export class TaskOdooService {
                                 }
                             }
                         }
-                        // ////console.log(applicationList);
-                        // ////console.log(hiredList)
-
-                        //console.log(applicationList, 'nuevas en el servicio');
-                        //                 task$.next({ type: 1, task: applicationList });
-                        task$.next({ type: 1 });
+                        //task$.next({ type: 1 });
+                        get_order_line();
                     }
                 }
             );
@@ -5111,15 +5193,18 @@ export class TaskOdooService {
                         ////console.log(err, 'Error requestOffersForTask');
                         notificationError$.next({ type: 2 });
                     } else {
-                        //console.log(value, "Po asociadas a anonimas")
-
                         value = value.filter((po) => {
                             return po.state === 'sent';
                         });
 
+                        //console.log(value, 'Po asociadas a anonimas');
+
                         for (let task of applicationList) {
                             for (let offert of value) {
                                 if (task.So_origin === offert.origin) {
+                                    console.log('************* Nueva Oferta *************');
+                                    console.log(offert['new_budget']);
+
                                     //console.log("entre");
                                     newTaskModel = new TaskModel();
                                     task.notificationNewOffert = offert['new_budget'];
@@ -5284,6 +5369,69 @@ export class TaskOdooService {
 
         let newTaskModel = new TaskModel();
 
+        let get_order_line = () => {
+            //console.log(PO_id, 'extra');
+
+            let inParams = [];
+            inParams.push([['order_id', 'in', PO_id]]);
+            inParams.push(['product_id', 'product_qty', 'price_unit', 'qty_invoiced']);
+            let params = [];
+            params.push(inParams);
+
+            let fparams = [];
+            fparams.push(jaysonServer.db);
+            fparams.push(user.id);
+            fparams.push(jaysonServer.password);
+            fparams.push('purchase.order.line'); //model
+            fparams.push('search_read'); //method
+
+            for (let i = 0; i < params.length; i++) {
+                fparams.push(params[i]);
+            }
+
+            client.request(
+                'call',
+                { service: 'object', method: 'execute_kw', args: fparams },
+                function (err, error, value) {
+                    if (err) {
+                        ////console.log(err, 'get_po_list');
+                        notificationError$.next({ type: 1 });
+                    } else {
+                        // console.log(value, 'order Line');
+
+                        for (let orderLine of value) {
+                            for (let task of applicationList) {
+                                for (let offer of task.So_offers) {
+                                    for (let line of offer.Po_order_line) {
+                                        //console.log(line, "lineas");
+                                        if (line === orderLine.id) {
+                                            switch (orderLine.product_id[0]) {
+                                                // case 39:
+
+                                                // 	task.type = "Servicio de Fontanería"
+                                                // 	break;
+
+                                                case 40:
+                                                    offer.work_force += orderLine.price_unit;
+                                                    break;
+
+                                                case 41:
+                                                    offer.materials += orderLine.price_unit;
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        applicationList = [].concat(applicationList, applicationListTemp);
+                        task$.next({ type: 2, task: applicationListTemp });
+                    }
+                }
+            );
+        };
+
         let list_msg_ids = () => {
             let inParams = [];
             inParams.push([PO_id]);
@@ -5338,9 +5486,7 @@ export class TaskOdooService {
                                 }
                             }
                         }
-                        applicationList = [].concat(applicationList, applicationListTemp);
-                        // console.log(applicationList, 'nuevas en el servicio');
-                        task$.next({ type: 2, task: applicationListTemp });
+                        get_order_line();
                     }
                 }
             );
@@ -5584,23 +5730,19 @@ export class TaskOdooService {
     }
 
     newTaskAnonimus(task: TaskModel) {
-        let jaysonServer = {
-            //host: '192.168.0.102',
-            //host: '192.168.0.107',
-            host: 'odoo.todoenunapp.com',
-            //host: 'localhost',
-            port: '443',
-            //port: '8069',
-            db: 'demo',
-            username: 'anonimo@example.com',
-            password: 'anonimo',
-            pathConnection: '/jsonrpc',
-        };
+        // let jaysonServer = {
+        //     host: 'odoo.todoenunapp.com',
+        //     port: '443',
+        //     db: 'demo',
+        //     username: 'anonimo@example.com',
+        //     password: 'anonimo',
+        //     pathConnection: '/jsonrpc',
+        // };
 
-        let user = new UsuarioModel();
-        user.partner_id = 217;
-        user.id = 129;
-        user.password = 'anonimo';
+        // let user = new UsuarioModel();
+        // user.partner_id = 217;
+        // user.id = 129;
+        // user.password = 'anonimo';
         let count: number;
 
         //let count: number;

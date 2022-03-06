@@ -134,6 +134,7 @@ export class TaskOfferPage implements OnInit {
     ngOnDestroy(): void {
         this.subscriptionOffersList.unsubscribe();
         this.subscriptionsNotificationError.unsubscribe();
+        this.task.Up_coming_Offer = [];
     }
 
     subscriptions() {

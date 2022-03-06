@@ -15,6 +15,7 @@
                 <p-button label="CREAR CUENTA" (onClick)="signUp()"></p-button>
             </div>
             <button
+                [disabled]="btn_disabled"
                 pButton
                 type="button"
                 label="Entrar para ver cómo funciona"

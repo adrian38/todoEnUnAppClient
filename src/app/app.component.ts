@@ -26,15 +26,15 @@ export class AppComponent {
             //this.statusBar.styleDefault();
             this.splashScreen.hide();
 
-            const updateUrl = 'https://todoenunapp.com/updateClientApk.xml';
-            this.appUpdate
-                .checkAppUpdate(updateUrl)
-                .then((update) => {
-                    alert('Verificando actualizaciones:  ' + update.msg);
-                })
-                .catch((error) => {
-                    alert('Error: ' + error.msg);
-                });
+            // const updateUrl = 'https://todoenunapp.com/updateClientApk.xml';
+            // this.appUpdate
+            //     .checkAppUpdate(updateUrl)
+            //     .then((update) => {
+            //         alert('Verificando actualizaciones:  ' + update.msg);
+            //     })
+            //     .catch((error) => {
+            //         alert('Error: ' + error.msg);
+            //     });
         });
     }
 }

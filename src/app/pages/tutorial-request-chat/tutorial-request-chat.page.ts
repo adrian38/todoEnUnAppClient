@@ -56,8 +56,6 @@ export class TutorialRequestChatPage implements OnInit {
 
     fotoTemporal: string = ' ';
 
-    chat_vacia: boolean = true;
-
     tempMessageId: number[];
 
     @ViewChild(IonContent) content: IonContent;
@@ -71,12 +69,11 @@ export class TutorialRequestChatPage implements OnInit {
         private _taskOdoo: TaskOdooService,
         private _chatOdoo: ChatOdooService,
         public navCtrl: NavController,
-        //private datos: ObtSubSService,
-        private menu: MenuController,
+
         private ngZone: NgZone,
         private platform: Platform,
         public photoService: PhotoService,
-        private alertCtrl: AlertController,
+
         public loadingController: LoadingController,
         private router: Router,
         private messageService: MessageService
@@ -98,9 +95,6 @@ export class TutorialRequestChatPage implements OnInit {
         if (typeof this.task.messageList !== 'undefined' && this.task.messageList.length > 0) {
             this.messagesList = this.task.messageList;
             this.selectLastMessage();
-            this.chat_vacia = false;
-        } else {
-            this.chat_vacia = true;
         }
 
         if (
@@ -118,7 +112,6 @@ export class TutorialRequestChatPage implements OnInit {
             }
             if (typeof this.tempMessageId !== 'undefined' && this.tempMessageId.length > 0) {
                 this._chatOdoo.requestNewMessage(this.tempMessageId);
-                this.chat_vacia = false;
             }
         }
     }
@@ -255,10 +248,6 @@ export class TutorialRequestChatPage implements OnInit {
                             messaggeList.messages.author = this.user.realname;
                             messaggeList.messages.author_id = this.user.partner_id;
 
-                            if (this.chat_vacia) {
-                                this.chat_vacia = false;
-                            }
-
                             this.messagesList.push(messaggeList.messages);
 
                             this.scrollToElement();
@@ -279,7 +268,6 @@ export class TutorialRequestChatPage implements OnInit {
                                     this.messagesList.push(mess);
                                 } else {
                                     this.messagesList.push(mess);
-                                    this.chat_vacia = false;
                                 }
                                 this.selectLastMessage();
                                 this.scrollToElement();
@@ -331,7 +319,7 @@ export class TutorialRequestChatPage implements OnInit {
     }
 
     onClose() {
-        this.navCtrl.navigateRoot('/ofertas', {
+        this.navCtrl.navigateRoot('/tutorial-request-detail', {
             animated: true,
             animationDirection: 'back',
         });

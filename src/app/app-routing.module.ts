@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardTutorialsService } from './services/auth-guard-tutorials.service';
 import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
@@ -25,6 +24,7 @@ const routes: Routes = [
             import('./pages/task-subcategory/task-subcategory.module').then(
                 (m) => m.TaskSubcategoryPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-materials',
@@ -32,11 +32,13 @@ const routes: Routes = [
             import('./pages/task-materials/task-materials.module').then(
                 (m) => m.TaskMaterialsPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-photos',
         loadChildren: () =>
             import('./pages/task-photos/task-photos.module').then((m) => m.TaskPhotosPageModule),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-description',
@@ -44,6 +46,7 @@ const routes: Routes = [
             import('./pages/task-description/task-description.module').then(
                 (m) => m.TaskDescriptionPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-location',
@@ -51,6 +54,7 @@ const routes: Routes = [
             import('./pages/task-location/task-location.module').then(
                 (m) => m.TaskLocationPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'map',
@@ -61,7 +65,7 @@ const routes: Routes = [
         path: 'imagenmodal',
         loadChildren: () =>
             import('./pages/imagenmodal/imagenmodal.module').then((m) => m.ImagenmodalPageModule),
-        //canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
     },
 
     {
@@ -70,17 +74,19 @@ const routes: Routes = [
             import('./pages/task-abstract/task-abstract.module').then(
                 (m) => m.TaskAbstractPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'map-detail',
         loadChildren: () =>
             import('./pages/map-detail/map-detail.module').then((m) => m.MapDetailPageModule),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-new',
         loadChildren: () =>
             import('./pages/task-new/task-new.module').then((m) => m.TaskNewPageModule),
-        canActivate: [AuthGuardTutorialsService],
+        canActivate: [AuthGuardService],
     },
     {
         path: 'task-offer',
@@ -150,6 +156,7 @@ const routes: Routes = [
     {
         path: 'about',
         loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutPageModule),
+        canActivate: [AuthGuardService],
     },
 
     {
@@ -158,6 +165,7 @@ const routes: Routes = [
             import('./pages/tutorial-options/tutorial-options.module').then(
                 (m) => m.TutorialOptionsPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'tutorial-requests',
@@ -165,6 +173,7 @@ const routes: Routes = [
             import('./pages/tutorial-requests/tutorial-requests.module').then(
                 (m) => m.TutorialRequestsPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'tutorial-request-detail',
@@ -172,6 +181,7 @@ const routes: Routes = [
             import('./pages/tutorial-request-detail/tutorial-request-detail.module').then(
                 (m) => m.TutorialRequestDetailPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'tutorial-request-chat',
@@ -179,6 +189,7 @@ const routes: Routes = [
             import('./pages/tutorial-request-chat/tutorial-request-chat.module').then(
                 (m) => m.TutorialRequestChatPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'tutorial-request-new',
@@ -186,6 +197,7 @@ const routes: Routes = [
             import('./pages/tutorial-request-new/tutorial-request-new.module').then(
                 (m) => m.TutorialRequestNewPageModule
             ),
+        canActivate: [AuthGuardService],
     },
     {
         path: 'registration-contract',

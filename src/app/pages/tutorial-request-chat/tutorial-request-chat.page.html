@@ -10,7 +10,9 @@
     <div class="pres_container">
         <ion-row style="padding-bottom: 0px">
             <ion-col size="10" style="padding-left: 20px; padding-top: 20px">
-                <ion-label class="label_presupuesto">PRESUPUESTO: {{ task.So_budget}} €</ion-label>
+                <ion-label class="label_presupuesto"
+                    >PRESUPUESTO: {{ task.materials + task.work_force}} €</ion-label
+                >
             </ion-col>
             <!-- <ion-col size="1" style="padding: 20px 5px 0px 0px">
                 <img
@@ -54,7 +56,8 @@
         <div
             style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px"
         >
-            <div class="div_chat" #target *ngIf="!chat_vacia">
+            <div style="height: 100%; width: 2.5%"></div>
+            <div class="div_chat" #target *ngIf="!task.messageList || task.messageList.length > 0">
                 <ion-row
                     class="chat_bubble"
                     lines="none"
@@ -82,16 +85,16 @@
                 </ion-row>
             </div>
 
-            <div *ngIf="chat_vacia" class="flex_column">
+            <div *ngIf="!task.messageList || task.messageList.length === 0" class="flex_column">
                 <div class="flex_row" class="flex_centered" style="margin-top: 60px">
                     <img style="width: 55%; height: 55%" src="../../../assets/icon/empty.svg" />
                 </div>
                 <div class="flex_row" class="flex_centered" style="margin-top: 0px">
-                    <h4 style="color: lightgray; margin-top: 0px">Chat vacio</h4>
+                    <h4 style="color: lightgray; margin-top: 0px">No tiene mensajes</h4>
                 </div>
             </div>
 
-            <div style="height: 100%; width: 5%"></div>
+            <div style="height: 100%; width: 2.5%"></div>
         </div>
         <!-- ************************************************** -->
 

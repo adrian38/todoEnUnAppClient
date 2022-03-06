@@ -98,6 +98,18 @@
                 </div>
             </ion-item>
 
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_schedule" src="/assets/icon/edit.svg"></ion-img>
+                        <ion-label class="h3_title">Descripción</ion-label>
+                    </div>
+                    <p class="h6_title ion-text-wrap">
+                        {{ task.description?task.description:'Sin descripción' }}
+                    </p>
+                </div>
+            </ion-item>
+
             <div style="margin-top: 40px; font-weight: bold">
                 <ion-label>Ofertas</ion-label>
             </div>
@@ -124,11 +136,12 @@
                                 <img style="width: 40%" src="../../../assets/icon/empty.svg" />
                             </div>
                         </ion-row>
-                        <ion-row>
-                            <div style="width: 100%; margin-top: 20px">
-                                <ion-label>No hay ofertas todavia</ion-label>
-                            </div>
-                        </ion-row>
+
+                        <ion-col style="text-align: center; padding-bottom: 0px">
+                            <h6 style="color: lightgray; margin-top: 0px; margin-bottom: 0px">
+                                No hay ofertas todavia
+                            </h6>
+                        </ion-col>
                     </ion-col>
                 </ion-row>
             </div>

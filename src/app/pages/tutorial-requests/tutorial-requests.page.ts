@@ -40,26 +40,25 @@ export class TutorialRequestsPage implements OnInit {
 
     tempLoadingSolicitud;
 
-    user = new UsuarioModel();
+    // user = new UsuarioModel();
 
-    jaysonServer = {
-        //host: '192.168.0.102',
-        //host: '192.168.0.107',
-        host: 'odoo.todoenunapp.com',
-        //host: 'localhost',
-        port: '443',
-        //port: '8069',
-        db: 'demo',
-        username: 'anonimo@example.com',
-        password: 'anonimo',
-        pathConnection: '/jsonrpc',
-    };
+    // jaysonServer = {
+    //     //host: '192.168.0.102',
+    //     //host: '192.168.0.107',
+    //     host: 'odoo.todoenunapp.com',
+    //     //host: 'localhost',
+    //     port: '443',
+    //     //port: '8069',
+    //     db: 'demo',
+    //     username: 'anonimo@example.com',
+    //     password: 'anonimo',
+    //     pathConnection: '/jsonrpc',
+    // };
 
     //@ViewChild('tabs') tabs: IonTabs;
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
     constructor(
-        private subServ: ObtSubSService,
         private _taskOdoo: TaskOdooService,
         private _chatOdoo: ChatOdooService,
         private ngZone: NgZone,
@@ -67,15 +66,12 @@ export class TutorialRequestsPage implements OnInit {
         private platform: Platform,
         public alertCtrl: AlertController,
         private messageService: MessageService,
-        public loadingController: LoadingController,
-
-        private _location: Location
-    ) //private splashScreen: SplashScreen
-    {
-        this.user.id = 129;
-        this.user.partner_id = 217;
-        this.user.password = 'anonimo';
-        this.user.username = 'anonimo@example.com';
+        public loadingController: LoadingController
+    ) {
+        // this.user.id = 129;
+        // this.user.partner_id = 217;
+        // this.user.password = 'anonimo';
+        // this.user.username = 'anonimo@example.com';
     }
 
     ngOnInit(): void {
@@ -91,11 +87,12 @@ export class TutorialRequestsPage implements OnInit {
     }
 
     init() {
-        if (!this._taskOdoo.getInit()) {
-            this._taskOdoo.setInit(true);
-            this._taskOdoo.setUserAnonimus(this.user, this.jaysonServer);
-            this._chatOdoo.setUserAnonimus(this.user, this.jaysonServer);
-            this._taskOdoo.notificationPull();
+        if (!this._taskOdoo.getInitAnonimus()) {
+            this._taskOdoo.setInitAnonimus(true);
+
+            // this._taskOdoo.setUserAnonimus(this.user, this.jaysonServer);
+            // this._chatOdoo.setUserAnonimus(this.user, this.jaysonServer);
+            // this._taskOdoo.notificationPull();
             this._taskOdoo.requestApplicationTaskAnonimus();
             this.presentLoadingCargado();
         } else {
@@ -251,8 +248,7 @@ export class TutorialRequestsPage implements OnInit {
     }
 
     in(i) {
-        this.task = this.solicitudesList[i];
-        this._taskOdoo.setTaskCesar(this.task);
+        this._taskOdoo.setTaskCesar(this.solicitudesList[i]);
         this.navCtrl.navigateRoot('/tutorial-request-detail', {
             animated: true,
             animationDirection: 'forward',
