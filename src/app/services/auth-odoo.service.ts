@@ -5,12 +5,13 @@ let jayson = require('../../../node_modules/jayson/lib/client/');
 
 let jaysonServer = {
     //host: '192.168.0.102',
+    host: '93.188.165.85',
     //host: '192.168.0.107',
-    host: 'odoo.todoenunapp.com',
+    // host: 'odoo.todoenunapp.com',
     //host: 'localhost',
-    port: '443',
-    //port: '8069',
-    db: 'demo',
+    // port: '443',
+    port: '8069',
+    db: 'gremio',
     username: '',
     password: '',
     pathConnection: '/jsonrpc',
@@ -145,7 +146,7 @@ export class AuthOdooService {
                 }
             );
         };
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });

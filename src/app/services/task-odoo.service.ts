@@ -223,7 +223,7 @@ export class TaskOdooService {
         let poll = (uid, partner_id, last) => {
             let path = '/longpolling/poll';
 
-            client = jayson.https({
+            client = jayson.http({
                 host: jaysonServer.host,
                 port: jaysonServer.port + path,
             });
@@ -531,7 +531,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -804,7 +804,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -992,7 +992,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -1437,7 +1437,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -1798,7 +1798,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -2560,7 +2560,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -2619,7 +2619,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -2678,7 +2678,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -2943,7 +2943,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -3210,7 +3210,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -3333,7 +3333,7 @@ export class TaskOdooService {
     //     )
     //   }
 
-    //   let client = jayson.https({
+    //   let client = jayson.http({
     //     host: jaysonServer.host,
     //     port: jaysonServer.port + jaysonServer.pathConnection,
     //   })
@@ -3428,7 +3428,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -3517,7 +3517,7 @@ export class TaskOdooService {
     //     )
     //   }
 
-    //   let client = jayson.https({
+    //   let client = jayson.http({
     //     host: jaysonServer.host,
     //     port: jaysonServer.port + jaysonServer.pathConnection,
     //   })
@@ -3611,7 +3611,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -3881,7 +3881,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -3970,7 +3970,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4119,7 +4119,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4260,7 +4260,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4344,7 +4344,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4496,7 +4496,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4811,7 +4811,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4879,7 +4879,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -4962,7 +4962,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -5338,7 +5338,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -5707,7 +5707,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -5989,7 +5989,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -6140,7 +6140,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -6278,7 +6278,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
@@ -6388,7 +6388,7 @@ export class TaskOdooService {
             );
         };
 
-        let client = jayson.https({
+        let client = jayson.http({
             host: jaysonServer.host,
             port: jaysonServer.port + jaysonServer.pathConnection,
         });
