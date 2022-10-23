@@ -74,7 +74,9 @@
         <ion-col size="1"></ion-col>
     </ion-row>
 
-    <div class="new_task_buttons" *ngIf="tutorial == 'false'">
+    <!-- <div class="new_task_buttons" *ngIf="tutorial == 'false'"></div> -->
+
+    <div class="new_task_buttons" *ngIf="tutorial === 'false'">
         <div class="one_button">
             <p-button label="VER SOLICITUDES" (onClick)="goToTasks()">
                 <img alt="logo" src="/assets/icon/solicitudes_icon.svg" style="width: 1.5rem" />

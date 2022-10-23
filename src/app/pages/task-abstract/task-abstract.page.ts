@@ -77,7 +77,7 @@ export class TaskAbstractPage implements OnInit {
         this.task.address.latitude = String(this.datos.getlatitud());
         this.task.address.longitude = String(this.datos.getlongitud());
         this.task.title = this.datos.gettitulo();
-        this.task.product_id = 39;
+        this.task.product_id = 1; ///Hacerlo todo global//Servicio Fontaneria
         this.task.type = 'Servicio de Fontaneria';
         //this.task.date_planned = this.datos.getCalendarioD();
         //this.task.time = this.date.transform(this.datos.getCalendarioT(), 'HH:mm:ss');

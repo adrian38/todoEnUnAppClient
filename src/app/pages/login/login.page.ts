@@ -75,6 +75,7 @@ export class LoginPage implements OnInit {
                 this._taskOdoo.notificationPull();
             }
 
+            sessionStorage.setItem('tutorial', 'false');
             this.btn_disabled = false;
             this.navController.navigateRoot('/task-new', {
                 animated: true,
