@@ -1,0 +1,84 @@
+<app-header
+    headerText="Solicitudes"
+    [fillBackground]="true"
+    [expandHeader]="true"
+    expandText="{{servicio}}"
+    [cerrar]="true"
+    [atras]="true"
+    [titulo]="true"
+    (clickedClose)="cerrarsolicitud()"
+></app-header>
+
+<ion-content>
+    <div id="barra">
+        <ion-label>Especifique el nombre del servicio</ion-label>
+    </div>
+
+    <!-- <ion-grid style="margin-top: 20px;"> -->
+
+    <!--  <ion-row>
+      <div id="barra">
+        <ion-label >Titulo de la solicitud</ion-label>
+      </div>
+    </ion-row> -->
+
+    <form #formulario="ngForm">
+        <!-- <ion-item style="margin-top: 20px;" lines="none" >
+        <ion-label position="floating">Titulo:</ion-label>
+          <ion-input type="text"
+          name="titulo"
+          [(ngModel)]="titulo"
+          required
+          maxlength=20
+          id="item"></ion-input>
+      </ion-item> -->
+
+        <ion-row style="margin-top: 40px">
+            <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+            <ion-col size="10">
+                <ion-input
+                    type="text"
+                    name="titulo"
+                    [(ngModel)]="titulo"
+                    required
+                    maxlength="20"
+                    placeholder="NOMBRE..."
+                ></ion-input>
+            </ion-col>
+            <ion-col size="1" style="background: rgb(255, 255, 255)"></ion-col>
+        </ion-row>
+    </form>
+
+    <!-- <div id="barra" style="margin-top: 60px;">
+<ion-label >¿Dispone de los materiales?</ion-label>
+</div>
+
+
+
+
+<ion-list style="margin-top: 20px;">
+<ion-radio-group value="no">
+
+
+  <ion-item (click)="checkSiF()">
+    <ion-label>Si</ion-label>
+    <ion-radio slot="start" value="si"></ion-radio>
+  </ion-item>
+
+  <ion-item (click)="checkNoF()">
+    <ion-label>No</ion-label>
+    <ion-radio slot="start" value="no"></ion-radio>
+  </ion-item>
+
+
+</ion-radio-group>
+</ion-list> -->
+
+    <div class="task_title_buttons">
+        <div class="one_button">
+            <p-button (onClick)="goto()" label="SIGUIENTE"> </p-button>
+        </div>
+    </div>
+
+    <!-- </ion-grid> -->
+</ion-content>

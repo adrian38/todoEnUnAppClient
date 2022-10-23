@@ -76,4 +76,23 @@
         </ion-col>
         <ion-col size="1"></ion-col>
     </ion-row>
+
+    <ion-row style="margin-top: 20px">
+        <ion-col size="1"></ion-col>
+        <ion-col size="4.5">
+            <ion-row>
+                <img
+                    id="img4"
+                    class="service-type-image"
+                    src="/assets/icon/otherworks.svg"
+                    (click)="subTaskSelected(4)"
+                />
+            </ion-row>
+            <ion-row>
+                <ion-label style="margin-top: 10px; text-align: center; width: 120px"
+                    >{{this.subTaskTypes[4]}}
+                </ion-label>
+            </ion-row>
+        </ion-col>
+    </ion-row>
 </ion-content>

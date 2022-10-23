@@ -13,6 +13,7 @@ export class TaskSubcategoryPage implements OnInit {
         'Cambio de grifería',
         'Cambio de sifón',
         'Radiadores y calefacción',
+        'otros',
         // "Pequeño desatasco",
         // "Gran desatasco",
         // "Mecanismo cisterna",
@@ -59,16 +60,31 @@ export class TaskSubcategoryPage implements OnInit {
             }, 800);
         } else {
             this._serv.set_sub_servicio_activo(selected);
-            this._serv.setTitulo(this.subTaskTypes[selected]);
 
-            document.getElementById(id).className = 'jello-horizontal';
+            console.log('************* this.subTaskTypes[selected] *************');
+            console.log(this.subTaskTypes[selected]);
 
-            setTimeout(() => {
-                this.navCtrl.navigateRoot('/task-materials', {
-                    animated: true,
-                    animationDirection: 'forward',
-                });
-            }, 800);
+            if (this.subTaskTypes[selected] === 'otros') {
+                document.getElementById(id).className = 'jello-horizontal';
+
+                setTimeout(() => {
+                    this.navCtrl.navigateRoot('/task-title', {
+                        animated: true,
+                        animationDirection: 'forward',
+                    });
+                }, 800);
+            } else {
+                this._serv.setTitulo(this.subTaskTypes[selected]);
+
+                document.getElementById(id).className = 'jello-horizontal';
+
+                setTimeout(() => {
+                    this.navCtrl.navigateRoot('/task-materials', {
+                        animated: true,
+                        animationDirection: 'forward',
+                    });
+                }, 800);
+            }
         }
     }
 }

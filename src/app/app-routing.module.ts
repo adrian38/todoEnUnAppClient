@@ -220,6 +220,11 @@ const routes: Routes = [
                 (m) => m.UserPasswordLostPageModule
             ),
     },
+    {
+        path: 'task-title',
+        loadChildren: () =>
+            import('./pages/task-title/task-title.module').then((m) => m.TaskTitlePageModule),
+    },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

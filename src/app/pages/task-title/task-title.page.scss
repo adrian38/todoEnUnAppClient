@@ -1,0 +1,93 @@
+/* #barraSuperior{
+    width: 100%;
+    height: 99px;
+
+    background-color: rgb(246, 183, 118);
+}
+
+#barraInferior{
+    width: 100%;
+    height: 65px;
+    border-radius: 0px 0px 20px 0px;
+    background-color: rgb(49 ,49 ,57);
+}
+
+#logo{
+    width: 30px;
+    height: 30px;
+    margin-top: 13px;
+    margin-left: 6px;
+
+}
+*/
+
+:host ::ng-deep .task_title_buttons {
+    width: 80%;
+    margin-left: 10%;
+    //bottom: 0;
+    // padding-bottom: 10%;
+    position: absolute;
+    bottom: 5%;
+
+    .one_button {
+        width: 100%;
+        //padding-top: 15%;
+
+        .p-button {
+            margin-top: 10%;
+            span {
+                padding-top: 5px;
+                font: normal 15px 'Helvetica-Md', sans-serif !important;
+            }
+
+            color: rgb(49, 49, 57);
+            border: solid var(--ion-color-primary);
+            background: var(--ion-color-primary);
+            width: 100%;
+        }
+
+        .p-button:focus {
+            box-shadow: none !important;
+        }
+    }
+}
+
+#barra {
+    background-color: rgb(241, 241, 241);
+    width: 100%;
+    height: 50px;
+    margin-top: 43px;
+    font-family: 'Helvetica-Bd';
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* #item{
+
+    border-bottom: 0.5px solid  rgb(246, 183, 118);
+
+} */
+
+ion-input {
+    width: 100%;
+
+    /*  border: 1px solid  rgb(246, 183, 118); */
+    border: 1px transparent;
+    background-color: rgb(245, 245, 245);
+    fill: round($number: 7);
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 10px;
+}
+ion-input:focus-within {
+    width: 100%;
+
+    border: 1px transparent;
+    /* border: 3px solid  rgb(246, 183, 118); */
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 10px;
+    background-color: rgb(245, 245, 245);
+    fill: round($number: 7);
+}

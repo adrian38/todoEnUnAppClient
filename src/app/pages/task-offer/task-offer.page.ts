@@ -87,6 +87,7 @@ export class TaskOfferPage implements OnInit {
             this.segment.value = 'ofertas';
         } else {
             this.segment.value = 'detalle';
+            this.segChangeManual(this.subServ.get_Detalles());
         }
     }
 
@@ -332,6 +333,22 @@ export class TaskOfferPage implements OnInit {
             }
         }
     }
+    segChangeManual(detail: boolean) {
+        if (!detail) {
+            this.veroferta = true;
+            this.verdetalles = false;
+        } else {
+            this.veroferta = false;
+            this.verdetalles = true;
+
+            if (!this.task.downloadPhotoSo) {
+                this.temporal('Cargando Fotos...');
+                this._taskOdoo.requestPhotoSo(this.task);
+            } else {
+                this.disableImages();
+            }
+        }
+    }
 
     openChat(offer: TaskModel) {
         offer.Up_coming_Chat = this.task.Up_coming_Chat;
@@ -344,6 +361,7 @@ export class TaskOfferPage implements OnInit {
 
     onClickLocation() {
         this.subServ.setruta('/task-offer');
+        this.subServ.set_Detalles(true);
         this.navCtrl.navigateRoot('/map-detail', {
             animated: true,
             animationDirection: 'back',
