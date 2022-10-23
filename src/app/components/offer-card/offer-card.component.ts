@@ -19,7 +19,9 @@ export class OfferCardComponent implements OnInit {
         this.outputCancelOffer = new EventEmitter();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log('offer', this.offer);
+    }
 
     showDialog() {
         this.outputShowDialog.emit(this.index);

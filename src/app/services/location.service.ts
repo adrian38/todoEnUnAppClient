@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Capacitor } from "@capacitor/core";
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LocationService {
-    constructor() { }
+    constructor() {}
     async askToTurnOnGPS(): Promise<boolean> {
         return await new Promise((resolve, reject) => {
             LocationAccuracy.canRequest().then((canRequest: boolean) => {
@@ -17,19 +17,24 @@ export class LocationService {
                         () => {
                             resolve(true);
                         },
-                        error => { resolve(false); }
+                        (error) => {
+                            resolve(false);
+                        }
                     );
+                } else {
+                    resolve(false);
                 }
-                else { resolve(false); }
             });
-        })
+        });
     }
     // Check if application having GPS access permission
     async checkGPSPermission(): Promise<boolean> {
         return await new Promise((resolve, reject) => {
-            if (Capacitor.isNative) {
-                AndroidPermissions.checkPermission(AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-                    result => {
+            if (Capacitor.isNativePlatform()) {
+                AndroidPermissions.checkPermission(
+                    AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION
+                ).then(
+                    (result) => {
                         if (result.hasPermission) {
                             // If having permission show 'Turn On GPS' dialogue
                             resolve(true);
@@ -38,11 +43,14 @@ export class LocationService {
                             resolve(false);
                         }
                     },
-                    err => { alert(err); }
+                    (err) => {
+                        alert(err);
+                    }
                 );
+            } else {
+                resolve(true);
             }
-            else { resolve(true); }
-        })
+        });
     }
 
     async requestGPSPermission(): Promise<string> {
@@ -52,23 +60,26 @@ export class LocationService {
                     resolve('CAN_REQUEST');
                 } else {
                     // Show 'GPS Permission Request' dialogue
-                    AndroidPermissions.requestPermission(AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-                        .then(
-                            (result) => {
-                                if (result.hasPermission) {
-                                    // call method to turn on GPS
-                                    resolve('GOT_PERMISSION');
-                                } else {
-                                    resolve('DENIED_PERMISSION');
-                                }
-                            },
-                            error => {
-                                // Show alert if user click on 'No Thanks'
-                                alert('requestPermission Error requesting location permissions ' + error);
+                    AndroidPermissions.requestPermission(
+                        AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION
+                    ).then(
+                        (result) => {
+                            if (result.hasPermission) {
+                                // call method to turn on GPS
+                                resolve('GOT_PERMISSION');
+                            } else {
+                                resolve('DENIED_PERMISSION');
                             }
-                        );
+                        },
+                        (error) => {
+                            // Show alert if user click on 'No Thanks'
+                            alert(
+                                'requestPermission Error requesting location permissions ' + error
+                            );
+                        }
+                    );
                 }
             });
-        })
+        });
     }
 }

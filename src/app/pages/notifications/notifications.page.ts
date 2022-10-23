@@ -16,7 +16,7 @@ export class NotificationsPage implements OnInit {
     notificaciones: TaskModel[] = [];
     temNoti: TaskModel = new TaskModel();
 
-    tempNotificaciones: any;
+    tempNotificaciones: any[] = [];
 
     loading: any;
     newchat: number[];
@@ -33,7 +33,7 @@ export class NotificationsPage implements OnInit {
 
     ngOnInit() {
         this._taskOdoo.setNotification(false);
-        this.tempNotificaciones = this._taskOdoo.getNoificationArray();
+        // this.tempNotificaciones = this._taskOdoo.getNoificationArray();
 
         console.log(this.tempNotificaciones);
 

@@ -155,6 +155,7 @@ export class TaskOdooService {
     setTaskCesar(task: TaskModel) {
         taskCesar = task;
     }
+
     getTaskCesar() {
         return taskCesar;
     }
@@ -162,6 +163,7 @@ export class TaskOdooService {
     setTaskChat(task: TaskModel) {
         taskChat = task;
     }
+
     getTaskChat() {
         return taskChat;
     }
@@ -324,13 +326,13 @@ export class TaskOdooService {
 
                                             if (temp1 != -1) {
                                                 switch (line.product_id) {
-                                                    case 40:
+                                                    case 2:
                                                         applicationList[temp].So_offers[
                                                             temp1
                                                         ].work_force += line.price_unit;
                                                         break;
 
-                                                    case 41:
+                                                    case 3:
                                                         applicationList[temp].So_offers[
                                                             temp1
                                                         ].materials += line.price_unit;
@@ -1068,7 +1070,7 @@ export class TaskOdooService {
                                             // 	task.type = "Servicio de Fontanería"
                                             // 	break;
 
-                                            case 40:
+                                            case 2:
                                                 // console.log('hay materiales extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1077,7 +1079,7 @@ export class TaskOdooService {
                                                 }
                                                 break;
 
-                                            case 41:
+                                            case 3:
                                                 console.log('mano de obra extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1134,15 +1136,15 @@ export class TaskOdooService {
 
                                     if (temp != -1) {
                                         switch (orderLine.product_id[0]) {
-                                            case 39:
+                                            case 1:
                                                 task.type = 'Servicio de Fontanería';
                                                 break;
 
-                                            case 40:
+                                            case 2:
                                                 task.work_force = orderLine.price_unit;
                                                 break;
 
-                                            case 41:
+                                            case 3:
                                                 task.materials = orderLine.price_unit;
                                                 break;
                                         }
@@ -1501,11 +1503,11 @@ export class TaskOdooService {
                                         //////console.log(line, "lineas");
                                         if (line === orderLine.id) {
                                             switch (orderLine.product_id[0]) {
-                                                case 40:
+                                                case 1:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 41:
+                                                case 2:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -1877,11 +1879,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 40:
+                                                case 2:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 41:
+                                                case 3:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -1905,7 +1907,7 @@ export class TaskOdooService {
                                             // 	task.type = "Servicio de Fontanería"
                                             // 	break;
 
-                                            case 40:
+                                            case 2:
                                                 // console.log('hay materiales extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1914,7 +1916,7 @@ export class TaskOdooService {
                                                 }
                                                 break;
 
-                                            case 41:
+                                            case 3:
                                                 //console.log('mano de obra extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1973,15 +1975,15 @@ export class TaskOdooService {
 
                                     if (temp != -1) {
                                         switch (orderLine.product_id[0]) {
-                                            case 39:
+                                            case 1:
                                                 task.type = 'Servicio de Fontanería';
                                                 break;
 
-                                            case 40:
+                                            case 2:
                                                 task.work_force = orderLine.price_unit;
                                                 break;
 
-                                            case 41:
+                                            case 3:
                                                 task.materials = orderLine.price_unit;
                                                 break;
                                         }
@@ -4716,11 +4718,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 40:
+                                                case 2:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 41:
+                                                case 3:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -5033,11 +5035,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 40:
+                                                case 2:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 41:
+                                                case 3:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -5411,11 +5413,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 40:
+                                                case 2:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 41:
+                                                case 3:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }

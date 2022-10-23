@@ -57,40 +57,14 @@ export class MapPage implements OnInit {
         public ngZone: NgZone,
         private locationService: LocationService
     ) {
-        // this.mapType = this.datos.getMapType();
-        //console.log('mapType', this.mapType);
-
         this.calle = this.datos.getcalle().trim();
 
-        // if (this.mapType) {
-        //     console.log('poner geo');
         if (this.calle) {
             this.numero = this.datos.getnumero().toString();
             this.getLocaleDirection();
         } else {
             this.getMyLocation(false);
         }
-        // }
-
-        // if (!this.mapType) {
-        //     console.log('detalles');
-        //     if (this.datos.getruta() !== '/task-location') {
-        //         this.task = this._taskOdoo.getTaskCesar();
-        //         this.lat = Number(this.task.address.latitude);
-        //         this.lng = Number(this.task.address.longitude);
-        //         const nuevoMarcador = new Marcador(this.lat, this.lng);
-        //         this.marcadores.push(nuevoMarcador);
-        //     } else {
-        //         this.lat = Number(this.datos.getlatitud());
-        //         this.lng = Number(this.datos.getlongitud());
-        //         const nuevoMarcador = new Marcador(this.lat, this.lng);
-
-        //         this.marcadores.push(nuevoMarcador);
-        //     }
-        // }
-
-        /*  this.calle= this.datos.getcalle().trim(),"calle";
-              this.numero=this.datos.getnumero(); */
     }
     ngOnInit() {
         setTimeout(() => {
