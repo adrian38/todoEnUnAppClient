@@ -9,7 +9,9 @@ import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
     styleUrls: ['./task-title.page.scss'],
 })
 export class TaskTitlePage implements OnInit {
-    titulo: string = '';
+    titulo: boolean = false;
+    title: string = '';
+    titulo_vacio: boolean = false;
     checkSi: boolean = false;
     checkNo: boolean = true;
     validado: boolean = true;
@@ -26,31 +28,11 @@ export class TaskTitlePage implements OnInit {
     ngOnInit() {
         this.servicio = this._serv.getServ();
 
-        /* this.servicio=this._serv.getServ();
-		console.log(this.servicio); */
-        /* this.titulo=this._serv.gettitulo(); */
-
-        /*     this.titulo=this._serv.get_sub_servicio_activo();
-			if(this.titulo==""){
-			  this.validado=true;
-
-
-			}
-			else{
-			  this.validado=false;
-
-			} */
-
-        this.titulo = this._serv.gettitulo();
+        this.title = this._serv.gettitulo();
 
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.navCtrl.navigateRoot('/option', { animated: true, animationDirection: 'back' });
         });
-
-        /* this.platform.backButton.subscribeWithPriority(10, () => {
-		  this.navCtrl.navigateRoot('/option', {animated: true, animationDirection: 'back' }) ;
-
-		  }); */
     }
 
     cerrarsolicitud() {
@@ -89,11 +71,21 @@ export class TaskTitlePage implements OnInit {
     }
 
     goto() {
-        this._serv.setTitulo(this.titulo);
+        if (this.title != '') {
+            this.titulo_vacio = false;
+        } else {
+            this.titulo_vacio = true;
+        }
 
-        this.navCtrl.navigateRoot('/task-materials', {
-            animated: true,
-            animationDirection: 'forward',
-        });
+        if (!this.titulo_vacio) {
+            this._serv.setTitulo(this.title);
+
+            this.navCtrl.navigateRoot('/task-materials', {
+                animated: true,
+                animationDirection: 'forward',
+            });
+        } else {
+            console.log('title empthy');
+        }
     }
 }

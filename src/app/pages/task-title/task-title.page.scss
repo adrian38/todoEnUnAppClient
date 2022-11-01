@@ -21,6 +21,21 @@
 }
 */
 
+.no_border {
+    border: none !important;
+}
+
+.green_border {
+    border: 1px solid var(--ion-color-greenblue) !important;
+    border-radius: 5px;
+}
+.mandatory {
+    font: normal 15px 'Helvetica-Roman', sans-serif;
+    color: rgb(101, 173, 172);
+    display: block;
+    height: 10px !important;
+}
+
 :host ::ng-deep .task_title_buttons {
     width: 80%;
     margin-left: 10%;

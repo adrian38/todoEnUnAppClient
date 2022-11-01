@@ -4,7 +4,7 @@ import { AlertController, LoadingController, NavController, Platform } from '@io
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { Address } from '../../models/task.model';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
-import { Photo } from 'src/app/interfaces/interfaces';
+// import { Photo } from 'src/app/interfaces/interfaces';
 import { ToastController } from '@ionic/angular';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
@@ -224,6 +224,7 @@ export class RegistrationDataUserPage implements OnInit {
         this.avatarusuario = this.datos.getfotoRegis();
         this.avatarusuario64 = this.datos.getfoto0();
     }
+
     vaciar_campos() {
         this.datos.setfoto0('');
         this.datos.setfoto1('');
@@ -240,7 +241,6 @@ export class RegistrationDataUserPage implements OnInit {
         this.datos.setportal('');
         this.datos.setescalera('');
         this.datos.setcod_postal('');
-
         this.coordenadas_puesta = false;
         this.long = null;
         this.lat = null;
@@ -336,7 +336,6 @@ export class RegistrationDataUserPage implements OnInit {
             this.obligatorioGPS = false;
         }
     }
-    //-----------------------------*******************----------------
 
     completarRegistro() {
         this.usuario = new UsuarioModel();
@@ -391,6 +390,7 @@ export class RegistrationDataUserPage implements OnInit {
             this.presentLoading();
         };
     }
+
     async presentLoading() {
         this.loading = await this.loadingController.create({
             cssClass: 'my-custom-class',
