@@ -326,13 +326,13 @@ export class TaskOdooService {
 
                                             if (temp1 != -1) {
                                                 switch (line.product_id) {
-                                                    case 2:
+                                                    case 40:
                                                         applicationList[temp].So_offers[
                                                             temp1
                                                         ].work_force += line.price_unit;
                                                         break;
 
-                                                    case 3:
+                                                    case 41:
                                                         applicationList[temp].So_offers[
                                                             temp1
                                                         ].materials += line.price_unit;
@@ -1070,7 +1070,7 @@ export class TaskOdooService {
                                             // 	task.type = "Servicio de Fontanería"
                                             // 	break;
 
-                                            case 2:
+                                            case 40:
                                                 // console.log('hay materiales extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1079,7 +1079,7 @@ export class TaskOdooService {
                                                 }
                                                 break;
 
-                                            case 3:
+                                            case 41:
                                                 console.log('mano de obra extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1136,15 +1136,15 @@ export class TaskOdooService {
 
                                     if (temp != -1) {
                                         switch (orderLine.product_id[0]) {
-                                            case 1:
+                                            case 39:
                                                 task.type = 'Servicio de Fontanería';
                                                 break;
 
-                                            case 2:
+                                            case 40:
                                                 task.work_force = orderLine.price_unit;
                                                 break;
 
-                                            case 3:
+                                            case 41:
                                                 task.materials = orderLine.price_unit;
                                                 break;
                                         }
@@ -1503,11 +1503,11 @@ export class TaskOdooService {
                                         //////console.log(line, "lineas");
                                         if (line === orderLine.id) {
                                             switch (orderLine.product_id[0]) {
-                                                case 1:
+                                                case 40:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 2:
+                                                case 41:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -1879,11 +1879,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 2:
+                                                case 40:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 3:
+                                                case 41:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -1907,7 +1907,7 @@ export class TaskOdooService {
                                             // 	task.type = "Servicio de Fontanería"
                                             // 	break;
 
-                                            case 2:
+                                            case 40:
                                                 // console.log('hay materiales extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1916,7 +1916,7 @@ export class TaskOdooService {
                                                 }
                                                 break;
 
-                                            case 3:
+                                            case 41:
                                                 //console.log('mano de obra extra');
                                                 if (
                                                     orderLine.product_qty != orderLine.qty_invoiced
@@ -1969,21 +1969,25 @@ export class TaskOdooService {
                         for (let orderLine of value) {
                             for (let task of hiredList) {
                                 for (let line of task.facturation_line) {
+
+                                    // console.log('************* task.facturation_line *************');
+                                    // console.log(line);
                                     let temp = line.findIndex(
                                         (element) => element === orderLine.id
                                     );
 
                                     if (temp != -1) {
+
                                         switch (orderLine.product_id[0]) {
-                                            case 1:
+                                            case 39:
                                                 task.type = 'Servicio de Fontanería';
                                                 break;
 
-                                            case 2:
+                                            case 40:
                                                 task.work_force = orderLine.price_unit;
                                                 break;
 
-                                            case 3:
+                                            case 41:
                                                 task.materials = orderLine.price_unit;
                                                 break;
                                         }
@@ -2049,7 +2053,7 @@ export class TaskOdooService {
         };
 
         let list_msg_ids = () => {
-            console.log(PO_id, 'PO_id');
+
 
             let inParams = [];
             inParams.push([PO_id]);
@@ -2162,6 +2166,7 @@ export class TaskOdooService {
                             }
                         }
 
+
                         for (let task of recordList) {
                             let temp = value.find((element) => element.order_id[0] === task.So_id);
                             if (temp) {
@@ -2213,60 +2218,64 @@ export class TaskOdooService {
                         ////console.log(err, 'Error requestOffersForTask');
                         notificationError$.next({ type: 1 });
                     } else {
-                        value = value.filter((po) => {
-                            return po.state === 'sent' || po.state === 'purchase';
-                        });
+                        if (value) {
+                            value = value.filter((po) => {
+                                return po.state === 'sent' || po.state === 'purchase';
+                            });
 
-                        console.log(value, 'valores de PO');
 
-                        for (let task of applicationList) {
-                            for (let offert of value) {
-                                if (task.So_origin === offert.origin) {
-                                    task.notificationNewOffert = offert['new_budget'];
-                                    newTaskModel = new TaskModel();
+                            for (let task of applicationList) {
+                                for (let offert of value) {
+                                    if (task.So_origin === offert.origin) {
+                                        task.notificationNewOffert = offert['new_budget'];
+                                        newTaskModel = new TaskModel();
+                                        //provider_partner_id.push(temp['partner_id'][0]);
+                                        newTaskModel.provider_id = offert['partner_id'][0];
+                                        newTaskModel.provider_name = offert['partner_id'][1];
+                                        newTaskModel.Po_id = offert['id'];
+                                        newTaskModel.So_id = task.So_id;
+                                        newTaskModel.notificationNewOffert = offert['new_budget'];
+                                        PO_id.push(offert['id']);
+                                        newTaskModel.Po_order_line = offert['order_line'];
+                                        //task.budget = temp['amount_total'];
+                                        task.So_offers.push(newTaskModel);
+                                    }
+                                }
+                            }
+
+                            ////console.log(PO_id, "Para buscar presupuestos");
+
+                            for (let task of hiredList) {
+                                let temp = value.find(
+                                    (element) => element.origin === task.So_origin
+                                );
+                                if (temp) {
                                     //provider_partner_id.push(temp['partner_id'][0]);
-                                    newTaskModel.provider_id = offert['partner_id'][0];
-                                    newTaskModel.provider_name = offert['partner_id'][1];
-                                    newTaskModel.Po_id = offert['id'];
-                                    newTaskModel.So_id = task.So_id;
-                                    newTaskModel.notificationNewOffert = offert['new_budget'];
-                                    PO_id.push(offert['id']);
-                                    newTaskModel.Po_order_line = offert['order_line'];
+                                    task.provider_id = temp['partner_id'][0];
+                                    task.provider_name = temp['partner_id'][1];
+                                    task.Po_state = temp['state'];
+                                    task.Po_id = temp['id'];
+                                    task.cash = temp['cash'];
+                                    task.notificationExtraCost = temp['extra_budget'];
+                                    PO_id.push(temp['id']);
+                                    task.Po_order_line = temp['order_line'];
+
                                     //task.budget = temp['amount_total'];
-                                    task.So_offers.push(newTaskModel);
+                                    //task.origin = temp['origin'];
+                                }
+                            }
+
+                            for (let task of recordList) {
+                                //console.log("entrando a los records");
+                                let temp = value.find(
+                                    (element) => element.origin === task.So_origin
+                                );
+                                if (temp) {
+                                    //console.log("se encontro el record",temp['amount_total'])
+                                    task.So_budget = temp['amount_total'];
                                 }
                             }
                         }
-
-                        ////console.log(PO_id, "Para buscar presupuestos");
-
-                        for (let task of hiredList) {
-                            let temp = value.find((element) => element.origin === task.So_origin);
-                            if (temp) {
-                                //provider_partner_id.push(temp['partner_id'][0]);
-                                task.provider_id = temp['partner_id'][0];
-                                task.provider_name = temp['partner_id'][1];
-                                task.Po_state = temp['state'];
-                                task.Po_id = temp['id'];
-                                task.cash = temp['cash'];
-                                task.notificationExtraCost = temp['extra_budget'];
-                                PO_id.push(temp['id']);
-                                task.Po_order_line = temp['order_line'];
-
-                                //task.budget = temp['amount_total'];
-                                //task.origin = temp['origin'];
-                            }
-                        }
-
-                        for (let task of recordList) {
-                            //console.log("entrando a los records");
-                            let temp = value.find((element) => element.origin === task.So_origin);
-                            if (temp) {
-                                //console.log("se encontro el record",temp['amount_total'])
-                                task.So_budget = temp['amount_total'];
-                            }
-                        }
-
                         get_so_type();
                     }
                 }
@@ -4718,11 +4727,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 2:
+                                                case 40:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 3:
+                                                case 41:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -5035,11 +5044,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 2:
+                                                case 40:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 3:
+                                                case 41:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }
@@ -5413,11 +5422,11 @@ export class TaskOdooService {
                                                 // 	task.type = "Servicio de Fontanería"
                                                 // 	break;
 
-                                                case 2:
+                                                case 40:
                                                     offer.work_force += orderLine.price_unit;
                                                     break;
 
-                                                case 3:
+                                                case 41:
                                                     offer.materials += orderLine.price_unit;
                                                     break;
                                             }

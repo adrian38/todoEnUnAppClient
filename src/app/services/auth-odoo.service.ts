@@ -4,14 +4,14 @@ import { Observable, Subject } from 'rxjs';
 let jayson = require('../../../node_modules/jayson/lib/client/');
 
 let jaysonServer = {
-    //host: '192.168.0.102',
-    host: '93.188.165.85',
+    host: '192.168.1.138',
+    // host: '93.188.165.85',
     //host: '192.168.0.107',
     // host: 'odoo.todoenunapp.com',
     //host: 'localhost',
     // port: '443',
     port: '8069',
-    db: 'gremio',
+    db: 'demo',
     username: '',
     password: '',
     pathConnection: '/jsonrpc',
