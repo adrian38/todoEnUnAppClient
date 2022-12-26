@@ -7,5 +7,16 @@
 		"allowNavigation": [
 			"todoenunapp.com"
 		]
+	},
+	"SplashScreen": {
+		"launchAutoHide": true,
+		"launchShowDuration": 0
+	},
+	"cordova": {
+		"preferences": {
+			"LottieFullScreen": true,
+			"LottieHideAfterAnimationEnd": true,
+			"LottieAnimationLocation": "public/assets/splash.json"
+		}
 	}
 }
