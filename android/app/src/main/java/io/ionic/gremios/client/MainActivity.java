@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.ionic.gremios.client;
 
 import com.getcapacitor.BridgeActivity;
 

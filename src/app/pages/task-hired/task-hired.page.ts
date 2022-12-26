@@ -64,7 +64,7 @@ export class TaskHiredPage implements OnInit {
     //comentario_evidencia: string = ''
     displayClasificar: boolean = false;
     clasificacion: number = 0;
-    val: number;
+    val: number = 5;
     barraChat: boolean = true;
     tempMessageId: number[] = [];
 

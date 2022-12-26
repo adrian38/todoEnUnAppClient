@@ -177,8 +177,7 @@
             <h2>{{tempInfoProvider.provider_name}}</h2>
             <p-rating
                 [ngModel]="tempInfoProvider.ranking_provider"
-                readonly="true"
-                stars="5"
+                [readonly]="true"
                 [cancel]="false"
             ></p-rating>
         </ion-col>

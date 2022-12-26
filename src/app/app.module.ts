@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +29,7 @@ import localeEsAr from '@angular/common/locales/es-AR';
 registerLocaleData(localeEsAr, 'es');
 import { registerLocaleData } from '@angular/common';
 
-import { AppUpdate } from '@ionic-native/app-update/ngx';
+// import { AppUpdate } from '@ionic-native/app-update/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -53,10 +53,10 @@ import { AppUpdate } from '@ionic-native/app-update/ngx';
         ObtSubSService,
         SignUpOdooService,
         LocationService,
-        SplashScreen,
+        // SplashScreen,
         DatePipe,
         MessageService,
-        AppUpdate,
+        // AppUpdate,
         {
             provide: LOCALE_ID,
             useValue: 'es',

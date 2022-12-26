@@ -1,5 +1,5 @@
 {
-    "appId": "io.ionic.gremios.cliente",
+    "appId": "io.ionic.gremios.client",
     "appName": "todoEnUnAppCliente",
     "webDir": "www",
     "bundledWebRuntime": false,
