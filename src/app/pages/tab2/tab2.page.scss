@@ -68,13 +68,13 @@
     // font-family: $font-aero;
     // font-size: 16px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Bd', sans-serif;
+    font: normal 16px 'Helvetica-Bd';
     text-align: left;
     margin: 5px 0 12px 0;
 }
 
 .text-helvetica {
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     text-align: left;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .segment_btn {
-    font: normal 15px 'Helvetica-Roman', sans-serif;
+    font: normal 15px 'Helvetica-Roman';
     color: var(--ion-color-black);
     --color-checked: var(--ion-color-black);
     --indicator-height: 4px !important;
@@ -99,5 +99,5 @@
 }
 
 ion-segment .segment-button-checked {
-    font: normal 15px 'Helvetica-Bd', sans-serif;
+    font: normal 15px 'Helvetica-Bd';
 }

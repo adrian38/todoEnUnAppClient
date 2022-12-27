@@ -10,9 +10,9 @@
         width: 100% !important;
         min-width: 160px !important;
         height: 32px;
-        font: normal 15px 'Helvetica-Roman', sans-serif !important;
+        font: normal 15px 'Helvetica-Roman' !important;
         --border-radius: 5px;
-        //font: normal 15px "Helvetica-Bd", sans-serif;
+        //font: normal 15px "Helvetica-Bd", ;
     }
 }
 
@@ -184,7 +184,7 @@ ion-item {
 
 .btn_pagar {
     width: 100%;
-    font: normal 15px 'Helvetica-Roman', sans-serif !important;
+    font: normal 15px 'Helvetica-Roman' !important;
     --border-radius: 5px;
     color: black;
 }
@@ -195,7 +195,7 @@ ion-item {
 }
 
 .segment_btn {
-    font: normal 15px 'Helvetica-Roman', sans-serif;
+    font: normal 15px 'Helvetica-Roman';
     color: var(--ion-color-black);
     --color-checked: var(--ion-color-black);
     --indicator-height: 4px;
@@ -210,7 +210,7 @@ ion-item {
 }
 
 ion-segment .segment-button-checked {
-    font: normal 15px 'Helvetica-Bd', sans-serif;
+    font: normal 15px 'Helvetica-Bd';
 }
 
 .module {
@@ -225,14 +225,14 @@ ion-segment .segment-button-checked {
 }
 
 .h2_title {
-    font: normal 16px 'Helvetica-Bd', sans-serif !important;
+    font: normal 16px 'Helvetica-Bd' !important;
     padding: 8px 5px 8px 0 !important;
     text-align: left;
     width: 100%;
 }
 
 .h6_title {
-    font: normal 12px 'Helvetica-Roman', sans-serif !important;
+    font: normal 12px 'Helvetica-Roman' !important;
     text-align: left;
     width: 100%;
     padding: 5px 20px 5px 2px !important;
@@ -245,7 +245,7 @@ ion-segment .segment-button-checked {
 }
 
 .h3_title {
-    font: normal 14px 'Helvetica-Md', sans-serif !important;
+    font: normal 14px 'Helvetica-Md' !important;
     margin: 8px 5px 8px 10px !important;
     text-align: left;
     width: 100%;
@@ -294,7 +294,7 @@ ion-segment .segment-button-checked {
         .p-button {
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: var(--ion-color-primary-background);

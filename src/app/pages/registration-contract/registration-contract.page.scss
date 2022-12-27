@@ -12,13 +12,13 @@
 }
 
 .title {
-    font: normal 28px 'Helvetica-Bd', sans-serif;
+    font: normal 28px 'Helvetica-Bd';
     color: var(--ion-color-orange);
 }
 
 #terminos {
     text-align: justify;
-    font: normal 12px verdana, sans-serif;
+    font: normal 12px verdana;
     overflow: auto;
     margin-top: 30px;
     margin-bottom: 10px;
@@ -50,7 +50,7 @@ ion-checkbox::part(container) {
     width: 100% !important;
     min-width: 160px !important;
     height: 32px;
-    font: normal 15px 'Helvetica-Roman', sans-serif !important;
+    font: normal 15px 'Helvetica-Roman' !important;
 }
 
 :host ::ng-deep .task_materials_buttons {
@@ -70,7 +70,7 @@ ion-checkbox::part(container) {
             margin-top: 10%;
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: rgb(49, 49, 57);

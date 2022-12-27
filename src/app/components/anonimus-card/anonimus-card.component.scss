@@ -1,19 +1,19 @@
-@font-face {
-    font-family: 'Aero';
-    src: url('../../../assets/fonts/Aero.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Helvetica';
-    src: url('../../../assets/fonts/HelveticaNeueLTStd-Roman.otf') format('opentype');
-}
-$font-aero: 'Aero', sans-serif;
-$font-helvetica: 'Helvetica', sans-serif;
+// @font-face {
+//     font-family: 'Aero';
+//     src: url('../../../assets/fonts/Aero.ttf') format('truetype');
+// }
+// @font-face {
+//     font-family: 'Helvetica';
+//     src: url('../../../assets/fonts/HelveticaNeueLTStd-Roman.otf') format('opentype');
+// }
+// $font-aero: 'Aero', ;
+// $font-helvetica: 'Helvetica', ;
 
 .cat_title {
     // font-family: $font-aero;
     // font-size: 16px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Bd', sans-serif;
+    font: normal 16px 'Helvetica-Bd';
     text-align: left;
     margin: 5px 0 12px 0;
 }
@@ -21,12 +21,11 @@ marquee {
     // font-family: $font-aero;
     // font-size: 16px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Bd', sans-serif;
+    font: normal 16px 'Helvetica-Bd';
     margin: 5px 0 12px 0;
 }
 
-
-.noti_imag{
+.noti_imag {
     width: 75%;
     height: 75%;
     margin-top: 10px;
@@ -37,7 +36,7 @@ marquee {
 
     // font-size: 5vw !important;
 
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     text-align: left;
     // margin: 4px 8px;
 }

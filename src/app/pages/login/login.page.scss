@@ -9,7 +9,7 @@
 
     .welcome {
         color: var(--ion-color-orange);
-        font: normal 30px 'Helvetica-Bd', sans-serif;
+        font: normal 30px 'Helvetica-Bd';
         // text-align: left;
     }
 
@@ -60,7 +60,7 @@
                 margin-top: 10%;
                 span {
                     padding-top: 5px;
-                    font: normal 15px 'Helvetica-Md', sans-serif !important;
+                    font: normal 15px 'Helvetica-Md' !important;
                 }
 
                 color: rgb(49, 49, 57);
@@ -85,7 +85,7 @@
                 color: var(--ion-color-primary-green);
                 text-decoration: none;
                 text-align: left;
-                font: normal 12px sans-serif, verdana;
+                font: normal 12px, verdana;
                 min-width: 160px !important;
             }
         }

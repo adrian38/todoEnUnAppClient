@@ -77,7 +77,7 @@ ion-card {
 //   }
 
 // .title {
-//     font : normal 28px 'Helvetica-Md', sans-serif;
+//     font : normal 28px 'Helvetica-Md', ;
 //     color: var(--ion-color-orange);
 //   }
 
@@ -120,7 +120,7 @@ ion-card {
 //   .next_btn {
 //     --border-radius: 5px !important;
 //     width          : 140px;
-//     font: normal 16px 'Helvetica-Roman', sans-serif !important;
+//     font: normal 16px 'Helvetica-Roman',  !important;
 //     height         : 30px;
 
 //   }
@@ -136,7 +136,7 @@ ion-card {
 //   }
 
 .mandatory {
-    font: normal 8px 'Helvetica-Roman', sans-serif;
+    font: normal 8px 'Helvetica-Roman';
     color: rgb(101, 173, 172);
     display: block;
     height: 10px !important;
@@ -145,7 +145,7 @@ ion-card {
 .date {
     background: var(--ion-color-gray);
     height: 35px;
-    font: 300 14px 'Helvetica-Roman', sans-serif !important;
+    font: 300 14px 'Helvetica-Roman' !important;
 
     border-radius: 5px !important;
     padding: 5px 6px !important;
@@ -190,7 +190,7 @@ ion-card {
 //     --padding-start : 5px;
 //     --padding-bottom: 0;
 //     --padding-top   : 0;
-//     font            : normal 14px 'Helvetica-Roman', sans-serif !important;
+//     font            : normal 14px 'Helvetica-Roman',  !important;
 //     border-radius   : 5px;
 
 //   }
@@ -204,7 +204,7 @@ ion-card {
 //     background      :  var(--ion-color-gray);
 //     text-align      : right;
 //     width           : 40%;
-//     font            : normal 13px 'Helvetica-Roman', sans-serif !important;
+//     font            : normal 13px 'Helvetica-Roman',  !important;
 //     min-width       : 100px;
 
 //   }
@@ -218,7 +218,7 @@ ion-card {
 //     background      :  var(--ion-color-gray);
 //     text-align      : right;
 //     width           : 40%;
-//     font            : normal 13px 'Helvetica-Roman', sans-serif !important;
+//     font            : normal 13px 'Helvetica-Roman',  !important;
 //     min-width       : 100px;
 
 //   }
@@ -247,7 +247,7 @@ ion-card {
 //   }
 
 //   .iae_label {
-//     font      : normal 16px 'Helvetica-Roman', sans-serif !important;
+//     font      : normal 16px 'Helvetica-Roman',  !important;
 //     text-align: center;
 //     padding   : 6px;
 //   }
@@ -273,7 +273,7 @@ ion-card {
             margin-top: 10%;
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: rgb(49, 49, 57);

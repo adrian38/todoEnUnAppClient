@@ -14,7 +14,7 @@
     border-radius: 5px !important;
     width: 25% !important;
     text-align: right;
-    font-family: 'Helvetica-Roman', sans-serif !important;
+    font-family: 'Helvetica-Roman' !important;
     font-size: 16px !important;
     padding: 5px 7px;
 }
@@ -27,14 +27,14 @@
 
 .label_text {
     width: 75%;
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     word-wrap: normal;
     padding-top: 7px;
 }
 
 .label_right {
     width: 25%;
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     padding: 5px 7px;
     text-align: right;
 }
@@ -43,8 +43,8 @@
     min-width: 150px;
     height: 30px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Roman', sans-serif !important;
-    //font          : normal 16px 'Helvetica-Bd', sans-serif;
+    font: normal 16px 'Helvetica-Roman' !important;
+    //font          : normal 16px 'Helvetica-Bd', ;
 }
 
 :host ::ng-deep .task_materials_buttons {
@@ -63,7 +63,7 @@
             margin-top: 10%;
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: rgb(49, 49, 57);

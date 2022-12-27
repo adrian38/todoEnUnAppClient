@@ -33,12 +33,12 @@
 //     width: 100% !important;
 //     min-width: 160px !important;
 //     height: 40px;
-//     font: normal 15px 'Helvetica-Roman', sans-serif !important;
-//     //font: normal 15px "Helvetica-Bd", sans-serif;
+//     font: normal 15px 'Helvetica-Roman',  !important;
+//     //font: normal 15px "Helvetica-Bd", ;
 // }
 
 .h3_title {
-    font: normal 14px 'Helvetica-Md', sans-serif !important;
+    font: normal 14px 'Helvetica-Md' !important;
     margin: 8px 5px 8px 10px !important;
     text-align: left;
     width: 100%;
@@ -70,7 +70,7 @@ img {
             margin-top: 10%;
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: rgb(49, 49, 57);
@@ -95,7 +95,7 @@ img {
 
 .welcome {
     color: var(--ion-color-orange);
-    font: normal 22px 'Helvetica-Bd', sans-serif;
+    font: normal 22px 'Helvetica-Bd';
     text-align: left;
 }
 
@@ -110,9 +110,9 @@ img {
 //     width: 100% !important;
 //     min-width: 160px !important;
 //     height: 32px;
-//     font: normal 15px 'Helvetica-Roman', sans-serif !important;
+//     font: normal 15px 'Helvetica-Roman',  !important;
 //     --border-radius: 5px;
-//     //font: normal 15px "Helvetica-Bd", sans-serif;
+//     //font: normal 15px "Helvetica-Bd", ;
 //   }
 
 .div {
@@ -129,7 +129,7 @@ img {
     color: rgb(42, 176, 185);
     text-decoration: none;
     text-align: left;
-    font: normal 12px sans-serif, verdana;
+    font: normal 12px, verdana;
     min-width: 160px !important;
 }
 
@@ -151,7 +151,7 @@ img {
     // --padding-bottom: 8px;
     // --padding-end: 15px;
     text-align: left;
-    // font-family: "Helvetica-Md", sans-serif;
+    // font-family: "Helvetica-Md", ;
     font-size: 12px !important;
     outline: none !important;
 }

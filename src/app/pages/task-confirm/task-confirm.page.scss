@@ -27,7 +27,7 @@
     border-radius: 5px !important;
     width: 25% !important;
     text-align: right;
-    font-family: 'Helvetica-Roman', sans-serif !important;
+    font-family: 'Helvetica-Roman' !important;
     font-size: 16px !important;
     padding: 5px 7px;
 }
@@ -40,14 +40,14 @@
 
 .label_text {
     width: 75%;
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     word-wrap: normal;
     padding-top: 7px;
 }
 
 .label_right {
     width: 25%;
-    font: normal 16px 'Helvetica-Roman', sans-serif;
+    font: normal 16px 'Helvetica-Roman';
     padding: 5px 7px;
     text-align: right;
 }
@@ -56,8 +56,8 @@
     min-width: 150px;
     height: 30px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Roman', sans-serif !important;
-    //font          : normal 16px 'Helvetica-Bd', sans-serif;
+    font: normal 16px 'Helvetica-Roman' !important;
+    //font          : normal 16px 'Helvetica-Bd', ;
 }
 
 .page_subheader {
@@ -71,12 +71,12 @@
 }
 
 .page_subheader_title {
-    font: normal 16px 'Helvetica-Md', sans-serif !important;
+    font: normal 16px 'Helvetica-Md' !important;
     text-transform: uppercase;
 }
 
 .label2 {
-    font: normal 14px 'Helvetica-Md', sans-serif !important;
+    font: normal 14px 'Helvetica-Md' !important;
     width: 100% !important;
 }
 
@@ -90,7 +90,7 @@
     // --padding-bottom: 8px;
     --padding-start: 10px;
     text-align: left;
-    //font-family     : 'Helvetica-Roman', sans-serif !important;
+    //font-family     : 'Helvetica-Roman',  !important;
     font-size: 12px !important;
     outline: none !important;
     min-width: 10%;
@@ -125,16 +125,16 @@
     min-width: 80px;
     height: 30px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Roman', sans-serif !important;
-    //font: normal 16px "Helvetica-Md", sans-serif;
+    font: normal 16px 'Helvetica-Roman' !important;
+    //font: normal 16px "Helvetica-Md", ;
 }
 
 .btn_pagar {
     min-width: 70px;
     height: 30px;
     text-transform: uppercase;
-    font: normal 16px 'Helvetica-Roman', sans-serif !important;
-    //font: normal 16px "Helvetica-Md", sans-serif;
+    font: normal 16px 'Helvetica-Roman' !important;
+    //font: normal 16px "Helvetica-Md", ;
 }
 
 .no_border {
@@ -152,7 +152,7 @@
 }
 
 .mandatory {
-    font: normal 15px 'Helvetica-Roman', sans-serif;
+    font: normal 15px 'Helvetica-Roman';
     color: rgb(101, 173, 172);
     display: block;
     height: 10px !important;
@@ -175,7 +175,7 @@
         .p-button {
             span {
                 padding-top: 5px;
-                font: normal 15px 'Helvetica-Md', sans-serif !important;
+                font: normal 15px 'Helvetica-Md' !important;
             }
 
             color: var(--ion-color-primary-background);

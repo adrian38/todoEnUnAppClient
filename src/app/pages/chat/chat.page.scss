@@ -9,7 +9,7 @@
 }
 
 .label_presupuesto {
-    font: normal 15px 'Helvetica-Bd', sans-serif;
+    font: normal 15px 'Helvetica-Bd';
 }
 
 .pres_container {
@@ -66,7 +66,7 @@
     margin-left: 10px !important;
     margin-top: 8px !important;
     margin-bottom: 8px !important;
-    font: normal 14px 'Helvetica-Roman', sans-serif;
+    font: normal 14px 'Helvetica-Roman';
     text-align: left;
     z-index: 0 !important;
 }
@@ -82,7 +82,7 @@
 .bubble_chat_me_old {
     background-color: var(--ion-color-gray);
     border-radius: 10px !important;
-    font: normal 14px 'Helvetica-Roman', sans-serif;
+    font: normal 14px 'Helvetica-Roman';
     text-align: left;
     padding: 15px !important;
 }
@@ -90,7 +90,7 @@
 .bubble_chat_me {
     background-color: var(--ion-color-gray);
     border-radius: 10px !important;
-    font: normal 14px 'Helvetica-Roman', sans-serif;
+    font: normal 14px 'Helvetica-Roman';
     text-align: left;
     padding: 15px !important;
     display: inline-block;
@@ -113,7 +113,7 @@
 .bubble_chat_others_old {
     background-color: var(--ion-color-orange);
     border-radius: 10px;
-    font: normal 14px 'Helvetica-Roman', sans-serif;
+    font: normal 14px 'Helvetica-Roman';
     text-align: left;
     padding: 15px !important;
 }
@@ -121,7 +121,7 @@
 .bubble_chat_others {
     background-color: var(--ion-color-orange);
     border-radius: 10px;
-    font: normal 14px 'Helvetica-Roman', sans-serif;
+    font: normal 14px 'Helvetica-Roman';
     text-align: left;
     padding: 15px !important;
     display: inline-block;
@@ -203,7 +203,7 @@ ion-footer {
                 .p-button {
                     span {
                         padding-top: 5px;
-                        font: normal 15px 'Helvetica-Md', sans-serif !important;
+                        font: normal 15px 'Helvetica-Md' !important;
                     }
 
                     img {
