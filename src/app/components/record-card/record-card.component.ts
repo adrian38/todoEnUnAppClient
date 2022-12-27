@@ -25,8 +25,8 @@ export class RecordCardComponent implements OnInit {
             }
         }
         let title = this.record.title;
-        if (title.length > 15) {
-            title = title.slice(0, 15) + ' ... ';
+        if (title.length > 18) {
+            title = title.slice(0, 18) + ' ... ';
         }
         this.titulo = title;
     }

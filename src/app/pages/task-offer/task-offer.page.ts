@@ -1,13 +1,6 @@
 import { Component, OnInit, NgZone, ViewChild, OnDestroy } from '@angular/core';
 
-import {
-    NavController,
-    Platform,
-    IonSegment,
-    LoadingController,
-    ModalController,
-    AlertController,
-} from '@ionic/angular';
+import { NavController, Platform, IonSegment, LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { TaskModel } from 'src/app/models/task.model';
 import { UsuarioModel } from 'src/app/models/usuario.model';
@@ -119,10 +112,7 @@ export class TaskOfferPage implements OnInit {
             });
         }
 
-        if (
-            typeof this.task.Up_coming_Offer !== 'undefined' &&
-            this.task.Up_coming_Offer.length > 0
-        ) {
+        if (typeof this.task.Up_coming_Offer !== 'undefined' && this.task.Up_coming_Offer.length > 0) {
             this.presentLoading();
             this._taskOdoo.requestPo(this.task.Up_coming_Offer, this.task.So_id);
         }
@@ -147,72 +137,70 @@ export class TaskOfferPage implements OnInit {
         });
 
         this.notificationError$ = this._taskOdoo.getNotificationError$();
-        this.subscriptionsNotificationError = this.notificationError$.subscribe(
-            (notificationError) => {
-                this.ngZone.run(() => {
-                    switch (notificationError.type) {
-                        case 0:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Conectandose al Servidor.',
-                            });
+        this.subscriptionsNotificationError = this.notificationError$.subscribe((notificationError) => {
+            this.ngZone.run(() => {
+                switch (notificationError.type) {
+                    case 0:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Conectandose al Servidor.',
+                        });
 
-                            this.loading.dismiss();
-                            break;
+                        this.loading.dismiss();
+                        break;
 
-                        case 4:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Error eliminando la oferta.',
-                            });
-                            this.loading.dismiss();
-                            break;
+                    case 4:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Error eliminando la oferta.',
+                        });
+                        this.loading.dismiss();
+                        break;
 
-                        case 5:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Obteniendo Informacion del Trabajador.',
-                            });
+                    case 5:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Obteniendo Informacion del Trabajador.',
+                        });
 
-                            this.loading.dismiss();
-                            break;
+                        this.loading.dismiss();
+                        break;
 
-                        case 6:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Ingresando Dinero a la Plataforma.',
-                            });
+                    case 6:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Ingresando Dinero a la Plataforma.',
+                        });
 
-                            this.loading1.dismiss();
-                            break;
-                        case 9:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Cargando fotos de la tarea.',
-                            });
-                            this.loading1.dismiss();
-                            break;
-                        case 15:
-                            if (this.tempLoadingComment) {
-                                this.tempLoadingComment.target.complete();
-                            }
+                        this.loading1.dismiss();
+                        break;
+                    case 9:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Cargando fotos de la tarea.',
+                        });
+                        this.loading1.dismiss();
+                        break;
+                    case 15:
+                        if (this.tempLoadingComment) {
+                            this.tempLoadingComment.target.complete();
+                        }
 
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Cargando mas comentarios.',
-                            });
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Cargando mas comentarios.',
+                        });
 
-                            break;
-                    }
-                });
-            }
-        );
+                        break;
+                }
+            });
+        });
 
         this.offersList$ = this._taskOdoo.getRequestedTask$();
         this.subscriptionOffersList = this.offersList$.subscribe((offers) => {
@@ -273,9 +261,7 @@ export class TaskOfferPage implements OnInit {
                         break;
 
                     case 10:
-                        if (
-                            !(typeof this.offersList !== 'undefined' && this.offersList.length > 0)
-                        ) {
+                        if (!(typeof this.offersList !== 'undefined' && this.offersList.length > 0)) {
                             this.offersList = this.task.So_offers;
                             console.log(this.offersList, 'ofertas q tienes');
                         }
@@ -333,6 +319,7 @@ export class TaskOfferPage implements OnInit {
             }
         }
     }
+
     segChangeManual(detail: boolean) {
         if (!detail) {
             this.veroferta = true;
@@ -439,10 +426,6 @@ export class TaskOfferPage implements OnInit {
 
     loadData(event) {
         this.tempLoadingComment = event;
-        this._taskOdoo.requestMoreInfoProvider(
-            this.tempInfoProvider.So_id,
-            this.tempInfoProvider.provider_id,
-            this.offsetComment
-        );
+        this._taskOdoo.requestMoreInfoProvider(this.tempInfoProvider.So_id, this.tempInfoProvider.provider_id, this.offsetComment);
     }
 }

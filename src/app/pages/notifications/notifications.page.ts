@@ -33,7 +33,7 @@ export class NotificationsPage implements OnInit {
 
     ngOnInit() {
         this._taskOdoo.setNotification(false);
-        // this.tempNotificaciones = this._taskOdoo.getNoificationArray();
+        this.tempNotificaciones = this._taskOdoo.getNoificationArray();
 
         console.log(this.tempNotificaciones);
 
@@ -45,43 +45,35 @@ export class NotificationsPage implements OnInit {
 
                 case 2:
                     //!nueva oferta
-
-                    for (let mess of noti.task) {
-                        if (noti.upload == 0) {
-                            //console.log("funcion", (this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18)).toLowerCase() + ' ... ');
-                            this.temNoti.title =
-                                this._taskOdoo
-                                    .searchTittleSo(mess.SO_id)
-                                    .title.slice(0, 18)
-                                    .toLowerCase() + ' ... ';
-                            this.temNoti.notificationType = 2;
-                            this.notificaciones.push(this.temNoti);
-                        } else {
-                            //console.log("todavia no se ha cargado",(this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18)).toLowerCase() + ' ... ');
-                            this.temNoti.notificationType = 6;
-                            this.notificaciones.push(this.temNoti);
+                    let tempOffer: TaskModel = new TaskModel();
+                    if (noti.upload == 1) {
+                        tempOffer.notificationType = 6;
+                        tempOffer.title = 'Tiene nuevas oferttas';
+                        this.notificaciones.push(tempOffer);
+                    } else {
+                        for (let mess of noti.task) {
+                            if (noti.upload == 0) {
+                                //console.log("funcion", (this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18)).toLowerCase() + ' ... ');
+                                tempOffer.title = this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18).toLowerCase() + ' ... ';
+                                tempOffer.notificationType = 2;
+                                this.notificaciones.push(tempOffer);
+                            }
                         }
                     }
 
                     break;
 
                 case 3:
-                    console.log('tengo un chat');
-                    //!nuevo chat
-                    for (let mess of noti.task) {
-                        if (noti.upload == 0) {
-                            //console.log("funcion", this._taskOdoo.searchTittleSo(mess.SO_id).title);
-                            this.temNoti.title =
-                                this._taskOdoo
-                                    .searchTittleSo(mess.SO_id)
-                                    .title.slice(0, 18)
-                                    .toLowerCase() + ' ... ';
-                            this.temNoti.notificationType = 3;
-                            this.notificaciones.push(this.temNoti);
-                        } else {
-                            //console.log("todavia no se ha cargado");
-                            this.temNoti.notificationType = 5;
-                            this.notificaciones.push(this.temNoti);
+                    let temp: TaskModel = new TaskModel();
+                    if (noti.upload == 1) {
+                        temp.notificationType = 5;
+                        temp.title = 'Tiene nuevos mensajes';
+                        this.notificaciones.push(temp);
+                    } else {
+                        for (let mess of noti.task) {
+                            temp.title = this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18).toLowerCase() + ' ... ';
+                            temp.notificationType = 3;
+                            this.notificaciones.push(temp);
                         }
                     }
 
@@ -93,6 +85,8 @@ export class NotificationsPage implements OnInit {
                     break;
             }
         }
+
+        console.log(this.notificaciones, 'after process');
 
         this.subscriptions();
     }

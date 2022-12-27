@@ -54,7 +54,7 @@ export class TaskHiredPage implements OnInit {
     hora: string = '';
     comentario_clasificacion: string = '';
     //comentario_evidencia: string = ''
-    displayClasificar: boolean = true;
+    displayClasificar: boolean = false;
     clasificacion: number = 5;
     val: number = 5;
     barraChat: boolean = true;

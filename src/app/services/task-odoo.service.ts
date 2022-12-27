@@ -351,20 +351,42 @@ export class TaskOdooService {
                                     } else {
                                         //console.log("poniendo notificacion new offert")
                                         for (let offer of new_offert) {
-                                            temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
+                                            if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                                temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
 
-                                            if (temp != -1) {
-                                                applicationList[temp].notificationNewOffert = true;
-                                                applicationList[temp].Up_coming_Offer.push(offer.order_id);
+                                                if (temp != -1) {
+                                                    applicationList[temp].notificationNewOffert = true;
+                                                    applicationList[temp].Up_coming_Offer.push(offer.order_id);
+                                                    task$.next({ type: 9 });
 
-                                                task$.next({ type: 9 });
-                                                ////console.log(applicationList);
+                                                    notificationArray.unshift({
+                                                        type: 2,
+                                                        task: id_messg,
+                                                        upload: 0,
+                                                        hired: false,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                } else {
+                                                    notificationArray.unshift({
+                                                        type: 2,
+                                                        task: offer,
+                                                        upload: 1,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                }
                                             } else {
                                                 notificationArray.unshift({
                                                     type: 2,
                                                     task: offer,
                                                     upload: 1,
                                                 });
+
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
                                             }
                                         }
                                     }
@@ -388,37 +410,52 @@ export class TaskOdooService {
                                     for (let mess of id_messg) {
                                         if (mess.state != 'purchase') {
                                             if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                                console.log('mensaje nuevo application list', mess);
-
                                                 temp = applicationList.findIndex((element) => element.So_id === mess.SO_id);
 
                                                 if (temp != -1) {
-                                                    console.log('************* Aplication encontrada *************');
-                                                    console.log();
                                                     applicationList[temp].notificationNewChat = true;
                                                     applicationList[temp].Up_coming_Chat.push({
                                                         Po_id: mess.PO_id,
                                                         messageID: mess.message,
                                                     });
+
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: id_messg,
+                                                        upload: 0,
+                                                        hired: false,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
                                                 } else {
+                                                    console.log(
+                                                        '************* application cargada pero no esta la tarea en especifico *************'
+                                                    );
+                                                    console.log(notificationArray);
                                                     notificationArray.unshift({
                                                         type: 3,
                                                         task: mess,
                                                         upload: 1,
                                                         hired: false,
                                                     });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
                                                 }
+                                            } else {
+                                                notificationArray.unshift({
+                                                    type: 3,
+                                                    task: mess,
+                                                    upload: 1,
+                                                    hired: false,
+                                                });
+                                                console.log('************* application list not yet download *************');
+                                                console.log(notificationArray);
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
                                             }
 
                                             //task$.next({ type: 12, task: id_messg });
-                                            notifications$.next(true);
-                                            notificationBoolean = true;
-                                            notificationArray.unshift({
-                                                type: 3,
-                                                task: id_messg,
-                                                upload: 0,
-                                                hired: false,
-                                            });
                                         } else {
                                             if (typeof hiredList !== 'undefined' && hiredList.length > 0) {
                                                 temp = hiredList.findIndex((element) => element.Po_id === mess.PO_id);
@@ -429,6 +466,15 @@ export class TaskOdooService {
                                                         Po_id: mess.PO_id,
                                                         messageID: mess.message,
                                                     });
+
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: id_messg,
+                                                        upload: 0,
+                                                        hired: true,
+                                                    });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
                                                 } else {
                                                     notificationArray.unshift({
                                                         type: 3,
@@ -436,18 +482,22 @@ export class TaskOdooService {
                                                         upload: 1,
                                                         hired: true,
                                                     });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
                                                 }
+                                            } else {
+                                                notificationArray.unshift({
+                                                    type: 3,
+                                                    task: mess,
+                                                    upload: 1,
+                                                    hired: false,
+                                                });
+
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
                                             }
 
                                             //task$.next({ type: 12, task: id_messg });
-                                            notifications$.next(true);
-                                            notificationBoolean = true;
-                                            notificationArray.unshift({
-                                                type: 3,
-                                                task: id_messg,
-                                                upload: 0,
-                                                hired: true,
-                                            });
                                         }
                                     }
                                 }
@@ -1898,8 +1948,8 @@ export class TaskOdooService {
                         for (let offer of task.So_offers) {
                             for (let message of value) {
                                 if (message.res_id === offer.Po_id) {
-                                    console.log('************* Encontrado *************');
-                                    console.log();
+                                    // console.log('************* Encontrado *************');
+                                    // console.log();
 
                                     let tempMessage: MessageModel = new MessageModel(
                                         message['body'].slice(3, message['body'].length - 4),
