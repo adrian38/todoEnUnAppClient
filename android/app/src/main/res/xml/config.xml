@@ -21,6 +21,7 @@
 
   
   <preference name="LottieFullScreen" value="true" />
+  <preference name="LottieScaleType" value="CENTER" />
   <preference name="LottieHideAfterAnimationEnd" value="true" />
   <preference name="LottieAnimationLocation" value="public/assets/splash.json" />
 </widget>
