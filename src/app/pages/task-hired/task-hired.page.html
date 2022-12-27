@@ -1,7 +1,4 @@
-<p-toast
-    [baseZIndex]="3000"
-    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
-></p-toast>
+<p-toast [baseZIndex]="3000" [style]="{width: '250px', height: '25px' , minWidth: '200px'}"></p-toast>
 
 <ion-header class="ion-no-border">
     <div style="background: var(--ion-color-orange)">
@@ -9,12 +6,7 @@
     </div>
 
     <div id="barraNaranja">
-        <ion-segment
-            (ionChange)="segChange($event)"
-            style="color: rgb(49, 49, 57)"
-            color="dark"
-            #segmentHist
-        >
+        <ion-segment (ionChange)="segChange($event)" style="color: rgb(49, 49, 57)" color="dark" #segmentHist>
             <ion-segment-button class="segment_btn" value="chat">
                 <ion-label style="color: rgb(49, 49, 57)">CHAT</ion-label>
             </ion-segment-button>
@@ -30,36 +22,19 @@
                 <ion-label class="label_presupuesto">Costo Extra: {{ presupuesto }} €</ion-label>
             </ion-col>
             <ion-col size="1" style="padding: 12px 5px 0px 0px">
-                <img
-                    style="width: 20px; height: 20px"
-                    (click)="alertaDateChange()"
-                    src="../../../assets/icon/pencil.svg"
-                />
+                <img style="width: 20px; height: 20px" (click)="alertaDateChange()" src="../../../assets/icon/pencil.svg" />
             </ion-col>
 
             <ion-col size="1.5" style="padding: 12px 5px 0px 0px">
-                <img
-                    style="width: 20px; height: 20px"
-                    (click)="onClose()"
-                    src="../../../assets/icon/close.svg"
-                />
+                <img style="width: 20px; height: 20px" (click)="onClose()" src="../../../assets/icon/close.svg" />
             </ion-col>
         </ion-row>
         <ion-row style="padding-top: 0px">
             <ion-col size="1.5" style="padding: 0px 0px 5px 5px; text-align: center">
-                <img
-                    style="width: 15px; height: 15px"
-                    (click)="verFactura()"
-                    src="../../../assets/icon/detail.svg"
-                />
+                <img style="width: 15px; height: 15px" (click)="verFactura()" src="../../../assets/icon/detail.svg" />
             </ion-col>
             <ion-col size="3" style="padding-top: 0px; padding-left: 0px">
-                <p
-                    style="margin: 0px 0px; font-size: 11px; text-decoration: underline"
-                    (click)="verFactura()"
-                >
-                    Ver factura total
-                </p>
+                <p style="margin: 0px 0px; font-size: 11px; text-decoration: underline" (click)="verFactura()">Ver factura total</p>
             </ion-col>
             <ion-col size="7.5"></ion-col>
         </ion-row>
@@ -68,9 +43,7 @@
 
 <ion-content>
     <div *ngIf="barraChat" class="flex_column" style="height: 100%; width: 100%">
-        <div
-            style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px"
-        >
+        <div style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px">
             <div class="div_chat" #target *ngIf="!chat_vacia">
                 <ion-row
                     class="chat_bubble"
@@ -78,9 +51,7 @@
                     [ngClass]="(user.partner_id ==  message.author_id) ? 'align_right' : 'align_left'"
                     *ngFor="let message of messagesList"
                 >
-                    <ng-container
-                        *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate"
-                    >
+                    <ng-container *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate">
                         <div
                             style="width: auto; height: auto; max-width: 80%"
                             [ngClass]="( message.message === ultimo_sms) ? 'bubble_chat_me' : 'bubble_chat_me_old'"
@@ -129,11 +100,7 @@
 
                     <div style="display: flex; flex-direction: column; justify-content: flex-end">
                         <ion-button fill="clear" class="send_btn" (click)="pushToChat()">
-                            <ion-icon
-                                name="send"
-                                color="greenblue"
-                                style="min-width: 25px; min-height: 30px"
-                            ></ion-icon>
+                            <ion-icon name="send" color="greenblue" style="min-width: 25px; min-height: 30px"></ion-icon>
                         </ion-button>
                     </div>
                 </div>
@@ -156,9 +123,7 @@
                         <ion-img class="icon_calendar" src="/assets/icon/calendario.svg"></ion-img>
                         <ion-label class="h3_title">Fecha</ion-label>
                     </div>
-                    <ion-label class="h6_title ion-text-wrap"
-                        >{{ task.date_planned |date:'EEEE d.MMMM yyyy' | lowercase }}</ion-label
-                    >
+                    <ion-label class="h6_title ion-text-wrap">{{ task.date_planned |date:'EEEE d.MMMM yyyy' | lowercase }}</ion-label>
                 </div>
             </ion-item>
 
@@ -168,9 +133,7 @@
                         <ion-img class="icon_schedule" src="/assets/icon/hora.svg"></ion-img>
                         <ion-label class="h3_title">Horario</ion-label>
                     </div>
-                    <ion-label class="h6_title ion-text-wrap"
-                        >{{ task.time |date: 'h:mm a' }}</ion-label
-                    >
+                    <ion-label class="h6_title ion-text-wrap">{{ task.time |date: 'h:mm a' }}</ion-label>
                 </div>
             </ion-item>
 
@@ -183,41 +146,18 @@
 
                     <div class="flex_row">
                         <div class="flex_column">
-                            <ion-label class="h6_title ion-text-wrap"
-                                >{{ task.address.street}}, Numero: {{ task.address.number
-                                }},</ion-label
-                            >
+                            <ion-label class="h6_title ion-text-wrap">{{ task.address.street}}, Numero: {{ task.address.number }},</ion-label>
                             <div class="flex_row">
-                                <ion-label
-                                    class="h6_title ion-text-wrap"
-                                    *ngIf=" task.address.portal"
-                                    >Portal: {{ task.address.portal }},
-                                </ion-label>
-                                <ion-label
-                                    class="h6_title ion-text-wrap"
-                                    *ngIf=" task.address.stair"
-                                    >Escalera: {{ task.address.stair }},
-                                </ion-label>
-                                <ion-label
-                                    class="h6_title ion-text-wrap"
-                                    *ngIf=" task.address.floor"
-                                    >Piso: {{ task.address.floor }},
-                                </ion-label>
-                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.door"
-                                    >Puerta: {{ task.address.door }},
-                                </ion-label>
+                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.portal">Portal: {{ task.address.portal }}, </ion-label>
+                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.stair">Escalera: {{ task.address.stair }}, </ion-label>
+                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.floor">Piso: {{ task.address.floor }}, </ion-label>
+                                <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.door">Puerta: {{ task.address.door }}, </ion-label>
                             </div>
-                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.cp"
-                                >Codigo_Postal: {{ task.address.cp }},
-                            </ion-label>
+                            <ion-label class="h6_title ion-text-wrap" *ngIf=" task.address.cp">Codigo_Postal: {{ task.address.cp }}, </ion-label>
                         </div>
 
                         <div class="flex_centered">
-                            <img
-                                class="img_location"
-                                src="/assets/icon/ubicacion.svg"
-                                (click)="onClickUbicacion( )"
-                            />
+                            <img class="img_location" src="/assets/icon/ubicacion.svg" (click)="onClickUbicacion( )" />
                         </div>
                     </div>
                 </div>
@@ -229,32 +169,9 @@
                         <ion-img class="icon_schedule" src="/assets/icon/materials.svg"></ion-img>
                         <ion-label class="h3_title">Materiales</ion-label>
                     </div>
-                    <ion-label class="h6_title ion-text-wrap"
-                        >{{ task.require_materials?'Dispone de materiales':'No dispone de
-                        materiales'}}</ion-label
-                    >
-                </div>
-            </ion-item>
-
-            <ion-item class="module ion-no-padding" lines="none">
-                <div class="flex_column">
-                    <div class="flex_row flex_centered">
-                        <ion-img class="icon_price" src="/assets/icon/budget.svg"></ion-img>
-                        <ion-label class="h3_title">Precio</ion-label>
-                    </div>
-                    <div class="flex_row">
-                        <ion-label class="h6_title ion-text-wrap">
-                            Total: {{ task.materials + task.work_force }} €
-                        </ion-label>
-                        <ion-button
-                            class="btn"
-                            style="min-width: 105px !important"
-                            color="orange"
-                            (click)="onClickFactura()"
-                        >
-                            <span style="padding-top: 5px">VER FACTURA</span>
-                        </ion-button>
-                    </div>
+                    <ion-label class="h6_title ion-text-wrap">
+                        {{ task.require_materials?'Dispone de materiales':'No dispone de materiales'}}
+                    </ion-label>
                     <!-- <ion-row>
                         <ion-col size="1">
                             <ion-img
@@ -281,6 +198,21 @@
                             </ion-button>
                         </ion-col>
                     </ion-row> -->
+                </div>
+            </ion-item>
+
+            <ion-item class="module ion-no-padding" lines="none">
+                <div class="flex_column">
+                    <div class="flex_row flex_centered">
+                        <ion-img class="icon_price" src="/assets/icon/budget.svg"></ion-img>
+                        <ion-label class="h3_title">Precio</ion-label>
+                    </div>
+                    <div class="flex_row">
+                        <ion-label class="h6_title ion-text-wrap"> Total: {{ task.materials + task.work_force }} € </ion-label>
+                        <ion-button class="btn" style="min-width: 105px !important" color="orange" (click)="onClickFactura()">
+                            <span style="padding-top: 5px">VER FACTURA</span>
+                        </ion-button>
+                    </div>
                 </div>
             </ion-item>
 
@@ -349,9 +281,7 @@
                         <ion-img class="icon_schedule" src="/assets/icon/edit.svg"></ion-img>
                         <ion-label class="h3_title">Descripción</ion-label>
                     </div>
-                    <p class="h6_title ion-text-wrap">
-                        {{ task.description?task.description:'Sin descripción' }}
-                    </p>
+                    <p class="h6_title ion-text-wrap">{{ task.description?task.description:'Sin descripción' }}</p>
                 </div>
             </ion-item>
 
@@ -362,9 +292,7 @@
                         <ion-label class="h3_title">Trabajador</ion-label>
                     </div>
                     <div class="flex_row">
-                        <ion-label class="h6_title ion-text-wrap"
-                            >{{ task.provider_name }}</ion-label
-                        >
+                        <ion-label class="h6_title ion-text-wrap">{{ task.provider_name }}</ion-label>
                         <ion-button class="btn" color="orange" (click)="onClickDenunciar( $event )">
                             <span style="padding-top: 5px">DENUNCIAR</span>
                         </ion-button>
@@ -392,18 +320,12 @@
         >
             <ion-row style="margin-top: 30px">
                 <ion-col size="4">
-                    <img
-                        id="photoProvider"
-                        src="{{task.photoProvider}}"
-                        onError="this.src='assets/images/noImage.svg'"
-                    />
+                    <img id="photoProvider" src="{{task.photoProvider}}" onError="this.src='assets/images/noImage.svg'" />
                 </ion-col>
 
                 <ion-col size="8">
                     <ion-row style="margin-left: 10px">
-                        <ion-label style="font-family: 'HelveticaNeueLTStd-Bd'"
-                            >{{task.client_name}}</ion-label
-                        >
+                        <ion-label style="font-family: 'HelveticaNeueLTStd-Bd'">{{task.client_name}}</ion-label>
                     </ion-row>
 
                     <ion-row style="margin-left: 10px; margin-bottom: 5px">
@@ -411,11 +333,7 @@
                     </ion-row>
 
                     <ion-row style="margin-left: 10px">
-                        <p-rating
-                            [(ngModel)]="val"
-                            [(ngModel)]="clasificacion"
-                            [cancel]="false"
-                        ></p-rating>
+                        <p-rating [(ngModel)]="val" [(ngModel)]="clasificacion" [cancel]="false"></p-rating>
                     </ion-row>
                 </ion-col>
             </ion-row>
@@ -428,7 +346,7 @@
                         cols="30"
                         rows="6"
                         [(ngModel)]="comentario_clasificacion"
-                        style="max-width: 100%; width: 100%; flex: 100%"
+                        style="max-width: 100%; width: 100%; flex: 100%; padding: 10px"
                         placeholder="Escriba su opinión aqui"
                     ></textarea>
                 </ion-col>
@@ -450,13 +368,7 @@
             </div>
 
             <div class="div">
-                <ion-button
-                    class="btn_init_section"
-                    type="submit"
-                    color="orange"
-                    expand="block"
-                    (click)="btn_ahoraNo()"
-                >
+                <ion-button class="btn_init_section" type="submit" color="orange" expand="block" (click)="btn_ahoraNo()">
                     <span style="padding-top: 5px">AHORA NO</span>
                 </ion-button>
             </div>
@@ -464,12 +376,7 @@
 
         <div class="task_materials_buttons">
             <div class="one_button">
-                <p-button
-                    [disabled]="finish"
-                    (click)="onClickFinalizar( $event )"
-                    label="FINALIZAR TAREA"
-                >
-                </p-button>
+                <p-button [disabled]="finish" (click)="onClickFinalizar( $event )" label="FINALIZAR TAREA"> </p-button>
             </div>
         </div>
     </div>

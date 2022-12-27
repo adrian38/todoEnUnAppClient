@@ -31,8 +31,8 @@
     flex-direction: column;
     text-align: center;
 }
+
 textarea {
-    /*  border: 1px solid  rgb(246, 183, 118);  */
     border: 1px transparent;
     height: 200px;
     border-radius: 5px 5px 5px 5px;
@@ -41,9 +41,9 @@ textarea {
     background-color: rgb(245, 245, 245);
     padding: 0px;
 }
+
 textarea:focus-within {
     border: 0px solid transparent;
-    /* border: 1px solid  transparent; */
     height: 200px;
     border-radius: 5px 5px 5px 5px;
     margin-top: 10px;

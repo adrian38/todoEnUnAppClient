@@ -63,6 +63,10 @@ export class LoginPage implements OnInit {
     }
 
     checkUser() {
+        if (this.loading) {
+            this.loading.dismiss();
+        }
+
         if (this.user.connected) {
             this._taskOdoo.setInitTab(false);
             this._taskOdoo.setUser(this.user);

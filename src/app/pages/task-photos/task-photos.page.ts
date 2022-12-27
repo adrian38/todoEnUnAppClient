@@ -77,7 +77,7 @@ export class TaskPhotosPage implements OnInit {
                 this._serv.setfoto22(temp);
             }
         } catch (e) {
-            console.error('no photo');
+            console.error(e, 'no photo');
         }
     }
 

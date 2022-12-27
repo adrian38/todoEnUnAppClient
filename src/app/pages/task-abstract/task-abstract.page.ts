@@ -77,7 +77,7 @@ export class TaskAbstractPage implements OnInit {
         this.task.address.latitude = String(this.datos.getlatitud());
         this.task.address.longitude = String(this.datos.getlongitud());
         this.task.title = this.datos.gettitulo();
-        this.task.product_id = 1; ///Hacerlo todo global//Servicio Fontaneria
+        this.task.product_id = 39; ///Hacerlo todo global//Servicio Fontaneria
         this.task.type = 'Servicio de Fontaneria';
         //this.task.date_planned = this.datos.getCalendarioD();
         //this.task.time = this.date.transform(this.datos.getCalendarioT(), 'HH:mm:ss');
@@ -194,7 +194,6 @@ export class TaskAbstractPage implements OnInit {
 
         this.taskToSend = { ...this.task };
         this.taskToSend.photoSO = [...this.task.photoSO];
-        console.log('before', this.taskToSend);
 
         for (let [index, element] of this.taskToSend.photoSO.entries()) {
             if (Buffer.from(element.substring(element.indexOf(',') + 1)).length / 1e6 > 0.322216) {
@@ -206,7 +205,7 @@ export class TaskAbstractPage implements OnInit {
 
         // this.taskToSend.time = this.date.transform(this.datos.getCalendarioT(), 'HH:mm:ss');
 
-        //console.log(this.taskToSend, 'tarea a crear');
+        // console.log(this.taskToSend, 'tarea a crear');
         this.btn_deshabilitar = true;
         this._taskOdoo.newTask(this.taskToSend);
     }

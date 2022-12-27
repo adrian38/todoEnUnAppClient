@@ -1,14 +1,6 @@
 import { Component, NgZone, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ImagenmodalPage } from '../imagenmodal/imagenmodal.page';
-import {
-    AlertController,
-    IonContent,
-    IonSegment,
-    LoadingController,
-    ModalController,
-    NavController,
-    Platform,
-} from '@ionic/angular';
+import { AlertController, IonContent, IonSegment, LoadingController, ModalController, NavController, Platform } from '@ionic/angular';
 import { MessageModel } from 'src/app/models/message.model';
 import { TaskModel } from 'src/app/models/task.model';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
@@ -62,8 +54,8 @@ export class TaskHiredPage implements OnInit {
     hora: string = '';
     comentario_clasificacion: string = '';
     //comentario_evidencia: string = ''
-    displayClasificar: boolean = false;
-    clasificacion: number = 0;
+    displayClasificar: boolean = true;
+    clasificacion: number = 5;
     val: number = 5;
     barraChat: boolean = true;
     tempMessageId: number[] = [];
@@ -126,10 +118,7 @@ export class TaskHiredPage implements OnInit {
             this.chat_vacia = true;
         }
 
-        if (
-            typeof this.task.Up_coming_Chat !== 'undefined' &&
-            this.task.Up_coming_Chat.length > 0
-        ) {
+        if (typeof this.task.Up_coming_Chat !== 'undefined' && this.task.Up_coming_Chat.length > 0) {
             //!Poner cargado de mensajes
 
             this.tempMessageId = [];
@@ -162,68 +151,66 @@ export class TaskHiredPage implements OnInit {
         });
 
         this.notificationError$ = this._taskOdoo.getNotificationError$();
-        this.subscriptionsNotificationError = this.notificationError$.subscribe(
-            (notificationError) => {
-                this.ngZone.run(() => {
-                    switch (notificationError.type) {
-                        case 0:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Conectandose al Servidor.',
-                            });
+        this.subscriptionsNotificationError = this.notificationError$.subscribe((notificationError) => {
+            this.ngZone.run(() => {
+                switch (notificationError.type) {
+                    case 0:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Conectandose al Servidor.',
+                        });
+                        this.loading.dismiss();
+                        break;
+
+                    case 9:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Cargando fotos de la tarea.',
+                        });
+                        //this.loading1.dismiss();
+                        break;
+
+                    case 11:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Actualizando la fecha de la tarea.',
+                        });
+                        //this.loading1.dismiss();
+                        break;
+
+                    case 13:
+                        if (this.loading) {
                             this.loading.dismiss();
-                            break;
+                        }
 
-                        case 9:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Cargando fotos de la tarea.',
-                            });
-                            //this.loading1.dismiss();
-                            break;
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Finalizando la tarea.',
+                        });
+                        this.displayClasificar = false;
+                        break;
 
-                        case 11:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Actualizando la fecha de la tarea.',
-                            });
-                            //this.loading1.dismiss();
-                            break;
+                    case 14:
+                        if (this.loadingg) {
+                            this.loadingg.dismiss();
+                        }
 
-                        case 13:
-                            if (this.loading) {
-                                this.loading.dismiss();
-                            }
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Guardando su calificacion.',
+                        });
 
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Finalizando la tarea.',
-                            });
-                            this.displayClasificar = false;
-                            break;
-
-                        case 14:
-                            if (this.loadingg) {
-                                this.loadingg.dismiss();
-                            }
-
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Guardando su calificacion.',
-                            });
-
-                            this.opinion = false;
-                            //this.loading1.dismiss();
-                            break;
-                    }
-                });
-            }
-        );
+                        this.opinion = false;
+                        //this.loading1.dismiss();
+                        break;
+                }
+            });
+        });
 
         this.poHired$ = this._taskOdoo.getRequestedTask$();
         this.subscriptionpoHired = this.poHired$.subscribe((hired) => {
@@ -290,10 +277,7 @@ export class TaskHiredPage implements OnInit {
                             }
                         }
 
-                        if (
-                            typeof this.tempMessageId !== 'undefined' &&
-                            this.tempMessageId.length > 0
-                        ) {
+                        if (typeof this.tempMessageId !== 'undefined' && this.tempMessageId.length > 0) {
                             this._chatOdoo.requestNewMessage(this.tempMessageId);
                         } else {
                             this._taskOdoo.aplicationListEdit(0, 5, tempTask, 0, temp_Up_Chat);
@@ -374,10 +358,7 @@ export class TaskHiredPage implements OnInit {
                     case 1:
                         for (let mess of messaggeList.messages)
                             if (mess.offer_id === this.task.Po_id) {
-                                if (
-                                    typeof this.messagesList !== 'undefined' &&
-                                    this.messagesList.length > 0
-                                ) {
+                                if (typeof this.messagesList !== 'undefined' && this.messagesList.length > 0) {
                                     this.messagesList.push(mess);
                                 } else {
                                     this.messagesList.push(mess);
@@ -653,26 +634,27 @@ export class TaskHiredPage implements OnInit {
     }
 
     btn_enviarClasificacion() {
-        if (this.clasificacion < 1) {
-            this.messageService.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Rellene los campos.',
-            });
-        } else {
-            this.opinion = true;
+        // if (this.clasificacion < 1) {
+        //     this.messageService.add({
+        //         severity: 'error',
+        //         summary: 'Error',
+        //         detail: 'Rellene los campos.',
+        //     });
+        // } else {
 
-            this.Loadinggf('Guardando su opinion');
+        this.opinion = true;
 
-            let comment: Comments = {
-                author: '',
-                comment: this.comentario_clasificacion,
-                ranking: this.clasificacion,
-            };
+        this.Loadinggf('Guardando su opinion');
 
-            //console.log(comment,"comentario a enviar")
+        let comment: Comments = {
+            author: '',
+            comment: this.comentario_clasificacion,
+            ranking: this.clasificacion,
+        };
 
-            this._taskOdoo.setProviderComment(this.task.Po_id, comment);
-        }
+        //console.log(comment,"comentario a enviar")
+
+        this._taskOdoo.setProviderComment(this.task.Po_id, comment);
+        //}
     }
 }

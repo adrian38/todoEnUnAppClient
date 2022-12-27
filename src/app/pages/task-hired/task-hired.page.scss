@@ -302,6 +302,7 @@ ion-item {
     height: 55px !important;
     min-width: 55px !important;
 }
+
 .imgtocar {
     width: 70px !important;
     height: 70px !important;
@@ -401,7 +402,7 @@ textarea {
     border-radius: 5px 5px 5px 5px;
     margin-top: 10px;
     box-sizing: border-box;
-    background-color: rgb(240, 240, 240) !important;
+    background-color: rgb(245, 245, 245) !important;
     padding: 0px;
 }
 textarea:focus-within {
@@ -409,7 +410,7 @@ textarea:focus-within {
     border-radius: 5px 5px 5px 5px;
     margin-top: 10px;
     box-sizing: border-box;
-    background-color: rgb(240, 240, 240) !important;
+    background-color: rgb(245, 245, 245) !important;
     padding: 0px;
     outline: none;
 }
@@ -458,17 +459,3 @@ ion-footer {
 #barraNaranja {
     background-color: rgb(246, 183, 118);
 }
-
-/* .h6_title {
-  font: normal 12px 'Helvetica-Roman',  !important;
-  text-align: center;
-  width: 70%;
-  padding: 5px 20px 5px 2px !important;
-  min-width: 100px !important;
-}
-
-
-.icon_distancia{
-  height: 30% !important;
-  width: 70% !important;
-} */
