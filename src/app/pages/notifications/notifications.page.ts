@@ -48,13 +48,16 @@ export class NotificationsPage implements OnInit {
                     let tempOffer: TaskModel = new TaskModel();
                     if (noti.upload == 1) {
                         tempOffer.notificationType = 6;
-                        tempOffer.title = 'Tiene nuevas oferttas';
+                        tempOffer.title = 'Tiene nuevas ofertas';
                         this.notificaciones.push(tempOffer);
                     } else {
                         for (let mess of noti.task) {
                             if (noti.upload == 0) {
                                 //console.log("funcion", (this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18)).toLowerCase() + ' ... ');
-                                tempOffer.title = this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18).toLowerCase() + ' ... ';
+                                tempOffer.title = this._taskOdoo.searchTittleSo(mess.origin, true).title;
+                                if (tempOffer.title.length > 30) {
+                                    tempOffer.title = 'En la solicitud' + tempOffer.title.slice(0, 30) + ' ... ';
+                                }
                                 tempOffer.notificationType = 2;
                                 this.notificaciones.push(tempOffer);
                             }
@@ -71,7 +74,11 @@ export class NotificationsPage implements OnInit {
                         this.notificaciones.push(temp);
                     } else {
                         for (let mess of noti.task) {
-                            temp.title = this._taskOdoo.searchTittleSo(mess.SO_id).title.slice(0, 18).toLowerCase() + ' ... ';
+                            temp.title = this._taskOdoo.searchTittleSo(mess.SO_id, false).title;
+                            if (temp.title.length > 30) {
+                                temp.title = 'En la solicitud' + temp.title.slice(0, 30) + ' ... ';
+                            }
+
                             temp.notificationType = 3;
                             this.notificaciones.push(temp);
                         }

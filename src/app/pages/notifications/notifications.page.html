@@ -7,14 +7,7 @@
         <ion-row *ngFor="let notificacion of notificaciones, let i = index">
             <ion-col size="1"></ion-col>
             <ion-col size="1" style="padding-top: 2%">
-                <div *ngIf="notificacion.notificationType == 1">
-                    <ion-img
-                        src="../../../assets/icon/notificaciones.svg"
-                        style="width: 20px; height: 20px; margin: 5px auto; color: var(--ion-color-orange)"
-                    ></ion-img>
-                </div>
-
-                <div *ngIf="notificacion.notificationType == 3 ||  notificacion.notificationType == 5">
+                <div *ngIf="notificacion.notificationType !== 4">
                     <ion-img
                         src="../../../assets/icon/notificaciones.svg"
                         style="width: 20px; height: 20px; margin: 5px auto; color: var(--ion-color-orange)"
@@ -39,12 +32,8 @@
                     <ion-label class="prom_title" *ngIf="notificacion.notificationType == 2 || notificacion.notificationType == 6"
                         >Nueva Oferta</ion-label
                     >
-                    <ion-label class="prom_text ion-text-wrap" *ngIf="notificacion.notificationType !== 5"
-                        >En la solicitud {{ notificacion.title }}</ion-label
-                    >
-                    <ion-label class="prom_text ion-text-wrap" *ngIf="notificacion.notificationType == 5 || notificacion.notificationType == 6"
-                        >{{ notificacion.title }}</ion-label
-                    >
+
+                    <ion-label class="prom_text ion-text-wrap">{{ notificacion.title }}</ion-label>
                 </div>
                 <div id="item"></div>
             </ion-col>

@@ -62,6 +62,332 @@ export class TaskOdooService {
         //jaysonServer = this._authOdoo.OdooInfoJayson;
     }
 
+    notificationPull() {
+        //let id_po = [];
+        let id_po_offert = [];
+        let id_messg = [];
+        let new_offert = [];
+        //let id_offert_acepted = [];
+        let new_order_line = [];
+
+        let old_id_notification = 0;
+
+        let poll = (uid, partner_id, last) => {
+            let path = '/longpolling/poll';
+
+            client = jayson.http({
+                host: jaysonServer.host,
+                port: jaysonServer.port + path,
+            });
+
+            client.request(
+                'call',
+                {
+                    context: { uid: uid },
+                    channels: [jaysonServer.db + '_' + partner_id.toString()],
+                    last: last,
+                },
+                { context: { lang: 'es_ES', uid: uid } },
+                (err, error, value) => {
+                    if (err) {
+                        //console.log(err, 'Error poll')
+                        poll(user.id, user.partner_id, old_id_notification);
+                    } else {
+                        // console.log(value, "lo q esta llegando");
+
+                        if (typeof value !== 'undefined' && value.length > 0) {
+                            // console.log(value, 'notificacion');
+
+                            old_id_notification = value[value.length - 1].id;
+                            id_po_offert = [];
+                            id_messg = [];
+                            new_offert = [];
+                            //id_offert_acepted = [];
+                            new_order_line = [];
+
+                            for (let task of value) {
+                                if (
+                                    (task['message']['type'] === 'purchase_order_notification' && task['message']['action'] === 'canceled') ||
+                                    task['message']['action'] === 'calceled'
+                                ) {
+                                    id_po_offert.push({
+                                        order_id: task['message']['order_id'],
+                                        origin: task['message']['origin'],
+                                    });
+                                } else if (task['message']['type'] === 'purchase_order_notification' && task['message']['action'] === 'accepted') {
+                                    new_offert.push({
+                                        order_id: task['message']['order_id'],
+                                        origin: task['message']['origin'],
+                                    });
+                                } else if (task['message']['type'] === 'purchase_order_line_notification' && task['message']['action'] === 'new') {
+                                    new_order_line.push({
+                                        order_id: task['message']['order_id'],
+                                        origin: task['message']['origin'],
+                                        price_unit: task['message']['price_unit'],
+                                        product_id: task['message']['product_id'],
+                                    });
+                                } else if (task['message']['type'] === 'message_notification' && task['message']['action'] === 'new') {
+                                    id_messg.push({
+                                        message: task['message']['message_id'],
+                                        SO_id: task['message']['sale_id'],
+                                        PO_id: task['message']['puchase_id'],
+                                        state: task['message']['state'],
+                                    });
+                                }
+                            }
+
+                            if (typeof new_order_line !== 'undefined' && new_order_line.length > 0) {
+                                console.log('trabajador cambio presupuesto');
+
+                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                    for (let line of new_order_line) {
+                                        temp = applicationList.findIndex((element) => element.So_origin === line.origin);
+
+                                        if (temp != -1) {
+                                            let temp1 = applicationList[temp].So_offers.findIndex((element) => element.Po_id === line.order_id);
+
+                                            if (temp1 != -1) {
+                                                switch (line.product_id) {
+                                                    case 40:
+                                                        applicationList[temp].So_offers[temp1].work_force += line.price_unit;
+                                                        break;
+
+                                                    case 41:
+                                                        applicationList[temp].So_offers[temp1].materials += line.price_unit;
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    // if (route === '/ofertas' || route === '/chat') {
+                                    //   task$.next({ type: 13, task: new_order_line })
+                                    // }
+                                }
+                            } else if (typeof id_po_offert !== 'undefined' && id_po_offert.length > 0) {
+                                console.log('trabajador elimino su oferta');
+                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                    for (let offer of id_po_offert) {
+                                        temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
+
+                                        if (temp != -1) {
+                                            let temp1 = applicationList[temp].So_offers.findIndex((element) => element.Po_id === offer.order_id);
+
+                                            if (temp1 != -1) {
+                                                applicationList[temp].So_offers.splice(temp1, 1);
+                                            }
+                                            ////console.log(applicationList);
+                                        }
+                                    }
+                                }
+
+                                if (this.router.url === '/task-offer' || this.router.url === '/tutorial-request-detail') {
+                                    ////console.log("mandando la notificacion", id_po)
+
+                                    task$.next({ type: 4, task: id_po_offert });
+                                }
+                            } else if (typeof new_offert !== 'undefined' && new_offert.length > 0) {
+                                console.log('trabajador hizo su oferta ');
+
+                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                    if (this.router.url === '/task-offer' || this.router.url === '/tutorial-request-detail') {
+                                        notificationArray.unshift({
+                                            type: 2,
+                                            task: new_offert,
+                                            upload: 0,
+                                        });
+                                        notifications$.next(true);
+                                        notificationBoolean = true;
+                                        //  task$.next({ type: 9, task: new_offert });
+                                    } else {
+                                        //console.log("poniendo notificacion new offert")
+                                        for (let offer of new_offert) {
+                                            if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                                temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
+
+                                                if (temp != -1) {
+                                                    applicationList[temp].notificationNewOffert = true;
+                                                    applicationList[temp].Up_coming_Offer.push(offer.order_id);
+
+                                                    notificationArray.unshift({
+                                                        type: 2,
+                                                        task: new_offert,
+                                                        upload: 0,
+                                                        hired: false,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                    // task$.next({ type: 9 });//Bloqueante para ver notificaciones
+                                                } else {
+                                                    notificationArray.unshift({
+                                                        type: 2,
+                                                        task: new_offert,
+                                                        upload: 1,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                }
+                                            } else {
+                                                notificationArray.unshift({
+                                                    type: 2,
+                                                    task: new_offert,
+                                                    upload: 1,
+                                                });
+
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    notificationArray.unshift({
+                                        type: 2,
+                                        task: new_offert,
+                                        upload: 1,
+                                    });
+                                    notifications$.next(true);
+                                    notificationBoolean = true;
+                                }
+                            } else if (typeof id_messg !== 'undefined' && id_messg.length > 0) {
+                                //console.log('trabajador envio mensaje');
+
+                                if (
+                                    this.router.url === '/chat' ||
+                                    this.router.url === '/task-hired' ||
+                                    this.router.url === '/tutorial-request-chat'
+                                ) {
+                                    task$.next({ type: 12, task: id_messg });
+                                } else {
+                                    for (let mess of id_messg) {
+                                        if (mess.state != 'purchase') {
+                                            if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
+                                                temp = applicationList.findIndex((element) => element.So_id === mess.SO_id);
+
+                                                if (temp != -1) {
+                                                    applicationList[temp].notificationNewChat = true;
+                                                    applicationList[temp].Up_coming_Chat.push({
+                                                        Po_id: mess.PO_id,
+                                                        messageID: mess.message,
+                                                    });
+
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: id_messg,
+                                                        upload: 0,
+                                                        hired: false,
+                                                    });
+
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                } else {
+                                                    console.log(
+                                                        '************* application cargada pero no esta la tarea en especifico *************'
+                                                    );
+                                                    console.log(notificationArray);
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: mess,
+                                                        upload: 1,
+                                                        hired: false,
+                                                    });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                }
+                                            } else {
+                                                notificationArray.unshift({
+                                                    type: 3,
+                                                    task: mess,
+                                                    upload: 1,
+                                                    hired: false,
+                                                });
+                                                console.log('************* application list not yet download *************');
+                                                console.log(notificationArray);
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
+                                            }
+
+                                            //task$.next({ type: 12, task: id_messg });
+                                        } else {
+                                            if (typeof hiredList !== 'undefined' && hiredList.length > 0) {
+                                                temp = hiredList.findIndex((element) => element.Po_id === mess.PO_id);
+
+                                                if (temp != -1) {
+                                                    hiredList[temp].notificationNewChat = true;
+                                                    hiredList[temp].Up_coming_Chat.push({
+                                                        Po_id: mess.PO_id,
+                                                        messageID: mess.message,
+                                                    });
+
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: id_messg,
+                                                        upload: 0,
+                                                        hired: true,
+                                                    });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                } else {
+                                                    notificationArray.unshift({
+                                                        type: 3,
+                                                        task: mess,
+                                                        upload: 1,
+                                                        hired: true,
+                                                    });
+                                                    notifications$.next(true);
+                                                    notificationBoolean = true;
+                                                }
+                                            } else {
+                                                notificationArray.unshift({
+                                                    type: 3,
+                                                    task: mess,
+                                                    upload: 1,
+                                                    hired: false,
+                                                });
+
+                                                notifications$.next(true);
+                                                notificationBoolean = true;
+                                            }
+
+                                            //task$.next({ type: 12, task: id_messg });
+                                        }
+                                    }
+                                }
+                            }
+
+                            poll(user.id, user.partner_id, old_id_notification);
+                        } else {
+                            poll(user.id, user.partner_id, old_id_notification);
+                        }
+                    }
+                }
+            );
+        };
+
+        let client = jayson.http({
+            host: jaysonServer.host,
+            port: jaysonServer.port + jaysonServer.pathConnection,
+        });
+        client.request(
+            'call',
+            {
+                service: 'common',
+                method: 'login',
+                args: [jaysonServer.db, jaysonServer.username, jaysonServer.password],
+            },
+            (err, error, value) => {
+                if (err || !value) {
+                    //console.log(err, 'Error Notification POsuplier')
+                    poll(user.id, user.partner_id, old_id_notification);
+
+                    ///!poner error para reniciar aplicacion;
+                } else {
+                    poll(user.id, user.partner_id, old_id_notification);
+                }
+            }
+        );
+    }
+
     setNewPassword(password: string) {
         jaysonServer.password = password;
         user.password = password;
@@ -210,330 +536,6 @@ export class TaskOdooService {
 
     setNotificationArray(notiTemp: any) {
         notificationArray.push(notiTemp);
-    }
-
-    notificationPull() {
-        //let id_po = [];
-        let id_po_offert = [];
-        let id_messg = [];
-        let new_offert = [];
-        //let id_offert_acepted = [];
-        let new_order_line = [];
-
-        let old_id_notification = 0;
-
-        let poll = (uid, partner_id, last) => {
-            let path = '/longpolling/poll';
-
-            client = jayson.http({
-                host: jaysonServer.host,
-                port: jaysonServer.port + path,
-            });
-
-            client.request(
-                'call',
-                {
-                    context: { uid: uid },
-                    channels: [jaysonServer.db + '_' + partner_id.toString()],
-                    last: last,
-                },
-                { context: { lang: 'es_ES', uid: uid } },
-                (err, error, value) => {
-                    if (err) {
-                        //console.log(err, 'Error poll')
-                        poll(user.id, user.partner_id, old_id_notification);
-                    } else {
-                        // console.log(value, "lo q esta llegando");
-
-                        if (typeof value !== 'undefined' && value.length > 0) {
-                            // console.log(value, 'notificacion');
-
-                            old_id_notification = value[value.length - 1].id;
-                            id_po_offert = [];
-                            id_messg = [];
-                            new_offert = [];
-                            //id_offert_acepted = [];
-                            new_order_line = [];
-
-                            for (let task of value) {
-                                if (
-                                    (task['message']['type'] === 'purchase_order_notification' && task['message']['action'] === 'canceled') ||
-                                    task['message']['action'] === 'calceled'
-                                ) {
-                                    id_po_offert.push({
-                                        order_id: task['message']['order_id'],
-                                        origin: task['message']['origin'],
-                                    });
-                                } else if (task['message']['type'] === 'purchase_order_notification' && task['message']['action'] === 'accepted') {
-                                    new_offert.push({
-                                        order_id: task['message']['order_id'],
-                                        origin: task['message']['origin'],
-                                    });
-                                } else if (task['message']['type'] === 'purchase_order_line_notification' && task['message']['action'] === 'new') {
-                                    new_order_line.push({
-                                        order_id: task['message']['order_id'],
-                                        origin: task['message']['origin'],
-                                        price_unit: task['message']['price_unit'],
-                                        product_id: task['message']['product_id'],
-                                    });
-                                } else if (task['message']['type'] === 'message_notification' && task['message']['action'] === 'new') {
-                                    id_messg.push({
-                                        message: task['message']['message_id'],
-                                        SO_id: task['message']['sale_id'],
-                                        PO_id: task['message']['puchase_id'],
-                                        state: task['message']['state'],
-                                    });
-                                }
-                            }
-
-                            if (typeof new_order_line !== 'undefined' && new_order_line.length > 0) {
-                                console.log('trabajador cambio presupuesto');
-
-                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                    for (let line of new_order_line) {
-                                        temp = applicationList.findIndex((element) => element.So_origin === line.origin);
-
-                                        if (temp != -1) {
-                                            let temp1 = applicationList[temp].So_offers.findIndex((element) => element.Po_id === line.order_id);
-
-                                            if (temp1 != -1) {
-                                                switch (line.product_id) {
-                                                    case 40:
-                                                        applicationList[temp].So_offers[temp1].work_force += line.price_unit;
-                                                        break;
-
-                                                    case 41:
-                                                        applicationList[temp].So_offers[temp1].materials += line.price_unit;
-                                                        break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    // if (route === '/ofertas' || route === '/chat') {
-                                    //   task$.next({ type: 13, task: new_order_line })
-                                    // }
-                                }
-                            } else if (typeof id_po_offert !== 'undefined' && id_po_offert.length > 0) {
-                                console.log('trabajador elimino su oferta');
-                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                    for (let offer of id_po_offert) {
-                                        temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
-
-                                        if (temp != -1) {
-                                            let temp1 = applicationList[temp].So_offers.findIndex((element) => element.Po_id === offer.order_id);
-
-                                            if (temp1 != -1) {
-                                                applicationList[temp].So_offers.splice(temp1, 1);
-                                            }
-                                            ////console.log(applicationList);
-                                        }
-                                    }
-                                }
-
-                                if (this.router.url === '/task-offer' || this.router.url === '/tutorial-request-detail') {
-                                    ////console.log("mandando la notificacion", id_po)
-
-                                    task$.next({ type: 4, task: id_po_offert });
-                                }
-                            } else if (typeof new_offert !== 'undefined' && new_offert.length > 0) {
-                                console.log('trabajador hizo su oferta ');
-
-                                if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                    if (this.router.url === '/task-offer' || this.router.url === '/tutorial-request-detail') {
-                                        task$.next({ type: 9, task: new_offert });
-                                        notifications$.next(true);
-                                        notificationBoolean = true;
-                                        notificationArray.unshift({
-                                            type: 2,
-                                            task: new_offert,
-                                            upload: 0,
-                                        });
-                                    } else {
-                                        //console.log("poniendo notificacion new offert")
-                                        for (let offer of new_offert) {
-                                            if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                                temp = applicationList.findIndex((element) => element.So_origin === offer.origin);
-
-                                                if (temp != -1) {
-                                                    applicationList[temp].notificationNewOffert = true;
-                                                    applicationList[temp].Up_coming_Offer.push(offer.order_id);
-                                                    task$.next({ type: 9 });
-
-                                                    notificationArray.unshift({
-                                                        type: 2,
-                                                        task: id_messg,
-                                                        upload: 0,
-                                                        hired: false,
-                                                    });
-
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                } else {
-                                                    notificationArray.unshift({
-                                                        type: 2,
-                                                        task: offer,
-                                                        upload: 1,
-                                                    });
-
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                }
-                                            } else {
-                                                notificationArray.unshift({
-                                                    type: 2,
-                                                    task: offer,
-                                                    upload: 1,
-                                                });
-
-                                                notifications$.next(true);
-                                                notificationBoolean = true;
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    notificationArray.unshift({
-                                        type: 2,
-                                        task: new_offert,
-                                        upload: 1,
-                                    });
-                                }
-                            } else if (typeof id_messg !== 'undefined' && id_messg.length > 0) {
-                                //console.log('trabajador envio mensaje');
-
-                                if (
-                                    this.router.url === '/chat' ||
-                                    this.router.url === '/task-hired' ||
-                                    this.router.url === '/tutorial-request-chat'
-                                ) {
-                                    task$.next({ type: 12, task: id_messg });
-                                } else {
-                                    for (let mess of id_messg) {
-                                        if (mess.state != 'purchase') {
-                                            if (typeof applicationList !== 'undefined' && applicationList.length > 0) {
-                                                temp = applicationList.findIndex((element) => element.So_id === mess.SO_id);
-
-                                                if (temp != -1) {
-                                                    applicationList[temp].notificationNewChat = true;
-                                                    applicationList[temp].Up_coming_Chat.push({
-                                                        Po_id: mess.PO_id,
-                                                        messageID: mess.message,
-                                                    });
-
-                                                    notificationArray.unshift({
-                                                        type: 3,
-                                                        task: id_messg,
-                                                        upload: 0,
-                                                        hired: false,
-                                                    });
-
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                } else {
-                                                    console.log(
-                                                        '************* application cargada pero no esta la tarea en especifico *************'
-                                                    );
-                                                    console.log(notificationArray);
-                                                    notificationArray.unshift({
-                                                        type: 3,
-                                                        task: mess,
-                                                        upload: 1,
-                                                        hired: false,
-                                                    });
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                }
-                                            } else {
-                                                notificationArray.unshift({
-                                                    type: 3,
-                                                    task: mess,
-                                                    upload: 1,
-                                                    hired: false,
-                                                });
-                                                console.log('************* application list not yet download *************');
-                                                console.log(notificationArray);
-                                                notifications$.next(true);
-                                                notificationBoolean = true;
-                                            }
-
-                                            //task$.next({ type: 12, task: id_messg });
-                                        } else {
-                                            if (typeof hiredList !== 'undefined' && hiredList.length > 0) {
-                                                temp = hiredList.findIndex((element) => element.Po_id === mess.PO_id);
-
-                                                if (temp != -1) {
-                                                    hiredList[temp].notificationNewChat = true;
-                                                    hiredList[temp].Up_coming_Chat.push({
-                                                        Po_id: mess.PO_id,
-                                                        messageID: mess.message,
-                                                    });
-
-                                                    notificationArray.unshift({
-                                                        type: 3,
-                                                        task: id_messg,
-                                                        upload: 0,
-                                                        hired: true,
-                                                    });
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                } else {
-                                                    notificationArray.unshift({
-                                                        type: 3,
-                                                        task: mess,
-                                                        upload: 1,
-                                                        hired: true,
-                                                    });
-                                                    notifications$.next(true);
-                                                    notificationBoolean = true;
-                                                }
-                                            } else {
-                                                notificationArray.unshift({
-                                                    type: 3,
-                                                    task: mess,
-                                                    upload: 1,
-                                                    hired: false,
-                                                });
-
-                                                notifications$.next(true);
-                                                notificationBoolean = true;
-                                            }
-
-                                            //task$.next({ type: 12, task: id_messg });
-                                        }
-                                    }
-                                }
-                            }
-
-                            poll(user.id, user.partner_id, old_id_notification);
-                        } else {
-                            poll(user.id, user.partner_id, old_id_notification);
-                        }
-                    }
-                }
-            );
-        };
-
-        let client = jayson.http({
-            host: jaysonServer.host,
-            port: jaysonServer.port + jaysonServer.pathConnection,
-        });
-        client.request(
-            'call',
-            {
-                service: 'common',
-                method: 'login',
-                args: [jaysonServer.db, jaysonServer.username, jaysonServer.password],
-            },
-            (err, error, value) => {
-                if (err || !value) {
-                    //console.log(err, 'Error Notification POsuplier')
-                    poll(user.id, user.partner_id, old_id_notification);
-
-                    ///!poner error para reniciar aplicacion;
-                } else {
-                    poll(user.id, user.partner_id, old_id_notification);
-                }
-            }
-        );
     }
 
     newTask(task: TaskModel) {
@@ -4538,15 +4540,28 @@ export class TaskOdooService {
         );
     }
 
-    searchTittleSo(So_id) {
-        temp = applicationList.findIndex((element) => element.So_id === So_id);
+    searchTittleSo(So_id, So_origin: boolean) {
+        if (So_origin) {
+            temp = applicationList.findIndex((element) => element.So_origin === So_id);
 
-        if (temp != -1) {
-            return applicationList[temp];
-        } else {
-            temp = hiredList.findIndex((element) => element.So_id === So_id);
             if (temp != -1) {
-                return hiredList[temp];
+                return applicationList[temp];
+            } else {
+                temp = hiredList.findIndex((element) => element.So_origin === So_id);
+                if (temp != -1) {
+                    return hiredList[temp];
+                }
+            }
+        } else {
+            temp = applicationList.findIndex((element) => element.So_id === So_id);
+
+            if (temp != -1) {
+                return applicationList[temp];
+            } else {
+                temp = hiredList.findIndex((element) => element.So_id === So_id);
+                if (temp != -1) {
+                    return hiredList[temp];
+                }
             }
         }
     }
