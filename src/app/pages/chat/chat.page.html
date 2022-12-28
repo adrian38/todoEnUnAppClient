@@ -1,7 +1,4 @@
-<p-toast
-    [baseZIndex]="3000"
-    [style]="{width: '250px', height: '25px' , minWidth: '200px'}"
-></p-toast>
+<p-toast [baseZIndex]="3000" [style]="{width: '250px', height: '25px' , minWidth: '200px'}"></p-toast>
 
 <ion-header class="ion-no-border">
     <app-header headerText="CHAT" [fillBackground]="false"></app-header>
@@ -9,16 +6,8 @@
     <ion-row class="nav_down" style="padding-bottom: 0px">
         <div class="container_button">
             <div class="one_button">
-                <p-button
-                    [disabled]="btn_unable"
-                    label="ACEPTAR OFERTA"
-                    (onClick)="alertaDateChange()"
-                >
-                    <img
-                        alt="logo"
-                        src="/assets/icon/check-circle-outline.svg"
-                        style="width: 1.5rem"
-                    />
+                <p-button [disabled]="btn_unable" label="ACEPTAR OFERTA" (onClick)="alertaDateChange()">
+                    <img alt="logo" src="/assets/icon/check-circle-outline.svg" style="width: 1.5rem" />
                 </p-button>
             </div>
         </div>
@@ -27,9 +16,7 @@
 
 <ion-content #content>
     <div class="flex_column" style="height: 100%; width: 100%">
-        <div
-            style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px"
-        >
+        <div style="width: 105%; height: 100%; display: flex; flex-direction: row; min-height: 100px">
             <div style="height: 100%; width: 2.5%"></div>
             <div class="div_chat" #target *ngIf="messagesList.length > 0">
                 <ion-row
@@ -38,9 +25,7 @@
                     [ngClass]="(user.partner_id ==  message.author_id) ? 'align_right' : 'align_left'"
                     *ngFor="let message of messagesList"
                 >
-                    <ng-container
-                        *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate"
-                    >
+                    <ng-container *ngIf="(user.partner_id ==  message.author_id ); else elseTemplate">
                         <div
                             style="width: auto; height: auto; max-width: 80%"
                             [ngClass]="( message.message === ultimo_sms) ? 'bubble_chat_me' : 'bubble_chat_me_old'"
@@ -89,11 +74,7 @@
 
                     <div style="display: flex; flex-direction: column; justify-content: flex-end">
                         <ion-button fill="clear" class="send_btn" (click)="pushToChat()">
-                            <ion-icon
-                                name="send"
-                                color="greenblue"
-                                style="min-width: 25px; min-height: 30px"
-                            ></ion-icon>
+                            <ion-icon name="send" color="greenblue" style="min-width: 25px; min-height: 30px"></ion-icon>
                         </ion-button>
                     </div>
                 </div>

@@ -46,14 +46,12 @@ export class TaskLocationPage implements OnInit {
         private platform: Platform,
         private _authOdoo: AuthOdooService,
         public alertCtrl: AlertController,
-
         public toastController: ToastController,
         private router: Router
     ) {
         this.coordenadas = this._serv.getcoordenada();
         this.servicio = this._serv.getServ();
         this.user = this._authOdoo.getUser();
-
         this.mantener_campos(1);
     }
 
@@ -123,11 +121,7 @@ export class TaskLocationPage implements OnInit {
             this.oblidatorioGPS = false;
         }
 
-        if (
-            this.oblidatoriocalle == false &&
-            this.oblidatorionumero == false &&
-            this.oblidatorioGPS == false
-        ) {
+        if (this.oblidatoriocalle == false && this.oblidatorionumero == false && this.oblidatorioGPS == false) {
             this.navCtrl.navigateRoot('/task-abstract', {
                 animated: true,
                 animationDirection: 'forward',
@@ -225,7 +219,7 @@ export class TaskLocationPage implements OnInit {
             this.latitud = String(this._serv.getlatitud());
             this.longitud = String(this._serv.getlongitud());
             this.Autofill = this._serv.getradiobuton();
-            console.log('marca', this.Autofill);
+            //console.log('marca', this.Autofill);
         }
     }
 

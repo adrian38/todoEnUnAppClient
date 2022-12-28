@@ -1,13 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-    AlertController,
-    IonContent,
-    LoadingController,
-    MenuController,
-    NavController,
-    Platform,
-} from '@ionic/angular';
+import { AlertController, IonContent, LoadingController, MenuController, NavController, Platform } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 //import { timeStamp } from 'console';
 import { Observable, Subscription } from 'rxjs';
@@ -40,7 +33,7 @@ export class ChatPage implements OnInit {
     task: TaskModel = new TaskModel();
 
     message: MessageModel;
-    messagesList: MessageModel[];
+    messagesList: MessageModel[] = [];
 
     messagesList$: Observable<any>;
     subscriptionMessList: Subscription;
@@ -57,7 +50,7 @@ export class ChatPage implements OnInit {
 
     fotoTemporal: string = ' ';
 
-    tempMessageId: number[];
+    tempMessageId: number[] = [];
     btn_unable: boolean = false;
 
     @ViewChild(IonContent) content: IonContent;
@@ -94,10 +87,7 @@ export class ChatPage implements OnInit {
             this.selectLastMessage();
         }
 
-        if (
-            typeof this.task.Up_coming_Chat !== 'undefined' &&
-            this.task.Up_coming_Chat.length > 0
-        ) {
+        if (typeof this.task.Up_coming_Chat !== 'undefined' && this.task.Up_coming_Chat.length > 0) {
             //!Poner cargado de mensajes
 
             this.tempMessageId = [];
@@ -137,132 +127,125 @@ export class ChatPage implements OnInit {
         });
 
         this.messageNotification$ = this._taskOdoo.getRequestedTask$();
-        this.subscriptionsMessageNotification = this.messageNotification$.subscribe(
-            (notification: any) => {
-                this.ngZone.run(() => {
-                    switch (notification.type) {
-                        case 12:
-                            //!Quitar cargado
+        this.subscriptionsMessageNotification = this.messageNotification$.subscribe((notification: any) => {
+            this.ngZone.run(() => {
+                switch (notification.type) {
+                    case 12:
+                        //!Quitar cargado
 
-                            this.tempMessageId = [];
-                            let temp_Up_Chat = [];
-                            let tempTask: TaskModel;
+                        this.tempMessageId = [];
+                        let temp_Up_Chat = [];
+                        let tempTask: TaskModel;
 
-                            //console.log(notification, ' recibiendo nuevo mensaje');
+                        //console.log(notification, ' recibiendo nuevo mensaje');
 
-                            for (let mess of notification.task) {
-                                if (mess.PO_id === this.task.Po_id) {
-                                    this.tempMessageId.push(mess.message);
-                                } else {
-                                    temp_Up_Chat.push({
-                                        PO_id: mess.PO_id,
-                                        messageId: mess.message,
-                                        SO_id: mess.SO_id,
-                                    });
-                                }
-                            }
-
-                            if (
-                                typeof this.tempMessageId !== 'undefined' &&
-                                this.tempMessageId.length > 0
-                            ) {
-                                //console.log(tempPoId, "id de po a buscar")
-                                //console.log(this.tempMessageId, ' mandando mensaje');
-                                this._chatOdoo.requestNewMessage(this.tempMessageId);
+                        for (let mess of notification.task) {
+                            if (mess.PO_id === this.task.Po_id) {
+                                this.tempMessageId.push(mess.message);
                             } else {
-                                this._taskOdoo.aplicationListEdit(0, 5, tempTask, 0, temp_Up_Chat);
+                                temp_Up_Chat.push({
+                                    PO_id: mess.PO_id,
+                                    messageId: mess.message,
+                                    SO_id: mess.SO_id,
+                                });
                             }
+                        }
 
-                            break;
+                        if (typeof this.tempMessageId !== 'undefined' && this.tempMessageId.length > 0) {
+                            //console.log(tempPoId, "id de po a buscar")
+                            //console.log(this.tempMessageId, ' mandando mensaje');
+                            this._chatOdoo.requestNewMessage(this.tempMessageId);
+                        } else {
+                            this._taskOdoo.aplicationListEdit(0, 5, tempTask, 0, temp_Up_Chat);
+                        }
 
-                        case 13:
-                            for (let i = 0; i < notification.task.length; i++) {
-                                if (this.task.Po_id === notification.task[i].order_id) {
-                                    switch (notification.task[i].product_id) {
-                                        // case 39:
+                        break;
 
-                                        // 	task.type = "Servicio de Fontanería"
-                                        // 	break;
+                    case 13:
+                        for (let i = 0; i < notification.task.length; i++) {
+                            if (this.task.Po_id === notification.task[i].order_id) {
+                                switch (notification.task[i].product_id) {
+                                    // case 39:
 
-                                        case 40:
-                                            this.task.work_force += notification.task[i].price_unit;
-                                            break;
+                                    // 	task.type = "Servicio de Fontanería"
+                                    // 	break;
 
-                                        case 41:
-                                            this.task.materials += notification.task[i].price_unit;
-                                            break;
-                                    }
+                                    case 40:
+                                        this.task.work_force += notification.task[i].price_unit;
+                                        break;
+
+                                    case 41:
+                                        this.task.materials += notification.task[i].price_unit;
+                                        break;
                                 }
                             }
+                        }
 
-                            break;
+                        break;
 
-                        case 15:
-                            //!!!quitar cargado actualizar fecha
-                            if (this.loading) {
-                                this.loading.dismiss();
-                            }
+                    case 15:
+                        //!!!quitar cargado actualizar fecha
+                        if (this.loading) {
+                            this.loading.dismiss();
+                        }
 
-                            this.messageService.add({
-                                severity: 'success',
-                                detail: 'Fecha de la solicitud correctamente actualizada ',
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Fecha de la solicitud correctamente actualizada ',
+                        });
+
+                        setTimeout(() => {
+                            this.navCtrl.navigateRoot('/task-confirm', {
+                                animated: true,
+                                animationDirection: 'forward',
                             });
-
-                            setTimeout(() => {
-                                this.navCtrl.navigateRoot('/task-confirm', {
-                                    animated: true,
-                                    animationDirection: 'forward',
-                                });
-                            }, 2000);
-                    }
-                });
-            }
-        );
+                        }, 2000);
+                }
+            });
+        });
 
         this.notificationError$ = this._taskOdoo.getNotificationError$();
-        this.subscriptionsNotificationError = this.notificationError$.subscribe(
-            (notificationError) => {
-                this.ngZone.run(() => {
-                    switch (notificationError.type) {
-                        case 0:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Conectandose al Servidor.',
-                            });
-                            break;
+        this.subscriptionsNotificationError = this.notificationError$.subscribe((notificationError) => {
+            this.ngZone.run(() => {
+                switch (notificationError.type) {
+                    case 0:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Conectandose al Servidor.',
+                        });
+                        break;
 
-                        case 6:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Enviando su mensaje.',
-                            });
+                    case 6:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Enviando su mensaje.',
+                        });
 
-                            break;
+                        break;
 
-                        case 10:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Obteniendo nuevo mensaje.',
-                            });
+                    case 10:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Obteniendo nuevo mensaje.',
+                        });
 
-                            break;
-                        case 11:
-                            this.messageService.add({
-                                severity: 'error',
-                                summary: 'Error',
-                                detail: 'Guardando el dia la cita.',
-                            });
+                        break;
+                    case 11:
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Guardando el dia la cita.',
+                        });
 
-                            this.btn_unable = false;
+                        this.btn_unable = false;
 
-                            break;
-                    }
-                });
-            }
-        );
+                        break;
+                }
+            });
+        });
 
         this.messagesList$ = this._chatOdoo.getMessages$();
         this.subscriptionMessList = this.messagesList$.subscribe((messaggeList) => {
@@ -286,10 +269,7 @@ export class ChatPage implements OnInit {
 
                         for (let mess of messaggeList.messages)
                             if (mess.offer_id === this.task.Po_id) {
-                                if (
-                                    typeof this.messagesList !== 'undefined' &&
-                                    this.messagesList.length > 0
-                                ) {
+                                if (typeof this.messagesList !== 'undefined' && this.messagesList.length > 0) {
                                     //console.log("uniendo los arreglos");
                                     this.messagesList.push(mess);
                                 } else {

@@ -9,12 +9,12 @@ import { DatePipe } from '@angular/common';
 //import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 //-----------------------------------------------
-import { ActionSheetController } from '@ionic/angular';
+// import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { PhotoService } from '../../services/photo.service';
+// import { PhotoService } from '../../services/photo.service';
 import { Observable, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { DomSanitizer } from '@angular/platform-browser';
+// import { DomSanitizer } from '@angular/platform-browser';
 import { ImagenmodalPage } from '../imagenmodal/imagenmodal.page';
 import { Router } from '@angular/router';
 
@@ -109,56 +109,52 @@ export class TaskAbstractPage implements OnInit {
         });
 
         this.notificationError$ = this._taskOdoo.getNotificationError$();
-        this.subscriptionNotificationError = this.notificationError$.subscribe(
-            (notificationError) => {
-                this.ngZone.run(() => {
-                    switch (notificationError.type) {
-                        case 0:
-                            this.loading.dismiss();
-                            this.messageService.add({
-                                severity: 'error',
-                                detail: 'Error en su conexión',
-                            });
-                            this.btn_deshabilitar = false;
-                            break;
+        this.subscriptionNotificationError = this.notificationError$.subscribe((notificationError) => {
+            this.ngZone.run(() => {
+                switch (notificationError.type) {
+                    case 0:
+                        this.loading.dismiss();
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: 'Error en su conexión',
+                        });
+                        this.btn_deshabilitar = false;
+                        break;
 
-                        case 8:
-                            this.loading.dismiss();
-                            this.messageService.add({
-                                severity: 'error',
-                                detail: 'No se creo la tarea',
-                            });
-                            this.btn_deshabilitar = false;
-                            break;
-                    }
-                });
-            }
-        );
+                    case 8:
+                        this.loading.dismiss();
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: 'No se creo la tarea',
+                        });
+                        this.btn_deshabilitar = false;
+                        break;
+                }
+            });
+        });
 
         this.notificationNewSoClient$ = this._taskOdoo.getRequestedTask$();
-        this.subscriptionNotificationNewSoClient = this.notificationNewSoClient$.subscribe(
-            (notificationNewSoClient) => {
-                this.ngZone.run(() => {
-                    switch (notificationNewSoClient.type) {
-                        case 7:
-                            this.loading.dismiss();
-                            console.log('tarea creada correctamente');
-                            this.messageService.add({
-                                severity: 'success',
-                                detail: 'Tarea creada correctamente',
+        this.subscriptionNotificationNewSoClient = this.notificationNewSoClient$.subscribe((notificationNewSoClient) => {
+            this.ngZone.run(() => {
+                switch (notificationNewSoClient.type) {
+                    case 7:
+                        this.loading.dismiss();
+                        console.log('tarea creada correctamente');
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Tarea creada correctamente',
+                        });
+                        this.datos.deleteFields();
+                        setTimeout(() => {
+                            this.navCtrl.navigateRoot('/tabs/tab1', {
+                                animated: true,
+                                animationDirection: 'forward',
                             });
-                            this.datos.deleteFields();
-                            setTimeout(() => {
-                                this.navCtrl.navigateRoot('/tabs/tab1', {
-                                    animated: true,
-                                    animationDirection: 'forward',
-                                });
-                            }, 2000);
-                            break;
-                    }
-                });
-            }
-        );
+                        }, 2000);
+                        break;
+                }
+            });
+        });
     }
 
     disableImages() {
@@ -189,6 +185,7 @@ export class TaskAbstractPage implements OnInit {
     cerrarsolicitud() {
         this.presentAlert();
     }
+
     crearSolicitud() {
         this.presentLoading();
 

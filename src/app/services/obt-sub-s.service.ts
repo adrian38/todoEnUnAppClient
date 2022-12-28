@@ -6,9 +6,9 @@ import { Observable, Subject } from 'rxjs';
     providedIn: 'root',
 })
 export class ObtSubSService {
-    private estado: boolean;
+    estado: boolean;
     cargando: boolean = false;
-    private comentario: string = '';
+    comentario: string = '';
 
     notificationSetTabs$ = new Subject<boolean>();
     notificationSetTabs2$ = new Subject<boolean>();
@@ -59,7 +59,7 @@ export class ObtSubSService {
 
     i: number = 0;
     idString: String;
-    private subServicioActual: string;
+    subServicioActual: string;
     /*
     foto0:string = '../../../assets/fotoadd.png'; */
     fotoRegistro: string = '../../../assets/images/registro.svg';
@@ -109,10 +109,11 @@ export class ObtSubSService {
         this.titulo = '';
 
         this.nombre = '';
-
+        this.subServicioActual = '';
         this.longitud = 0;
         this.latitud = 0;
         this.coordenadas = false;
+        this.radiobuton = false;
     }
 
     setCity(city: string) {

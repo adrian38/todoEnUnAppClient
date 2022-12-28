@@ -24,13 +24,10 @@ export class TaskSubcategoryPage implements OnInit {
         // "Arreglo urgente de fuga"
     ];
 
-    constructor(
-        public navCtrl: NavController,
-        private platform: Platform,
-        private _serv: ObtSubSService
-    ) {}
+    constructor(public navCtrl: NavController, private platform: Platform, private _serv: ObtSubSService) {}
 
     ngOnInit() {
+        this._serv.deleteFields();
         this.subscriptions();
     }
 

@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
         private navCon: NavController,
         private _taskOdoo: TaskOdooService,
         private ngZone: NgZone,
-        private datos: ObtSubSService,
+        // private datos: ObtSubSService,
         private router: Router
     ) {}
 
@@ -85,29 +85,27 @@ export class HeaderComponent implements OnInit {
         // if (this._location.isCurrentPathEqualTo('/horarios')) {
         //     this.navCon.navigateRoot('/materiales', { animated: true, animationDirection: 'back' });
         // }
-
-        if (this._location.isCurrentPathEqualTo('/task-location')) {
+        else if (this._location.isCurrentPathEqualTo('/task-title')) {
+            this.navCon.navigateRoot('/task-subcategory', {
+                animated: true,
+                animationDirection: 'back',
+            });
+        } else if (this._location.isCurrentPathEqualTo('/task-location')) {
             this.navCon.navigateRoot('/task-description', {
                 animated: true,
                 animationDirection: 'back',
             });
-        }
-
-        if (this._location.isCurrentPathEqualTo('/task-description')) {
+        } else if (this._location.isCurrentPathEqualTo('/task-description')) {
             this.navCon.navigateRoot('/task-photos', {
                 animated: true,
                 animationDirection: 'back',
             });
-        }
-
-        if (this._location.isCurrentPathEqualTo('/task-photos')) {
+        } else if (this._location.isCurrentPathEqualTo('/task-photos')) {
             this.navCon.navigateRoot('/task-materials', {
                 animated: true,
                 animationDirection: 'back',
             });
-        }
-
-        if (this._location.isCurrentPathEqualTo('/task-abstract')) {
+        } else if (this._location.isCurrentPathEqualTo('/task-abstract')) {
             this.navCon.navigateRoot('/task-location', {
                 animated: true,
                 animationDirection: 'back',
