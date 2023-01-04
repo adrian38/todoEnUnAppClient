@@ -1,5 +1,11 @@
 <ion-header class="ion-no-border">
-    <app-header headerText="Notificaciones" [fillBackground]="false"></app-header>
+    <app-header
+        headerText="Notificaciones"
+        [expandHeader]="true"
+        (clickedClose)="cerrarsolicitud()"
+        [cerrar]="true"
+        [fillBackground]="true"
+    ></app-header>
 </ion-header>
 
 <ion-content>

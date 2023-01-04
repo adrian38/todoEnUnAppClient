@@ -39,15 +39,11 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.notification = this._taskOdoo.getNotification();
-        this._taskOdoo.setRoute(this.router.url);
-        //console.log(this.router.url);
-        // this.ruta = this.datos.getruta();
         this.subscriptions();
     }
 
     ngOnDestroy() {
         this.subscriptionNotification.unsubscribe();
-        // this.subscriptionNotificationOff.unsubscribe();
     }
 
     closeEvent() {
@@ -114,7 +110,9 @@ export class HeaderComponent implements OnInit {
     }
 
     vernotificaciones() {
-        console.log('toque la campana');
+        console.log('************* this.router.url *************');
+        console.log(this.router.url);
+        this._taskOdoo.setRoute(this.router.url);
         this.navCon.navigateRoot('/notifications', { animated: true, animationDirection: 'back' });
     }
 }

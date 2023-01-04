@@ -18,18 +18,11 @@ export class TaskTitlePage implements OnInit {
     servicio: string = '';
     task: TaskModel;
 
-    constructor(
-        private _serv: ObtSubSService,
-        public navCtrl: NavController,
-        private platform: Platform,
-        public alertCtrl: AlertController
-    ) {}
+    constructor(private _serv: ObtSubSService, public navCtrl: NavController, private platform: Platform, public alertCtrl: AlertController) {}
 
     ngOnInit() {
         this.servicio = this._serv.getServ();
-
         this.title = this._serv.gettitulo();
-
         this.platform.backButton.subscribeWithPriority(10, () => {
             this.navCtrl.navigateRoot('/option', { animated: true, animationDirection: 'back' });
         });
@@ -44,7 +37,6 @@ export class TaskTitlePage implements OnInit {
             cssClass: 'my-custom-class',
             header: 'Alerta',
             message: 'Desea cancelar la solicitud',
-
             buttons: [
                 {
                     text: 'Cancelar',

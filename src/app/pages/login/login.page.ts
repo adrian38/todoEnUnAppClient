@@ -38,6 +38,9 @@ export class LoginPage implements OnInit {
     ngOnDestroy(): void {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
+        if (this.loading) {
+            this.loading.dismiss();
+        }
         this.userSubscription.unsubscribe();
     }
 
@@ -72,21 +75,22 @@ export class LoginPage implements OnInit {
             this._taskOdoo.setUser(this.user);
             this._chatOdoo.setUser(this.user);
 
-            //this._taskOdoo.requestTaskListClient();
-
             if (!this._taskOdoo.getInit()) {
                 this._taskOdoo.setInit(true);
                 this._taskOdoo.notificationPull();
             }
 
             sessionStorage.setItem('tutorial', 'false');
+
             this.btn_disabled = false;
             this.navController.navigateRoot('/task-new', {
                 animated: true,
                 animationDirection: 'forward',
             });
         } else {
-            this.loading.dismiss();
+            if (this.loading) {
+                this.loading.dismiss();
+            }
             switch (this.user.error) {
                 case 4:
                     this.btn_disabled = false;

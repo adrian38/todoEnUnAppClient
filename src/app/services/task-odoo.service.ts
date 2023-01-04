@@ -403,6 +403,10 @@ export class TaskOdooService {
         route = rout;
     }
 
+    getRoute() {
+        return route;
+    }
+
     setLastRoute(rout: string) {
         lastRoute = rout;
     }

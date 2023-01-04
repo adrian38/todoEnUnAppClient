@@ -1,9 +1,9 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { TaskOdooService } from 'src/app/services/task-odoo.service';
-import { MessageModel } from 'src/app/models/message.model';
+// import { MessageModel } from 'src/app/models/message.model';
 import { TaskModel } from 'src/app/models/task.model';
 import { ChatOdooService } from 'src/app/services/chat-odoo.service';
-import { Observable, Subscription } from 'rxjs';
+// import { Observable, Subscription } from 'rxjs';
 import { ModalController, NavController, Platform, LoadingController } from '@ionic/angular';
 import { ObtSubSService } from 'src/app/services/obt-sub-s.service';
 
@@ -23,8 +23,8 @@ export class NotificationsPage implements OnInit {
 
     constructor(
         private _taskOdoo: TaskOdooService,
-        private ngZone: NgZone,
-        private _chatOdoo: ChatOdooService,
+        // private ngZone: NgZone,
+        // private _chatOdoo: ChatOdooService,
         private platform: Platform,
         private navCtrl: NavController,
         private subServ: ObtSubSService,
@@ -32,10 +32,9 @@ export class NotificationsPage implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.subscriptions();
         this._taskOdoo.setNotification(false);
         this.tempNotificaciones = this._taskOdoo.getNoificationArray();
-
-        console.log(this.tempNotificaciones);
 
         for (let noti of this.tempNotificaciones) {
             switch (noti.type) {
@@ -92,12 +91,18 @@ export class NotificationsPage implements OnInit {
                     break;
             }
         }
-
-        console.log(this.notificaciones, 'after process');
-
-        this.subscriptions();
     }
     ngOnDestroy() {}
+
+    cerrarsolicitud() {
+        console.log('*************this._taskOdoo.getRoute()  *************');
+        console.log(this._taskOdoo.getRoute());
+
+        this.navCtrl.navigateRoot(this._taskOdoo.getRoute(), {
+            animated: true,
+            animationDirection: 'back',
+        });
+    }
 
     async presentLoadingCargado() {
         this.loading = await this.loadingController.create({
@@ -110,7 +115,7 @@ export class NotificationsPage implements OnInit {
 
     subscriptions() {
         this.platform.backButton.subscribeWithPriority(10, () => {
-            this.navCtrl.navigateRoot(this.subServ.getruta(), {
+            this.navCtrl.navigateRoot(this._taskOdoo.getRoute(), {
                 animated: true,
                 animationDirection: 'back',
             });
