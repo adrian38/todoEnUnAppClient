@@ -271,6 +271,10 @@ export class TaskOdooService {
                                                         messageID: mess.message,
                                                     });
 
+                                                    let tempOffer =  applicationList[temp].So_offers.findIndex((element) => element.Po_id === mess.PO_id);
+                                                     if (temp != -1) {
+                                                    applicationList[temp].So_offers[tempOffer].notificationNewChat = true;}
+
                                                     notificationArray.unshift({
                                                         type: 3,
                                                         task: id_messg,
@@ -2036,7 +2040,7 @@ export class TaskOdooService {
             let inParams = [];
             inParams.push([['origin', 'in', SO_origin]]);
 
-            inParams.push(['partner_id', 'origin', 'order_line', 'state', 'name', 'new_budget', 'cash', 'amount_total', 'extra_budget']);
+            inParams.push(['partner_id', 'origin', 'order_line', 'state', 'name', 'new_budget', 'cash', 'amount_total', 'extra_budget', "new_chat"]);
 
             let params = [];
             params.push(inParams);
@@ -2065,6 +2069,8 @@ export class TaskOdooService {
                         for (let task of applicationList) {
                             for (let offert of value) {
                                 if (task.So_origin === offert.origin) {
+
+
                                     task.notificationNewOffert = offert['new_budget'];
                                     newTaskModel = new TaskModel();
                                     //provider_partner_id.push(temp['partner_id'][0]);
@@ -2073,6 +2079,7 @@ export class TaskOdooService {
                                     newTaskModel.Po_id = offert['id'];
                                     newTaskModel.So_id = task.So_id;
                                     newTaskModel.notificationNewOffert = offert['new_budget'];
+                                    newTaskModel.notificationNewChat = offert['new_chat'];
                                     PO_id.push(offert['id']);
                                     newTaskModel.Po_order_line = offert['order_line'];
                                     //task.budget = temp['amount_total'];
@@ -2081,7 +2088,7 @@ export class TaskOdooService {
                             }
                         }
 
-                        ////console.log(PO_id, "Para buscar presupuestos");
+                        // console.log(applicationList, 'applicationList TaskOdooService');
 
                         for (let task of hiredList) {
                             let temp = value.find((element) => element.origin === task.So_origin);
