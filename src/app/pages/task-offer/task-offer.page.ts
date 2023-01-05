@@ -78,6 +78,13 @@ export class TaskOfferPage implements OnInit {
     ngAfterViewInit() {
         if (!this.subServ.get_Detalles()) {
             this.segment.value = 'ofertas';
+            if(this.task.So_offers.length === 0){
+                  this.messageService.add({
+                severity: 'error',
+                summary: 'Disculpe',
+                detail: 'Todavia no hay ofertas.',
+            });
+            }
         } else {
             this.segment.value = 'detalle';
             this.segChangeManual(this.subServ.get_Detalles());
@@ -87,7 +94,7 @@ export class TaskOfferPage implements OnInit {
     ngOnInit() {
         //this.screenOrientation.lock('portrait');
 
-        if (typeof this.task.So_offers !== 'undefined' && this.task.So_offers.length > 0) {
+        if (this.task.So_offers.length > 0) {
             let tempPoid = [];
             this.offersList = this.task.So_offers;
 
@@ -103,13 +110,6 @@ export class TaskOfferPage implements OnInit {
             } else {
                 this.offersList = this.task.So_offers;
             }
-        } else {
-            this.messageService.add({
-                key: 'c',
-                severity: 'error',
-                summary: 'Disculpe',
-                detail: 'Todavia no hay ofertas.',
-            });
         }
 
         if (typeof this.task.Up_coming_Offer !== 'undefined' && this.task.Up_coming_Offer.length > 0) {
@@ -121,6 +121,8 @@ export class TaskOfferPage implements OnInit {
 
         this.subscriptions();
     }
+
+
 
     ngOnDestroy(): void {
         this.subscriptionOffersList.unsubscribe();

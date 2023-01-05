@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 let jayson = require('../../../node_modules/jayson/lib/client/');
 
 let jaysonServer = {
-    host: '192.168.1.141',
+    host: '192.168.1.131',
     // host: '93.188.165.85',
     //host: '192.168.0.107',
     // host: 'odoo.todoenunapp.com',

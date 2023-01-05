@@ -1532,7 +1532,7 @@ export class TaskOdooService {
         let get_po_of_task = () => {
             let inParams = [];
             inParams.push([['origin', 'in', SO_origin]]);
-            inParams.push(['partner_id', 'origin', 'order_line', 'state', 'name', 'new_budget']);
+            inParams.push(['partner_id', 'origin', 'order_line', 'state', 'name', 'new_budget',"new_chat"]);
 
             let params = [];
             params.push(inParams);
@@ -1568,6 +1568,7 @@ export class TaskOdooService {
                             newTaskModel.provider_id = temp['partner_id'][0];
                             newTaskModel.provider_name = temp['partner_id'][1];
                             newTaskModel.notificationNewOffert = temp['new_budget'];
+                            newTaskModel.notificationNewChat = temp['new_chat'];
                             newTaskModel.Po_id = temp['id'];
                             newTaskModel.So_id = task.So_id;
                             PO_id.push(temp['id']);
@@ -3439,13 +3440,17 @@ export class TaskOdooService {
                     let temp1 = applicationList[temp].So_offers.findIndex((element) => element.Po_id === Task.Po_id);
                     if (temp1 != -1) {
                         applicationList[temp].So_offers[temp1].messageList = Task.messageList;
+                        applicationList[temp].So_offers[temp1].notificationNewChat=false;
                         applicationList[temp].Up_coming_Chat = [];
+                        this.applicationListEditOdooChat(Task);
                     }
+
                 }
 
                 temp = hiredList.findIndex((element) => element.So_id === So_id);
                 if (temp != -1) {
                     hiredList[temp].messageList = Task.messageList;
+                    //  this.applicationListEditOdooChat(Task);
                 }
 
                 break;
@@ -3644,6 +3649,67 @@ export class TaskOdooService {
                     ////console.log(err, 'requestTaskListClient');
                 } else {
                     get_update_so();
+                }
+            }
+        );
+    }
+
+    applicationListEditOdooChat(Task: TaskModel) {
+        ////console.log(Task, "para actualizar");
+
+        let get_update_po = () => {
+            ////console.log("actualizando Po")
+            let inParams = [];
+            inParams.push([Task.Po_id]); //id to update
+            inParams.push({
+                new_chat: false,
+            }); //to activate set to true
+            let params = [];
+            params.push(inParams);
+
+            let fparams = [];
+            fparams.push(jaysonServer.db);
+            fparams.push(user.id);
+            fparams.push(jaysonServer.password);
+
+            fparams.push('purchase.order'); //model
+            fparams.push('write'); //method
+
+            for (let i = 0; i < params.length; i++) {
+                fparams.push(params[i]);
+            }
+            client.request('call', { service: 'object', method: 'execute_kw', args: fparams }, function (err, error, value) {
+                if (err) {
+                    //console.log(err, 'Error actualizando PO')
+                    //notificationError$.next({ type: 1 });
+                } else {
+
+
+                        get_update_po();
+
+                }
+            });
+        };
+
+
+
+        let client = jayson.http({
+            host: jaysonServer.host,
+            port: jaysonServer.port + jaysonServer.pathConnection,
+        });
+        client.request(
+            'call',
+            {
+                service: 'common',
+                method: 'login',
+                args: [jaysonServer.db, jaysonServer.username, jaysonServer.password],
+            },
+            function (err, error, value) {
+                if (err || !value) {
+                    notificationError$.next({ type: 0 });
+                    ////console.log(err, 'requestTaskListClient');
+                } else {
+                    get_update_po();
                 }
             }
         );
